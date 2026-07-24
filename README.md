@@ -97,13 +97,14 @@ Contraseña: Adm1n1$trad0r
 ### Diagrama Entidad-Relacion
 insertar diagra
 ### Modelo Relacional
-insertar diagra
+insertar modelo
 
 ## Link a los recursos
 - Link para el repositorio de github
 - Link para el tablero de github proyects
 - Link a mockup de figma
-
+  Mockup para rol de administrador:
+  https://www.figma.com/proto/BKdEkqmCxr3Su8fVLPDhkY/Proyecto-tickets?node-id=1-253&p=f&t=KGyI5SY7SHO9KHBS-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A253
 ## Link del VPS
 Demo del proyecto final y su acceso en el VPS
 
