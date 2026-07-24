@@ -42,7 +42,7 @@ __SuportITO__ contará con tres roles de usuarios donde cada uno tiene definida 
 ## Link a los recursos
 - Link para el repositorio de github
 - Link para el tablero de github proyects
-- Link a mockup de figma
+- Link a mockup de figma <br>
   Mockup para rol de administrador:
   https://www.figma.com/proto/BKdEkqmCxr3Su8fVLPDhkY/Proyecto-tickets?node-id=1-253&p=f&t=KGyI5SY7SHO9KHBS-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A253
 
