@@ -97,14 +97,12 @@ Contraseña: Adm1n1$trad0r
 ### Diagrama Entidad-Relacion
 insertar diagra
 ### Modelo Relacional
-insertar modelo
+insertar diagra
 
-## Link del prototipo en Figma
-- Link a mockup de figma
-
-## Link a los recursos de GitHub
+## Link a los recursos
 - Link para el repositorio de github
 - Link para el tablero de github proyects
+- Link a mockup de figma
 
 ## Link del VPS
 Demo del proyecto final y su acceso en el VPS
