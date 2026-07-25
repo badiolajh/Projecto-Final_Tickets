@@ -1,0 +1,41 @@
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import '../../Componentes/SlideBar/SlideBar.css';
+import '../../Componentes/NavBar/NavBar.css';
+import '../../Componentes/Administrador_componentes/Usuarios-Frame/Usuarios_F.css';
+import './Principal.css';
+
+import SlideBar from '../../Componentes/SlideBar/SlideBar.jsx';
+import NavBar from '../../Componentes/NavBar/NavBar.jsx';
+import Usuarios_F from '../../Componentes/Administrador_componentes/Usuarios-Frame/Usuarios_F.jsx';
+
+function Principal({onLogout}) {
+  // if (!user) return <Navigate to="/" replace />;
+
+  return (
+    <div className="app-layout">
+          <NavBar  />{/*  user={user}*/}
+
+          <div className="content-area">
+            <SlideBar onLogout={onLogout}  /> {/* onLogout={onLogout}*/}
+
+            <main className="main-content">
+              <Routes>
+                {/* La ruta base debe apuntar a usuarios explícitamente */}
+                <Route index element={<Navigate to="/dashboard" replace />} />
+
+                <Route path="/dashboard" element={<h1 className='en-proceso'>Bienvenido al Dashboard</h1>} />
+                <Route path="/usuarios" element={<Usuarios_F/>} />     {/* user={user}*/}
+                <Route path="/incidencias" element={<div className="en-proceso"><h1>incidencias: En proceso...</h1></div>} />
+                <Route path="/historial" element={<div className="en-proceso"><h1>historial: En proceso...</h1></div>} />
+                <Route path="/redes" element={<div className="en-proceso"><h1>redes: En proceso...</h1></div>} />
+
+                {/* Ruta para manejar errores o rutas inexistentes */}
+                <Route path="*" element={<Navigate to="/dashboard" replace />} />
+              </Routes>
+            </main>
+          </div>
+        </div>
+  );
+}
+export default Principal;

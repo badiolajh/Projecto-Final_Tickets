@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+.Logo-principal{
+    padding-left: 50px;
+
+}
+.NavBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 10px 20px;
+  background-color: #242424;
+  color: white;
+  height: 50px;
+}
+
+.Buscar {
+    font-family: "Anonymous Pro", monospace;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      flex: 1;
+      padding: 0 90px;
+}
+
+.Buscar input {
+    font-family: "Anonymous Pro", monospace;
+      padding: 8px 12px;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background-color: #2a2a2a;
+      color: white;
+
+      width: 120%;
+      max-width: 566px;
+      height: 40px;
+      box-sizing: border-box;
+}
+
+.Notificaciones {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+  margin-left: auto;
+  padding-top: 17px;
+  padding-right: 20px;
+}
+
+.Usuario{
+    font-family: "Anonymous Pro", monospace;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.Usuario .Foto {
+    padding-left: 15px;
+    font-size: 50px;
+}
