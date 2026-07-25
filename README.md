@@ -102,9 +102,13 @@ insertar modelo
 ## Link a los recursos
 - Link para el repositorio de github
 - Link para el tablero de github proyects
-- Link a mockup de figma
-  Mockup para rol de administrador:
-  https://www.figma.com/proto/BKdEkqmCxr3Su8fVLPDhkY/Proyecto-tickets?node-id=1-253&p=f&t=KGyI5SY7SHO9KHBS-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A253
+- Link a mockup de figma:
+  - Mockup para rol de administrador: [vista_administrador_figma](https://www.figma.com/proto/BKdEkqmCxr3Su8fVLPDhkY/Proyecto-tickets?node-id=1-253&p=f&t=KGyI5SY7SHO9KHBS-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A253)
+  
+  - Mokup para el rol de empledo: [vista_empleado_figma](https://www.figma.com/proto/BKdEkqmCxr3Su8fVLPDhkY/Proyecto-tickets?node-id=66-1055&p=f&viewport=614%2C459%2C0.19&t=RS7ZgpvY0NDDOHde-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=66%3A1055&page-id=38%3A2)
+
+  - Mokup para el rol de tecnico: [vista_tecnico_figma](https://www.figma.com/proto/BKdEkqmCxr3Su8fVLPDhkY/Proyecto-tickets?node-id=66-362&p=f&viewport=-2000%2C-299%2C0.62&t=wMwUssKte1WsT7Tg-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=66%3A1106&page-id=38%3A3)
+
 ## Link del VPS
 Demo del proyecto final y su acceso en el VPS
 
