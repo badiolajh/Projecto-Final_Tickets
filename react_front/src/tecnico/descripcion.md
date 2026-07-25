@@ -1,0 +1,1 @@
+En este directorio estan todos los componentes del tecnico
