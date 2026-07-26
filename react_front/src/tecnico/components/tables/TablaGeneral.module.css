@@ -1,49 +1,118 @@
 .tableContainer {
-  background-color: white;
-  border-radius: 6px;
-  padding: 16px;
+    background: transparent;
+    font-family: 'Anonymous Pro', monospace;
+}
+
+/* Encabezado con borde y separación */
+.headerWrapper {
+    border-radius: 5px;
+    margin-bottom: 15px;
+    overflow: hidden; /* asegura que el borde se aplique */
+    background-color: #242424;
 }
 
 .table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: 'Anonymous Pro', monospace;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* fuerza distribución uniforme */
 }
 
+.table th,
+.table td {
+    padding: 10px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Encabezado */
 .table th {
-  background-color: var(--color-secundario);
-  color: white;
-  padding: 8px;
-  text-align: left;
+    background-color: #242424;
+    color: white;
+}
+
+/* Cuerpo separado */
+.bodyWrapper {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    overflow: hidden;
+    background-color: white;
 }
 
 .table td {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
+    background-color: white;
+    color: black;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Distribución de columnas */
+.table th:nth-child(1),
+.table td:nth-child(1) {
+    width: 30%; /* Empleado */
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+    width: 25%; /* Tipo/Estado */
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+    width: 20%; /* Fecha */
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+    width: 25%; /* Acciones */
 }
 
 .actions {
-  display: flex;
-  gap: 8px;
+    display: flex;
+    gap: 8px;
 }
 
+/* Footer */
 .footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: white;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
-.pagination button {
-  margin: 0 4px;
-  padding: 4px 8px;
-  background-color: var(--color-primario);
-  border: none;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
+.pagination button,
+.pagination span {
+    margin: 0 4px;
+    padding: 4px 8px;
+    background-color: white;
+    border: none;
+    color: black;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination button:hover,
+.pagination span:hover {
+    background-color: #808080;
+    color: white;
+}
+
+.pageActive {
+    color: var(--color-primario);
+    font-weight: bold;
 }
 
 .selector select {
-  padding: 4px;
-  border-radius: 4px;
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.selector select:hover {
+    background-color: #808080;
+    color: white;
 }
