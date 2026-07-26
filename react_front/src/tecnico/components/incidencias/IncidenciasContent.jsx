@@ -10,9 +10,11 @@ const IncidenciasContent = () => {
 
     const encabezados = ['Empleado', 'Tipo', 'Fecha', 'Acciones'];
     const filas = [
-        ['Andres', 'Sistemas', '26/07/26', 'Ver | Finalizar'],
-        ['Adrian', 'Hardware', '25/07/26', 'Ver | Finalizar'],
-        ['Jorge', 'Redes', '18/07/26', 'Ver | Finalizar'],
+        ['Andres', 'Sistemas', '26/07/26'],
+        ['Adrian', 'Hardware', '25/07/26'],
+        ['Jorge', 'Redes', '18/07/26'],
+        ['Abril', 'Sistemas', '04/07/26'],
+        ['Maria', 'Hardware', '28/06/26'],
     ];
 
     return (
@@ -25,12 +27,8 @@ const IncidenciasContent = () => {
             </div>
 
             <TablaGeneral
-                encabezados={['Empleado', 'Tipo', 'Fecha', 'Acciones']}
-                filas={[
-                    ['Andres', 'Sistemas', '26/07/26'],
-                    ['Adrian', 'Hardware', '25/07/26'],
-                    ['Jorge', 'Redes', '18/07/26'],
-                ]}
+                encabezados={encabezados}
+                filas={filas}
                 acciones={[
                     {
                         tipo: 'ver',
