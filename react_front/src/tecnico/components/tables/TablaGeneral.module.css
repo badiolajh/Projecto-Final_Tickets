@@ -7,6 +7,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  font-family: 'Anonymous Pro', monospace;
 }
 
 .table th {
@@ -19,6 +20,11 @@
 .table td {
   padding: 8px;
   border-bottom: 1px solid #ddd;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
 }
 
 .footer {

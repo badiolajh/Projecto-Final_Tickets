@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./TablaGeneral.module.css";
+import ActionButton from "../common/ActionButton";
 
 const TablaGeneral = ({ encabezados, filas }) => {
   return (
@@ -15,14 +16,25 @@ const TablaGeneral = ({ encabezados, filas }) => {
         <tbody>
           {filas.map((fila, idx) => (
             <tr key={idx}>
-              {fila.map((dato, i) => (
+              {/* Renderizamos todas las columnas menos la última (acciones) */}
+              {fila.slice(0, -1).map((dato, i) => (
                 <td key={i}>{dato}</td>
               ))}
+              <td>
+                <div className={styles.actions}>
+                  {/* Aquí usamos ActionButton con variantes */}
+                  <ActionButton tipo="ver" />
+                  <ActionButton tipo="finalizar" />
+                  {/* Si la fila requiere otro botón, se puede agregar */}
+                  {/* <ActionButton tipo="diagnostico" /> */}
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
 
+      {/* Footer con paginación y selector */}
       <div className={styles.footer}>
         <div className={styles.pagination}>
           <button>{"<"}</button>
