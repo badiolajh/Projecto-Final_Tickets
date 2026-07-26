@@ -1,0 +1,48 @@
+.dashboardTable {
+  background-color: #242424;
+  color: white;
+  border-radius: 6px;
+  padding: 16px;
+  max-height: 250px; /* límite de altura */
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.content {
+  overflow-y: auto; /* scroll vertical */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.type {
+  font-size: 14px;
+}
+
+.viewButton {
+  background-color: var(--color-primario);
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
