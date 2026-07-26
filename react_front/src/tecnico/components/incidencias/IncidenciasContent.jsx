@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import TablaGeneral from "../tables/TablaGeneral";
+import SearchBar from "../common/SearchBar";
+import FilterEstado from "../common/FilterEstado";
 import styles from "./IncidenciasContent.module.css";
 
 const IncidenciasContent = () => {
+  const [search, setSearch] = useState("");
+  const [estado, setEstado] = useState("pendiente");
+
   const encabezados = ["Empleado", "Tipo", "Fecha", "Acciones"];
   const filas = [
     ["Andres", "Sistemas", "26/07/26", "Ver | Finalizar"],
@@ -12,14 +17,22 @@ const IncidenciasContent = () => {
 
   return (
     <div className={styles.incidencias}>
+      <h2 className={styles.title}>Estos son tus tickets activos!</h2>
+
+      {/* Controles superiores */}
       <div className={styles.controls}>
-        <input type="text" placeholder="Buscar..." className={styles.search} />
-        <select className={styles.filter}>
-          <option>Pendiente</option>
-          <option>Activo</option>
-          <option>Finalizado</option>
-        </select>
+        <div className={styles.searchWrapper}>
+          <label className={styles.label}>Buscar</label>
+          <SearchBar placeholder="Buscar..." onChange={setSearch} />
+        </div>
+
+        <div className={styles.filterWrapper}>
+          <label className={styles.label}>Estado</label>
+          <FilterEstado value={estado} onChange={setEstado} />
+        </div>
       </div>
+
+      {/* Tabla general */}
       <TablaGeneral encabezados={encabezados} filas={filas} />
     </div>
   );

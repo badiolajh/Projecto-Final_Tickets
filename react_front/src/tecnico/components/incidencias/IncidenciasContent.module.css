@@ -1,0 +1,29 @@
+.incidencias {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.controls {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.searchWrapper,
+.filterWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+}
