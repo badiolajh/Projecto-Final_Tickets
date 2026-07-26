@@ -1,0 +1,60 @@
+.button {
+  font-family: 'Anonymous Pro', monospace;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* Variante Ver */
+.ver {
+  background: none;
+  border: 1px solid #BCBEC0;
+  color: #BCBEC0;
+}
+
+.ver:hover {
+  background-color: #2D2D2D;
+}
+
+/* Variante Finalizar */
+.finalizar {
+  background-color: #2D2D2D;
+  border: 1px solid #BCBEC0;
+  color: #BCBEC0;
+}
+
+.finalizar:hover {
+  background-color: #444;
+}
+
+/* Variante Diagnóstico */
+.diagnostico {
+  background-color: #2D2D2D;
+  border: 1px solid #BCBEC0;
+  color: #BCBEC0;
+}
+
+.diagnostico:hover {
+  background-color: #444;
+}
+
+/* Variante Nueva solicitud */
+.nuevo {
+  background-color: var(--color-primario);
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+.nuevo:hover {
+  opacity: 0.9;
+}
+
+/* Default */
+.default {
+  background-color: #2D2D2D;
+  border: 1px solid #BCBEC0;
+  color: white;
+}
