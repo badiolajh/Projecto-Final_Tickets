@@ -1,0 +1,18 @@
+.historial {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  font-family: 'Anonymous Pro', monospace;
+}
+
+.controls {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}

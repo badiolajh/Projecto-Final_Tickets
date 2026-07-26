@@ -1,25 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import TablaGeneral from "../tables/TablaGeneral";
+import SearchBar from "../common/SearchBar";
+import FilterEstado from "../common/FilterEstado";
 import styles from "./HistorialContent.module.css";
 
 const HistorialContent = () => {
+  const [search, setSearch] = useState("");
+  const [estado, setEstado] = useState("todos");
+
   const encabezados = ["Empleado", "Tipo", "Fecha", "Acciones"];
   const filas = [
-    ["Abril", "Sistemas", "04/07/26", "Ver | Diagnóstico"],
-    ["Maria", "Hardware", "28/06/26", "Ver | Diagnóstico"],
+    ["Abril", "Sistemas", "04/07/26"],
+    ["Maria", "Hardware", "28/06/26"],
+    ["Julian", "Redes", "13/07/26"],
+    ["Cristal", "Hardware", "30/06/26"],
   ];
 
   return (
     <div className={styles.historial}>
+      <h2 className={styles.title}>Historial de tickets</h2>
+
       <div className={styles.controls}>
-        <input type="text" placeholder="Buscar..." className={styles.search} />
-        <select className={styles.filter}>
-          <option>Pendiente</option>
-          <option>Activo</option>
-          <option>Finalizado</option>
-        </select>
+        <SearchBar onChange={setSearch} />
+        <FilterEstado value={estado} onChange={setEstado} />
       </div>
-      <TablaGeneral encabezados={encabezados} filas={filas} />
+
+      <TablaGeneral
+        encabezados={encabezados}
+        filas={filas}
+        acciones={[
+          {
+            tipo: "ver",
+            onClick: (fila) => console.log("Ver historial", fila),
+          },
+          {
+            tipo: "diagnostico",
+            onClick: (fila) => console.log("Diagnóstico historial", fila),
+          },
+        ]}
+      />
     </div>
   );
 };
