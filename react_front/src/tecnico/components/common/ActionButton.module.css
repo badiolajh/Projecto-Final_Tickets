@@ -1,48 +1,39 @@
 .button {
   font-family: 'Anonymous Pro', monospace;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
   transition: all 0.2s ease;
+  background: transparent;
 }
 
-/* Variante Ver */
-.ver {
-  background: none;
-  border: 1px solid #BCBEC0;
-  color: #BCBEC0;
+/* Ícono */
+.icon {
+  width: 18px;
+  height: 18px;
 }
 
-.ver:hover {
-  background-color: #2D2D2D;
-}
-
-/* Variante Finalizar */
-.finalizar {
-  background-color: #2D2D2D;
-  border: 1px solid #BCBEC0;
-  color: #BCBEC0;
-}
-
-.finalizar:hover {
-  background-color: #444;
-}
-
-/* Variante Diagnóstico */
+/* Variantes con estilo uniforme */
+.ver,
+.finalizar,
 .diagnostico {
-  background-color: #2D2D2D;
-  border: 1px solid #BCBEC0;
-  color: #BCBEC0;
+  border: 1px solid #09A109;
+  color: #09A109;
 }
 
+.ver:hover,
+.finalizar:hover,
 .diagnostico:hover {
-  background-color: #444;
+  background-color: rgba(9, 161, 9, 0.1);
 }
 
 /* Variante Nueva solicitud */
 .nuevo {
-  background-color: var(--color-primario);
+  background-color: #09A109;
   border: none;
   color: white;
   font-weight: bold;
@@ -54,7 +45,6 @@
 
 /* Default */
 .default {
-  background-color: #2D2D2D;
   border: 1px solid #BCBEC0;
-  color: white;
+  color: #BCBEC0;
 }
