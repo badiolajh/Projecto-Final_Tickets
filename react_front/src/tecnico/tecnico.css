@@ -42,3 +42,10 @@ body {
   flex: 1;
   overflow-y: auto;   /* solo el contenido se desplaza */
 }
+
+/* En móviles el main ocupa todo el ancho */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0; /* quitar margen izquierdo */
+  }
+}

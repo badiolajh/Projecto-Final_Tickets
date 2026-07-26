@@ -1,15 +1,15 @@
 .header {
-    position: fixed; /* Se queda fijo arriba */
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 60px; /* altura fija */
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #242424;
-    padding: 12px 24px;
-    z-index: 1000;         /* siempre encima del contenido */
+    padding: 1px 24px;
+    z-index: 1000;
 }
 
 /* Logo */
@@ -17,7 +17,6 @@
     width: 250px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
 }
 
 .logoIcon {
@@ -35,7 +34,6 @@
 .searchLabel {
     color: white;
     font-weight: 400;
-    font-size: larger;
 }
 
 .search {
@@ -70,7 +68,7 @@
     height: 28px;
 }
 
-/* Avatar como botón */
+/* Avatar */
 .avatarButton {
     background: none;
     border: none;
@@ -83,4 +81,55 @@
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+/* Botón menú hamburguesa */
+.menu {
+    width: 2rem; /* más ancho */
+    height: 2rem; /* más alto */
+    display: none; /* oculto en desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 6px; /* margen interno para ampliar área */
+    margin-right: 12px; /* margen externo */
+}
+
+.menu div {
+    width: 100%;
+    height: 0.2rem; /* barras más visibles */
+    background-color: var(--color-primario);
+    transition: all 0.2s ease;
+    padding-left: 2px;
+}
+
+.menuToggle div:first-child {
+    width: 40%;
+    transform: rotate(-35deg) translate(-30%, 245%);
+}
+
+.menuToggle div:last-child {
+    width: 40%;
+    transform: rotate(35deg) translate(-30%, -245%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .searchContainer {
+        display: none; /* ocultar buscador */
+    }
+
+    .username {
+        display: none; /* ocultar nombre */
+    }
+
+    .menu {
+        display: flex; /* mostrar menú en mobile */
+        position: absolute;
+        left: 12px; /* esquina izquierda */
+    }
+
+    .logoContainer {
+        margin-left: 50px;
+    }
 }
