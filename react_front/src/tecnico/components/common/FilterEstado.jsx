@@ -8,6 +8,7 @@ const FilterEstado = ({ value, onChange }) => {
       value={value}
       onChange={e => onChange?.(e.target.value)}
     >
+      <option value="todos">Estado</option>
       <option value="pendiente">Pendiente</option>
       <option value="activo">Activo</option>
       <option value="finalizado">Finalizado</option>
