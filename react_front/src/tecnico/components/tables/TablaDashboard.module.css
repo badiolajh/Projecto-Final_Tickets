@@ -1,48 +1,57 @@
 .dashboardTable {
-  background-color: #242424;
-  color: white;
-  border-radius: 6px;
-  padding: 16px;
-  max-height: 250px; /* límite de altura */
-  display: flex;
-  flex-direction: column;
+    background-color: #242424;
+    color: white;
+    border-radius: 15px;
+    padding: 1px 34px;
+    height: 460px; /* límite de altura */
+    max-height: 460px;
+    display: flex;
+    flex-direction: column;
 }
 
 .title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 12px;
+    font-size: xx-large;
+    font-weight: lighter;
+    margin: 32px 0px 20px;
 }
 
 .content {
-  overflow-y: auto; /* scroll vertical */
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    overflow-y: auto; /* scroll vertical */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  padding: 8px;
-  border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #bcbec0;
+    padding: 8px;
+    border-radius: 4px;
 }
 
 .name {
-  font-weight: bold;
+    font-weight: normal;
 }
 
 .type {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .viewButton {
-  background-color: var(--color-primario);
-  border: none;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none; /* sin fondo */
+    border: 1px solid #bcbec0; /* borde gris */
+    color: #bcbec0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.viewIcon {
+    width: 16px;
+    height: 16px;
 }
