@@ -43,6 +43,17 @@ body {
   overflow-y: auto;   /* solo el contenido se desplaza */
 }
 
+/* Overlay para mobile */
+.overlay {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 60px);
+  background-color: rgba(0, 0, 0, 0.4); /* semitransparente */
+  z-index: 998; /* debajo del navbar pero encima del contenido */
+}
+
 /* En móviles el main ocupa todo el ancho */
 @media (max-width: 768px) {
   .main-content {

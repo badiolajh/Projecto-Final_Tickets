@@ -10,12 +10,18 @@ const TecnicoLayout = () => {
   const user = { nombre: "Jonathan", avatar: null };
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <div className="layout">
       <Header user={user} onMenuToggle={toggleMenu} isMenuOpen={menuOpen} />
+
       <div className="layout-body">
         <Navbar onSelect={setOpcion} active={opcion} isVisible={menuOpen} />
+
+        {/* Overlay para cerrar el menú al hacer clic fuera */}
+        {menuOpen && <div className="overlay" onClick={closeMenu}></div>}
+
         <div className="main-content">
           <MainGeneral titulo={opcion}>
             {/* Aquí se insertará el contenido dinámico según la opción */}
