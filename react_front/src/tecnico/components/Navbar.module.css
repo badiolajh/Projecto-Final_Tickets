@@ -1,52 +1,71 @@
 .navbar {
-    position: fixed; /* se queda fijo en el lateral */
-    top: 60px; /* debajo del header fijo */
-    left: 0;
-    width: 200px;
-    height: calc(100vh - 60px); /* ocupa toda la altura menos el header */
-    background-color: #1a1a1a;
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    transition: transform 0.3s ease;
-    z-index: 999; /* encima del contenido */
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 200px;
+  height: calc(100vh - 60px);
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  transition: transform 0.3s ease;
+  z-index: 999;
 }
 
+/* Secciones */
+.topSection {
+  margin-bottom: 50px; /* separación con el bloque central */
+  display: flex;
+  flex-direction: column;
+
+}
+
+.middleSection {
+  flex: 1; /* ocupa el espacio central */
+  display: flex;
+  flex-direction: column;
+}
+
+.bottomSection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+/* Botones */
 .button {
-    text-align: left;
-    padding: 10px 14px;
-    margin-bottom: 8px;
-    border: none;
-    background: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 6px;
-    font-family: 'Anonymous Pro', monospace;
-    transition:
-        background-color 0.2s,
-        color 0.2s;
-    font-size: medium;
+  text-align: left;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border: none;
+  background: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-family: 'Anonymous Pro', monospace;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: medium;
 }
 
 .button:hover {
-    background-color: var(--color-terciario);
+  background-color: var(--color-terciario);
 }
 
 .active {
-    color: var(--color-primario);
+  color: var(--color-primario);
 }
 
-/* Responsive: ocultar navbar en mobile */
+/* Responsive */
 .hide {
-    transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
 .show {
-    transform: translateX(0);
+  transform: translateX(0);
 }
 
 @media (min-width: 769px) {
-    .navbar {
-        transform: translateX(0); /* siempre visible en desktop */
-    }
+  .navbar {
+    transform: translateX(0);
+  }
 }
