@@ -13,7 +13,7 @@
   --color-primario: #0BC20B;
   --color-modales: #09A109;
   --color-secundario: #242424;
-  --color-terciario: #0BC20B;
+  --color-terciario: #808080;
 }
 
 body {
@@ -33,4 +33,12 @@ body {
 .layout-body {
   display: flex;
   flex: 1;
+  margin-top: 60px; /* mismo alto que el header */
+}
+
+/* El main debe dejar espacio para el navbar fijo */
+.main-content {
+  margin-left: 220px; /* espacio para el navbar fijo */
+  flex: 1;
+  overflow-y: auto;   /* solo el contenido se desplaza */
 }

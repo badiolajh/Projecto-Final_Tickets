@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Navbar.module.css";
 
-const Navbar = ({ onSelect }) => {
+const Navbar = ({ onSelect, active }) => {
   const opciones = ["Dashboard", "Incidencias", "Historial", "Redes", "Cerrar sesión"];
 
   return (
@@ -10,7 +10,7 @@ const Navbar = ({ onSelect }) => {
         <button
           key={op}
           onClick={() => onSelect(op)}
-          className={styles.button}
+          className={`${styles.button} ${active === op ? styles.active : ""}`}
         >
           {op}
         </button>

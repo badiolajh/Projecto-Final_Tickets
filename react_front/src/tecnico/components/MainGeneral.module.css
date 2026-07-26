@@ -3,6 +3,7 @@
   background-color: #f5f5f5;
   color: black;
   padding: 24px;
+  height: calc(100% - 60px) ;
 }
 
 .title {
@@ -13,5 +14,6 @@
 }
 
 .content {
-  min-height: 300px; /* espacio para contenido dinámico */
+  min-height: 300; /* espacio para contenido dinámico */
+  
 }

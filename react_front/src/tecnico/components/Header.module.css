@@ -1,80 +1,86 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--color-secundario);
-  padding: 12px 24px;
+    position: fixed; /* Se queda fijo arriba */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px; /* altura fija */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #242424;
+    padding: 12px 24px;
+    z-index: 1000;         /* siempre encima del contenido */
 }
 
 /* Logo */
 .logoContainer {
-  width: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .logoIcon {
-  height: 43px;
+    height: 43px;
 }
 
 /* Buscador */
 .searchContainer {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .searchLabel {
-  color: white;
-  font-weight: 400;
-  font-size: larger;
+    color: white;
+    font-weight: 400;
+    font-size: larger;
 }
 
 .search {
-  background-color: #3a3a3a;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  width: 40%;
+    background-color: #3a3a3a;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    width: 40%;
 }
 
 /* Perfil */
 .profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .username {
-  font-weight: 400;
+    font-weight: 400;
 }
 
 /* Icono de mensajes */
 .iconButton {
-  background: none;
-  border: none;
-  cursor: pointer;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .iconMessage {
-  width: 28px;
-  height: 28px;
+    width: 28px;
+    height: 28px;
 }
 
 /* Avatar como botón */
 .avatarButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
 }

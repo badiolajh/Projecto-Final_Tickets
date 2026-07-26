@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import MainGeneral from "../components/MainGeneral";
-import "../tecnico.css"; // Importa los estilos globales
+import "../tecnico.css";
 
 const TecnicoLayout = () => {
   const [opcion, setOpcion] = useState("Dashboard");
@@ -10,15 +10,14 @@ const TecnicoLayout = () => {
 
   return (
     <div className="layout">
-      {/* Header siempre visible */}
       <Header user={user} />
-
-      {/* Grid principal: navbar + main */}
       <div className="layout-body">
-        <Navbar onSelect={setOpcion} />
-        <MainGeneral titulo={opcion}>
-          {/* Aquí se insertará el contenido dinámico según la opción */}
-        </MainGeneral>
+        <Navbar onSelect={setOpcion} active={opcion} />
+        <div className="main-content">
+          <MainGeneral titulo={opcion}>
+            {/* Aquí se insertará el contenido dinámico según la opción */}
+          </MainGeneral>
+        </div>
       </div>
     </div>
   );
