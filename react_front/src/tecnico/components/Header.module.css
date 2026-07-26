@@ -6,10 +6,30 @@
   padding: 12px 24px;
 }
 
-.logo {
-  color: var(--color-primario);
-  font-weight: bold;
-  font-size: 20px;
+/* Logo */
+.logoContainer {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logoIcon {
+  height: 43px;
+}
+
+/* Buscador */
+.searchContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchLabel {
+  color: white;
+  font-weight: 400;
+  font-size: larger;
 }
 
 .search {
@@ -18,21 +38,43 @@
   border: none;
   padding: 6px 12px;
   border-radius: 6px;
-  width: 30%;
+  width: 40%;
 }
 
+/* Perfil */
 .profile {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
+.username {
+  font-weight: 400;
+}
+
+/* Icono de mensajes */
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.iconMessage {
+  width: 28px;
+  height: 28px;
+}
+
+/* Avatar como botón */
+.avatarButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
 .avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: gray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  object-fit: cover;
 }
