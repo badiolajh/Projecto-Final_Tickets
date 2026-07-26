@@ -38,7 +38,7 @@ body {
 
 /* El main debe dejar espacio para el navbar fijo */
 .main-content {
-  margin-left: 220px; /* espacio para el navbar fijo */
+  margin-left: 230px; /* espacio para el navbar fijo */
   flex: 1;
   overflow-y: auto;   /* solo el contenido se desplaza */
 }

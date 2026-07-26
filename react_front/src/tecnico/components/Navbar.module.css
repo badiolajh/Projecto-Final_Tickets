@@ -2,10 +2,9 @@
     position: fixed; /* se queda fijo en el lateral */
     top: 60px; /* debajo del header fijo */
     left: 0;
-    width: 220px;
+    width: 200px;
     height: calc(100vh - 60px); /* ocupa toda la altura menos el header */
     background-color: #1a1a1a;
-    width: 200px;
     height: 100%;
     display: flex;
     flex-direction: column;
