@@ -6,7 +6,7 @@ import styles from "./IncidenciasContent.module.css";
 
 const IncidenciasContent = () => {
   const [search, setSearch] = useState("");
-  const [estado, setEstado] = useState("pendiente");
+  const [estado, setEstado] = useState("todos");
 
   const encabezados = ["Empleado", "Tipo", "Fecha", "Acciones"];
   const filas = [
@@ -19,20 +19,11 @@ const IncidenciasContent = () => {
     <div className={styles.incidencias}>
       <h2 className={styles.title}>Estos son tus tickets activos!</h2>
 
-      {/* Controles superiores */}
       <div className={styles.controls}>
-        <div className={styles.searchWrapper}>
-          <label className={styles.label}>Buscar</label>
-          <SearchBar placeholder="Buscar..." onChange={setSearch} />
-        </div>
-
-        <div className={styles.filterWrapper}>
-          <label className={styles.label}>Estado</label>
-          <FilterEstado value={estado} onChange={setEstado} />
-        </div>
+        <SearchBar onChange={setSearch} />
+        <FilterEstado value={estado} onChange={setEstado} />
       </div>
 
-      {/* Tabla general */}
       <TablaGeneral encabezados={encabezados} filas={filas} />
     </div>
   );

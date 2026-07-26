@@ -1,21 +1,23 @@
 .searchWrapper {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Anonymous Pro', monospace;
 }
 
 .label {
-  color: #242424;
-  font-size: 20px;
-  font-weight: 500;
+    color: #242424;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .searchInput {
-  background-color: #2D2D2D;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 12px;
-  color: white;
-  font-size: 14px;
-  width: 250px;
+    background-color: #2d2d2d;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: white;
+    font-size: 14px;
+    width: 250px;
+    font-family: 'Anonymous Pro', monospace;
 }
