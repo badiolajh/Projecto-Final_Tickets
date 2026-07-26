@@ -1,0 +1,34 @@
+import React, { useState } from 'react';
+import TablaGeneral from '../tables/TablaGeneral';
+import SearchBar from '../common/SearchBar';
+import FilterEstado from '../common/FilterEstado';
+import styles from './IncidenciasContent.module.css';
+
+const IncidenciasContent = ({ acciones }) => {
+    const [search, setSearch] = useState('');
+    const [estado, setEstado] = useState('todos');
+
+    const encabezados = ['Empleado', 'Tipo', 'Fecha', 'Acciones'];
+    const filas = [
+        ['Andres', 'Sistemas', '26/07/26'],
+        ['Adrian', 'Hardware', '25/07/26'],
+        ['Jorge', 'Redes', '18/07/26'],
+        ['Abril', 'Sistemas', '04/07/26'],
+        ['Maria', 'Hardware', '28/06/26'],
+    ];
+
+    return (
+        <div className={styles.incidencias}>
+            <h2 className={styles.title}>Estos son tus tickets activos!</h2>
+
+            <div className={styles.controls}>
+                <SearchBar onChange={setSearch} />
+                <FilterEstado value={estado} onChange={setEstado} />
+            </div>
+
+            <TablaGeneral encabezados={encabezados} filas={filas} acciones={acciones} />
+        </div>
+    );
+};
+
+export default IncidenciasContent;

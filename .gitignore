@@ -1,2 +1,4 @@
 # ignora los archivos .bkp de drawio
 *.bkp
+react_front/src/App.jsx
+react_front/src/main.jsx
