@@ -17,6 +17,10 @@
   height: 18px;
 }
 
+.label {
+  display: inline;
+}
+
 /* Variantes con estilo uniforme */
 .ver,
 .finalizar,
@@ -47,4 +51,22 @@
 .default {
   border: 1px solid #BCBEC0;
   color: #BCBEC0;
+}
+
+/* Responsive: en móviles ocultamos el texto en todos los botones excepto el nuevo */
+@media (max-width: 768px) {
+  .button {
+    justify-content: center;
+    padding: 8px;
+  }
+
+  /* Oculta texto en todos los botones */
+  .button .label {
+    display: none;
+  }
+
+  /* Excepción: el botón nuevo sí muestra texto */
+  .nuevo .label {
+    display: inline;
+  }
 }

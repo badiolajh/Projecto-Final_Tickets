@@ -1,20 +1,24 @@
+/* Contenedor principal con scroll horizontal */
 .tableContainer {
     background: transparent;
     font-family: 'Anonymous Pro', monospace;
+    overflow-x: auto; /* habilita scroll horizontal */
+    width: 100%;
 }
 
 /* Encabezado con borde y separación */
 .headerWrapper {
     border-radius: 5px;
     margin-bottom: 15px;
-    overflow: hidden; /* asegura que el borde se aplique */
     background-color: #242424;
 }
 
+/* Tabla */
 .table {
     width: 100%;
+    min-width: 500px; /* fuerza scroll en móviles si no cabe */
     border-collapse: collapse;
-    table-layout: fixed; /* fuerza distribución uniforme */
+    table-layout: fixed;
 }
 
 .table th,
@@ -36,7 +40,6 @@
 .bodyWrapper {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    overflow: hidden;
     background-color: white;
 }
 
@@ -49,7 +52,7 @@
 /* Distribución de columnas */
 .table th:nth-child(1),
 .table td:nth-child(1) {
-    width: 30%; /* Empleado */
+    width: 30%; /* Empleado/Solicitud */
 }
 
 .table th:nth-child(2),
@@ -80,6 +83,7 @@
     background-color: white;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+    min-width: 470px;
 }
 
 .pagination button,

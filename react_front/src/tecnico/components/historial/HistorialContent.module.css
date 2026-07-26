@@ -16,3 +16,26 @@
   gap: 24px;
   align-items: center;
 }
+
+/* Responsive: en móviles los controles se apilan */
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+}
+
+/* Tabla con scroll horizontal */
+.tableContainer {
+  background: transparent;
+  font-family: 'Anonymous Pro', monospace;
+  overflow-x: auto; /* habilita scroll horizontal */
+}
+
+.table {
+  width: 100%;
+  min-width: 600px; /* asegura que en móviles se pueda hacer scroll */
+  border-collapse: collapse;
+  table-layout: fixed;
+}
