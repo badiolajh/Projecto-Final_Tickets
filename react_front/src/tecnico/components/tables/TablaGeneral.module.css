@@ -1,0 +1,43 @@
+.tableContainer {
+  background-color: white;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background-color: var(--color-secundario);
+  color: white;
+  padding: 8px;
+  text-align: left;
+}
+
+.table td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.pagination button {
+  margin: 0 4px;
+  padding: 4px 8px;
+  background-color: var(--color-primario);
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.selector select {
+  padding: 4px;
+  border-radius: 4px;
+}
