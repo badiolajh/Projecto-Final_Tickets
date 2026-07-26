@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Header.module.css";
-import logoIcon from "../icons/i_logo.png";
-import mensajeIcon from "../icons/i_mensaje.png";
-import perfilIcon from "../icons/i_perfil.png";
+import logoIcon from "../../icons/i_logo.png";
+import mensajeIcon from "../../icons/i_mensaje.png";
+import perfilIcon from "../../icons/i_perfil.png";
 
 const Header = ({ user, onMenuToggle, isMenuOpen, onProfileClick }) => {
   return (

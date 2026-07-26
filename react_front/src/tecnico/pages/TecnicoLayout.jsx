@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
-import MainGeneral from '../components/MainGeneral';
+import Header from '../components/grid/Header';
+import Navbar from '../components/grid/Navbar';
+import MainGeneral from '../components/grid/MainGeneral';
 import DashboardContent from '../components/dashboard/DashboardContent';
 import '../tecnico.css';
 import RedesContent from '../components/redes/RedesContent';
