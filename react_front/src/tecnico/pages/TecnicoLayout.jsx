@@ -4,6 +4,9 @@ import Navbar from '../components/Navbar';
 import MainGeneral from '../components/MainGeneral';
 import DashboardContent from '../components/dashboard/DashboardContent';
 import '../tecnico.css';
+import RedesContent from '../components/redes/RedesContent';
+import HistorialContent from '../components/historial/HistorialContent';
+import IncidenciasContent from '../components/incidencias/IncidenciasContent';
 
 const TecnicoLayout = () => {
     const [opcion, setOpcion] = useState('Dashboard');
@@ -39,6 +42,9 @@ const TecnicoLayout = () => {
                         {opcion === 'Dashboard' && (
                             <DashboardContent user={user} />
                         )}
+                        {opcion === 'Incidencias' && <IncidenciasContent />}
+                        {opcion === 'Historial' && <HistorialContent />}
+                        {opcion === 'Redes' && <RedesContent />}
                     </MainGeneral>
                 </div>
             </div>
