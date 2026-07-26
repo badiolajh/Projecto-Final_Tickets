@@ -4,7 +4,7 @@ import SearchBar from "../common/SearchBar";
 import FilterEstado from "../common/FilterEstado";
 import styles from "./HistorialContent.module.css";
 
-const HistorialContent = () => {
+const HistorialContent = ({ acciones }) => {
   const [search, setSearch] = useState("");
   const [estado, setEstado] = useState("todos");
 
@@ -25,20 +25,7 @@ const HistorialContent = () => {
         <FilterEstado value={estado} onChange={setEstado} />
       </div>
 
-      <TablaGeneral
-        encabezados={encabezados}
-        filas={filas}
-        acciones={[
-          {
-            tipo: "ver",
-            onClick: (fila) => console.log("Ver historial", fila),
-          },
-          {
-            tipo: "diagnostico",
-            onClick: (fila) => console.log("Diagnóstico historial", fila),
-          },
-        ]}
-      />
+      <TablaGeneral encabezados={encabezados} filas={filas} acciones={acciones} />
     </div>
   );
 };

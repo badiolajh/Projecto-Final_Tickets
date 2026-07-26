@@ -4,7 +4,7 @@ import SearchBar from '../common/SearchBar';
 import FilterEstado from '../common/FilterEstado';
 import styles from './IncidenciasContent.module.css';
 
-const IncidenciasContent = () => {
+const IncidenciasContent = ({ acciones }) => {
     const [search, setSearch] = useState('');
     const [estado, setEstado] = useState('todos');
 
@@ -26,21 +26,7 @@ const IncidenciasContent = () => {
                 <FilterEstado value={estado} onChange={setEstado} />
             </div>
 
-            <TablaGeneral
-                encabezados={encabezados}
-                filas={filas}
-                acciones={[
-                    {
-                        tipo: 'ver',
-                        onClick: (fila) => console.log('Ver incidencia', fila),
-                    },
-                    {
-                        tipo: 'finalizar',
-                        onClick: (fila) =>
-                            console.log('Finalizar incidencia', fila),
-                    },
-                ]}
-            />
+            <TablaGeneral encabezados={encabezados} filas={filas} acciones={acciones} />
         </div>
     );
 };

@@ -16,6 +16,21 @@ const TecnicoLayout = () => {
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const closeMenu = () => setMenuOpen(false);
 
+    // Funciones de acciones para cada sección
+    const accionesIncidencias = [
+        { tipo: 'ver', onClick: (fila) => console.log('Ver incidencia', fila) },
+        { tipo: 'finalizar', onClick: (fila) => console.log('Finalizar incidencia', fila) },
+    ];
+
+    const accionesHistorial = [
+        { tipo: 'ver', onClick: (fila) => console.log('Ver historial', fila) },
+        { tipo: 'diagnostico', onClick: (fila) => console.log('Diagnóstico historial', fila) },
+    ];
+
+    const accionesRedes = [
+        { tipo: 'ver', onClick: (fila) => console.log('Ver solicitud de red', fila) },
+    ];
+
     return (
         <div className="layout">
             <Header
@@ -31,20 +46,24 @@ const TecnicoLayout = () => {
                     isVisible={menuOpen}
                 />
 
-                {/* Overlay para cerrar el menú al hacer clic fuera */}
                 {menuOpen && (
                     <div className="overlay" onClick={closeMenu}></div>
                 )}
 
                 <div className="main-content">
                     <MainGeneral titulo={opcion}>
-                        {/* Aquí se insertará el contenido dinámico según la opción */}
                         {opcion === 'Dashboard' && (
                             <DashboardContent user={user} />
                         )}
-                        {opcion === 'Incidencias' && <IncidenciasContent />}
-                        {opcion === 'Historial' && <HistorialContent />}
-                        {opcion === 'Redes' && <RedesContent />}
+                        {opcion === 'Incidencias' && (
+                            <IncidenciasContent acciones={accionesIncidencias} />
+                        )}
+                        {opcion === 'Historial' && (
+                            <HistorialContent acciones={accionesHistorial} />
+                        )}
+                        {opcion === 'Redes' && (
+                            <RedesContent acciones={accionesRedes} />
+                        )}
                     </MainGeneral>
                 </div>
             </div>

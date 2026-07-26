@@ -5,7 +5,7 @@ import FilterEstado from "../common/FilterEstado";
 import ActionButton from "../common/ActionButton";
 import styles from "./RedesContent.module.css";
 
-const RedesContent = () => {
+const RedesContent = ({ acciones }) => {
   const [search, setSearch] = useState("");
   const [estado, setEstado] = useState("todos");
 
@@ -29,16 +29,7 @@ const RedesContent = () => {
         />
       </div>
 
-      <TablaGeneral
-        encabezados={encabezados}
-        filas={filas}
-        acciones={[
-          {
-            tipo: "ver",
-            onClick: (fila) => console.log("Ver solicitud de red", fila),
-          },
-        ]}
-      />
+      <TablaGeneral encabezados={encabezados} filas={filas} acciones={acciones} />
     </div>
   );
 };
