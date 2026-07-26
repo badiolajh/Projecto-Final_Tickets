@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-secundario);
+  padding: 12px 24px;
+}
+
+.logo {
+  color: var(--color-primario);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.search {
+  background-color: #3a3a3a;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  width: 30%;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

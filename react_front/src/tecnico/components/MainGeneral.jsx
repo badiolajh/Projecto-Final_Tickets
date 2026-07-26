@@ -1,10 +1,11 @@
 import React from "react";
+import styles from "./MainGeneral.module.css";
 
 const MainGeneral = ({ titulo, children }) => {
   return (
-    <main className="flex-1 bg-gray-100 p-6">
-      <h2 className="text-2xl font-bold mb-4">{titulo}</h2>
-      <div>{children}</div>
+    <main className={styles.main}>
+      <h2 className={styles.title}>{titulo}</h2>
+      <div className={styles.content}>{children}</div>
     </main>
   );
 };
