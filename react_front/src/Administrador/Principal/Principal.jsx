@@ -11,6 +11,7 @@ import NavBar from '../../Componentes/NavBar/NavBar.jsx';
 import Usuarios_F from '../../Componentes/Administrador_componentes/Usuarios-Frame/Usuarios_F.jsx';
 import DashBoardAdmin from "../../Componentes/Administrador_componentes/DashBoardAdmin/DashBoardAdmin.jsx";
 import Incidencias_Frame from "../../Componentes/Administrador_componentes/Incidencias-Frame/Incidencias_F.jsx";
+import Historial_Frame from "../../Componentes/Administrador_componentes/Historial-Frame/Historial_F.jsx";
 
 function Principal({onLogout}) {
   // if (!user) return <Navigate to="/" replace />;
@@ -30,7 +31,7 @@ function Principal({onLogout}) {
                 <Route path="/dashboard" element={<DashBoardAdmin/>} />
                 <Route path="/usuarios" element={<Usuarios_F/>} />     {/* user={user}*/}
             <Route path="/incidencias" element={<Incidencias_Frame />} />
-                <Route path="/historial" element={<div className="en-proceso"><h1>historial: En proceso...</h1></div>} />
+                <Route path="/historial" element={<Historial_Frame/>} />
                 <Route path="/redes" element={<div className="en-proceso"><h1>redes: En proceso...</h1></div>} />
 
                 {/* Ruta para manejar errores o rutas inexistentes */}

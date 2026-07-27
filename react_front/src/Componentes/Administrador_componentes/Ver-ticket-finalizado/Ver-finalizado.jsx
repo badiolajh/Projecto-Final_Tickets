@@ -1,7 +1,7 @@
 import { IoClose } from "react-icons/io5";
-import "./Ver-pendiente.css";
+import "./Ver-finalizado.css";
 
-const Tick_Pendiente = ({ isOpen, onClose , user}) => {
+const Tick_Finalizado = ({ isOpen, onClose , user}) => {
   if (!isOpen) return null;
 
   return (
@@ -26,17 +26,18 @@ const Tick_Pendiente = ({ isOpen, onClose , user}) => {
         </div>
 
         <div className="modal-actions-etiqueta">
-          <label className="etiqueta-asignar">Asignar:</label>
+          <label className="etiqueta-asignar">Asignado a:</label>
         </div>
         <div className="modal-actions">
           <button className="btn-cancel" onClick={onClose}><IoClose /> Cerrar</button>
           <div className="asignar-container">
-                      <select className="select-asignar">
-                        <option value="tecnico">Tecnico</option>
-                        <option value="admin">Administrador</option>
-                        <option value="empleado">Empleado</option>
-                      </select>
-                    </div>
+            <input
+            type="text"
+              className="input-asignado"
+              value="Tecnico"
+              disabled
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -45,4 +46,4 @@ const Tick_Pendiente = ({ isOpen, onClose , user}) => {
   );
 };
 
-export default Tick_Pendiente;
+export default Tick_Finalizado;

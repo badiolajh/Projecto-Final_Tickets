@@ -1,0 +1,24 @@
+.tickets-pendientes{
+    color: #242424;
+    font-weight: normal;
+    width: auto;
+    height: 43px;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+.btn-ver-incid {
+    font-family: "Anonymous Pro", monospace;
+    color: #00a82d;
+    padding: 4px 10px;
+    background: transparent;
+    border: 1px solid #00a82d;
+    padding: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 4px;
+}
+.btn-ver-incid:hover{
+    background:#F4F6F8;
+    cursor: pointer;
+}
