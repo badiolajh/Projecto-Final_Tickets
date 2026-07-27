@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./BtnCancelarDark.module.css";
+import styles from "./BtnCancelar.module.css";
 import iconAceptarDark from "../../icons/i_ver_dashboard.png"
 
-const BtnCancelarDark = ({ onClick }) => {
+const BtnCancelar = ({ onClick }) => {
   let label = "Cancelar";
   let className = "styles.cancelar";
   let icon = iconAceptarDark;
@@ -15,4 +15,4 @@ const BtnCancelarDark = ({ onClick }) => {
   );
 };
 
-export default BtnCancelarDark;
+export default BtnCancelar;

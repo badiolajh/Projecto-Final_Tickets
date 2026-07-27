@@ -15,7 +15,7 @@ const ModalVerPerfil = ({ info, onClick }) => {
         </div>
         {/* Acciones, contenedor de los botones, */}
         <div className={styles.modal}>
-            
+            {/* Definir los botones de cancelar y guardar */}
         </div> 
     </div>
   );
