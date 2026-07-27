@@ -4,6 +4,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { useState } from "react";
 
 import UserModal from "../UserModal/UserModal";
+import UserEdit from "../UserEdit/UserEdit";
 
 function Usuarios_Frame({ user }) {
   // Datos locales, aun no se implementa la API
@@ -21,6 +22,7 @@ function Usuarios_Frame({ user }) {
     const [filtroRol, setFiltroRol] = useState("Todos");
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [EditUserOpen, ModalEditUsuarioOpen] = useState(false);
 
     // Inicializa useSearchParams
     const [searchParams, setSearchParams] = useSearchParams();
@@ -104,9 +106,9 @@ function Usuarios_Frame({ user }) {
                       <tr key={u.id}>
                         <td>{u.firstName} {u.lastName}</td>
                         <td>{u.email}</td>
-                        <td>{u.role || "user"}</td>
+                        <td className="columna-admin">{u.role || "user"}</td>
                         <td className="acciones-boton">
-                          <button className="btn-editar"><FiEdit /> Editar</button>
+                          <button className="btn-editar" onClick={() => ModalEditUsuarioOpen(true)}><FiEdit /> Editar</button>
                           <button className="btn-eliminar"><FaRegTrashAlt /> Eliminar</button>
                         </td>
                       </tr>
@@ -144,11 +146,18 @@ function Usuarios_Frame({ user }) {
                               </label>
                             </div>
       </div>
+      {/* Modal de agregar Usuario*/}
       <UserModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
             title="Registro de usuario"
-          />
+      />
+      {/* Modal de editar Usuario*/}
+      <UserEdit
+      isOpen={EditUserOpen}
+      onClose={() => ModalEditUsuarioOpen(false)}
+      title="Editar de usuario"
+      />
         </div>
   )
 }

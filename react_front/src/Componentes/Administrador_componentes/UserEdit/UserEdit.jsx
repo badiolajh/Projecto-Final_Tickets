@@ -1,15 +1,15 @@
 import { IoCheckmark } from "react-icons/io5";
 import { ImCancelCircle } from "react-icons/im";
 import { IoCloudUploadOutline } from "react-icons/io5";
-import './UserModal.css';
+import './UserEdit.css';
 
-const UserModal = ({ isOpen, onClose }) => {
+const UserEdit = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <div className="section-title-superior">Agregar Usuario</div>
+          <div className="section-title-superior">Editar Usuario</div>
 
         <div className="section-title">Datos Personales</div>
         <div className='tarjeta-cuerpo-formulario'>
@@ -34,11 +34,11 @@ const UserModal = ({ isOpen, onClose }) => {
         </div>
         <div className="modal-actions">
           <button className="btn-cancel" onClick={onClose}><ImCancelCircle /> Descartar Cambios</button>
-          <button className="btn-registrar"  onClick={onClose}> <IoCheckmark /> Registrar</button>
+          <button className="btn-registrar"  onClick={onClose}> <IoCheckmark /> Guardar</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default UserModal;
+export default UserEdit;
