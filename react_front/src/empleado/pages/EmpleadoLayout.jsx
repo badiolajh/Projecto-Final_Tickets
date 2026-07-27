@@ -5,7 +5,7 @@ import MainGeneral from '../components/grid/MainGeneral';
 import DashboardContent from '../components/dashboard/DashboardContent';
 import IncidenciasContent from '../components/incidencias/IncidenciasContent';
 import HistorialContent from '../components/historial/HistorialContent';
-import '../empleado.css';
+import styles from './EmpleadoLayout.module.css';
 
 const EmpleadoLayout = () => {
     const [opcion, setOpcion] = useState('Dashboard');
@@ -25,14 +25,14 @@ const EmpleadoLayout = () => {
     ];
 
     return (
-        <div className="layout">
+        <div className={styles.layout}>
             <Header
                 user={user}
                 onMenuToggle={toggleMenu}
                 isMenuOpen={menuOpen}
             />
 
-            <div className="layout-body">
+            <div className={styles.layoutBody}>
                 <Navbar
                     onSelect={setOpcion}
                     active={opcion}
@@ -41,10 +41,10 @@ const EmpleadoLayout = () => {
                 />
 
                 {menuOpen && (
-                    <div className="overlay" onClick={closeMenu}></div>
+                    <div className={styles.overlay} onClick={closeMenu}></div>
                 )}
 
-                <div className="main-content">
+                <div className={styles.mainContent}>
                     <MainGeneral titulo={opcion}>
                         {opcion === 'Dashboard' && (
                             <DashboardContent user={user} />

@@ -1,0 +1,62 @@
+@font-face {
+  font-family: 'Anonymous Pro';
+  src: url('https://fonts.gstatic.com/s/anonymouspro/v20/rP2Bp2a15UIB7Un-bOe3.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Anonymous Pro';
+  src: url('https://fonts.gstatic.com/s/anonymouspro/v20/rP2Cp2a15UIB7Un-bOe3.ttf') format('truetype');
+  font-weight: 700;
+}
+
+:root {
+  --color-primario: #0BC20B;
+  --color-modales: #09A109;
+  --color-secundario: #242424;
+  --color-terciario: #808080;
+}
+
+body {
+  margin: 0;
+  font-family: 'Anonymous Pro', monospace;
+  background-color: var(--color-secundario);
+  color: white;
+}
+
+/* Layout general */
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.layoutBody {
+  display: flex;
+  flex: 1;
+  margin-top: 60px; /* mismo alto que el header */
+}
+
+/* El main debe dejar espacio para el navbar fijo */
+.mainContent {
+  margin-left: 230px; /* espacio para el navbar fijo */
+  flex: 1;
+  overflow-y: auto;   /* solo el contenido se desplaza */
+}
+
+/* Overlay para mobile */
+.overlay {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 60px);
+  background-color: rgba(0, 0, 0, 0.4); /* semitransparente */
+  z-index: 998; /* debajo del navbar pero encima del contenido */
+}
+
+/* En móviles el main ocupa todo el ancho */
+@media (max-width: 768px) {
+  .mainContent {
+    margin-left: 0; /* quitar margen izquierdo */
+  }
+}
