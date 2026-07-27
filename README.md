@@ -100,8 +100,8 @@ insertar diagra
 insertar modelo
 
 ## Link a los recursos
-- Link para el repositorio de github
-- Link para el tablero de github proyects
+- Link para el repositorio en [GitHub](https://github.com/badiolajh/Projecto-Final_Tickets)
+- Link para el tablero en [GitHub_Proyects](https://github.com/users/badiolajh/projects/1)
 - Link a mockup de figma:
   - Mockup para rol de administrador: [vista_administrador_figma](https://www.figma.com/proto/BKdEkqmCxr3Su8fVLPDhkY/Proyecto-tickets?node-id=1-253&p=f&t=KGyI5SY7SHO9KHBS-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A253)
   
@@ -110,7 +110,7 @@ insertar modelo
   - Mokup para el rol de tecnico: [vista_tecnico_figma](https://www.figma.com/proto/BKdEkqmCxr3Su8fVLPDhkY/Proyecto-tickets?node-id=66-362&p=f&viewport=-2000%2C-299%2C0.62&t=wMwUssKte1WsT7Tg-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=66%3A1106&page-id=38%3A3)
 
 ## Link del VPS
-Demo del proyecto final y su acceso en el VPS
-
+Demo del proyecto y su acceso en el VPS
+Actualmente en desarollo ...
 
 
