@@ -3,25 +3,23 @@ import { FaEye } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 
-import Tick_Pendiente from "../Ver-ticket-pendiente/Ver-pendiente";
+import Solicitud_Red from "../Ver-solicitud-red/Ver_red";
 
 
-function Incidencias_Frame() {
+function Redes_Frame() {
   // Datos locales, aun no se implementa la API
     const [usuarios] = useState([
-      { id: 1, firstName: "Andres", lastName: "", type: "Sistemas", date: "26/07/26" },
-      { id: 2, firstName: "Adrian", lastName: "", type: "Redes", date: "18/07/26" },
-      { id: 3, firstName: "Jorge", lastName: "", type: "Hardware", date: "16/07/26" },
-      { id: 4, firstName: "Jose", lastName: "", type: "Sistemas", date: "08/07/26" },
-      { id: 5, firstName: "Abril", lastName: "", type: "Hardware", date: "02/07/26" },
-      { id: 6, firstName: "Maria", lastName: "", type: "Redes", date: "28/06/26" },
+      { id: 1, firstName: "Andres",  status: "Pendiente", date: "26/07/26" },
+      { id: 2, firstName: "Adrian",  status: "Finalizado", date: "18/07/26" },
+      { id: 3, firstName: "Jorge",  status: "Finalizado", date: "16/07/26" },
+      { id: 4, firstName: "Jose",  status: "Finalizado", date: "08/07/26" },
     ]);
 
     const [registrosPorPagina, setRegistrosPorPagina] = useState(5);
     const [busqueda, setBusqueda] = useState("");
     const [filtroRol, setFiltroRol] = useState("Todos");
 
-  const [Verpendiente, ModaleVerPendiente]  = useState(false);
+  const [VerSolicitud, ModalSolcitudRed]  = useState(false);
 
     // Inicializa useSearchParams
     const [searchParams, setSearchParams] = useSearchParams();
@@ -52,7 +50,7 @@ function Incidencias_Frame() {
 
   return (
     <div className="contenedor-Opciones">
-          <h1 className="tickets-pendientes">Estos son tus tickets pendientes!</h1>
+          <h1 className="tickets-pendientes">Todos tus tickets finalizados!</h1>
 
           <div className="barra-controles">
             <label className="Buscar">
@@ -88,7 +86,7 @@ function Incidencias_Frame() {
             <table className="Tabla-Header">
               <thead>
                 <tr>
-                  <th>Empleado</th><th>Tipo</th><th>Fecha</th><th className="acciones">Acciones</th>
+                  <th>Empleado</th><th>Estado</th><th>Fecha</th><th className="acciones">Acciones</th>
                 </tr>
               </thead>
             </table>
@@ -101,10 +99,10 @@ function Incidencias_Frame() {
                     {usuariosPagina.map((u) => (
                       <tr key={u.id}>
                         <td>{u.firstName}</td>
-                        <td>{u.type}</td>
+                        <td>{u.status}</td>
                         <td className="columna-admin">{u.date}</td>
                         <td className="acciones-boton">
-                          <button className="btn-ver-incid" onClick={() => ModaleVerPendiente(true)}><FaEye /> Ver</button>
+                          <button className="btn-ver-incid" onClick={() => ModalSolcitudRed(true)}><FaEye /> Ver</button>
                         </td>
                       </tr>
                     ))}
@@ -142,13 +140,13 @@ function Incidencias_Frame() {
                             </div>
       </div>
       {/* Modal de editar Usuario*/}
-      <Tick_Pendiente
-      isOpen={Verpendiente}
-      onClose={() => ModaleVerPendiente(false)}
+      <Solicitud_Red
+      isOpen={VerSolicitud}
+      onClose={() => ModalSolcitudRed(false)}
       title="Ver Ticket Pendiente"
       />
         </div>
   )
 }
 
-export default Incidencias_Frame;
+export default Redes_Frame;

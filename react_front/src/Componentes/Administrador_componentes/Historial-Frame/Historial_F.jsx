@@ -88,7 +88,7 @@ function Historial_Frame() {
             <table className="Tabla-Header">
               <thead>
                 <tr>
-                  <th>Nombre</th><th>Tipo</th><th>Fecha</th><th className="acciones">Acciones</th>
+                  <th>Empleado</th><th>Tipo</th><th>Fecha</th><th className="acciones">Acciones</th>
                 </tr>
               </thead>
             </table>

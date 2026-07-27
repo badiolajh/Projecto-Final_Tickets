@@ -12,6 +12,7 @@ import Usuarios_F from '../../Componentes/Administrador_componentes/Usuarios-Fra
 import DashBoardAdmin from "../../Componentes/Administrador_componentes/DashBoardAdmin/DashBoardAdmin.jsx";
 import Incidencias_Frame from "../../Componentes/Administrador_componentes/Incidencias-Frame/Incidencias_F.jsx";
 import Historial_Frame from "../../Componentes/Administrador_componentes/Historial-Frame/Historial_F.jsx";
+import Redes_Frame from "../../Componentes/Administrador_componentes/Redes-Frame/Redes_F.jsx";
 
 function Principal({onLogout}) {
   // if (!user) return <Navigate to="/" replace />;
@@ -32,7 +33,7 @@ function Principal({onLogout}) {
                 <Route path="/usuarios" element={<Usuarios_F/>} />     {/* user={user}*/}
             <Route path="/incidencias" element={<Incidencias_Frame />} />
                 <Route path="/historial" element={<Historial_Frame/>} />
-                <Route path="/redes" element={<div className="en-proceso"><h1>redes: En proceso...</h1></div>} />
+                <Route path="/redes" element={<Redes_Frame/>} />
 
                 {/* Ruta para manejar errores o rutas inexistentes */}
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
