@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import TablaGeneral from '../tables/TablaGeneral';
 import SearchBar from '../common/SearchBar';
 import FilterEstado from '../common/FilterEstado';
+import ActionButton from '../common/ActionButton';
 import styles from './IncidenciasContent.module.css';
 
 const IncidenciasContent = ({ acciones }) => {
     const [search, setSearch] = useState('');
     const [estado, setEstado] = useState('todos');
 
-    const encabezados = ['Empleado', 'Tipo', 'Fecha', 'Acciones'];
+    const encabezados = ['Técnico', 'Tipo', 'Fecha', 'Acciones'];
     const filas = [
         ['Andres', 'Sistemas', '26/07/26'],
         ['Adrian', 'Hardware', '25/07/26'],
@@ -19,14 +20,25 @@ const IncidenciasContent = ({ acciones }) => {
 
     return (
         <div className={styles.incidencias}>
+            {/* Fila superior: título + botón Solicitar Ticket */}
             <h2 className={styles.title}>Estos son tus tickets activos!</h2>
 
             <div className={styles.controls}>
-                <SearchBar onChange={setSearch} />
-                <FilterEstado value={estado} onChange={setEstado} />
+                <div className={styles.controlsLeft}>
+                    <SearchBar onChange={setSearch} />
+                    <FilterEstado value={estado} onChange={setEstado} />
+                </div>
+                <ActionButton
+                    tipo="nuevo"
+                    onClick={() => console.log('Solicitar nuevo ticket')}
+                />
             </div>
 
-            <TablaGeneral encabezados={encabezados} filas={filas} acciones={acciones} />
+            <TablaGeneral
+                encabezados={encabezados}
+                filas={filas}
+                acciones={acciones}
+            />
         </div>
     );
 };
