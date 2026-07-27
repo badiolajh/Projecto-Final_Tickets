@@ -4,18 +4,25 @@
   gap: 24px;
 }
 
+/* Fila superior: Bienvenida + Botón Solicitar Ticket */
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .welcome {
   font-size: 22px;
   font-weight: bold;
-  margin-bottom: 12px;
+  font-family: 'Anonymous Pro', monospace;
 }
 
+/* Sección de estadísticas */
 .stats {
   display: flex;
   gap: 16px;
   background-color: #242424;
   border-radius: 15px;
-  
 }
 
 .statBox {
@@ -52,11 +59,10 @@
   justify-content: flex-start;
 }
 
-
 .distTitle {
-  text-align: center; /* título centrado */
+  text-align: center;
   font-size: 32px;
-  font-weight:lighter;
+  font-weight: lighter;
   margin-bottom: 10px;
 }
 
@@ -69,19 +75,25 @@
 }
 
 .distLabel {
-  font-size: large; /* igual que label de estadísticas */
+  font-size: large;
   width: 100px;
   padding-top: 30px;
 }
 
 .distValue {
-  font-size: xx-large; /* igual que number de estadísticas */
+  font-size: xx-large;
 }
-
 
 .tableWrapper {
   width: 100%;
   height: 460px;
+}
+
+.tableTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  font-family: 'Anonymous Pro', monospace;
 }
 
 /* Responsive: todo en una sola columna */
@@ -100,13 +112,18 @@
     height: auto;
   }
 
-  .distribution{
+  .distribution {
     height: 100%;
     padding: 0px;
   }
 
-  .distRow{
+  .distRow {
     padding-left: 34px;
   }
 
+  .topRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 }

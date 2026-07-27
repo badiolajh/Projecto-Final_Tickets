@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './DashboardContent.module.css';
 import TablaDashboard from '../tables/TablaDashboard';
+import ActionButton from '../common/ActionButton';
 
 const DashboardContent = ({ user }) => {
-    // Datos estáticos de ejemplo (luego vendrán del backend)
     const estadisticas = {
-        asignados: 23,
-        pendientes: 6,
+        solicitados: 23,
+        sinAsignar: 3,
         proceso: 12,
         resueltos: 34,
     };
@@ -23,39 +23,38 @@ const DashboardContent = ({ user }) => {
         { nombre: 'Jorge', tipo: 'Redes' },
         { nombre: 'Abril', tipo: 'Sistemas' },
         { nombre: 'Maria', tipo: 'Hardware' },
-        { nombre: 'Maria', tipo: 'Hardware' },
+        { nombre: 'Mario', tipo: 'Hardware' },
     ];
 
     return (
         <div className={styles.dashboard}>
-            <h2 className={styles.welcome}>
-                Bienvenido {user?.nombre || 'Técnico'}
-            </h2>
+            {/* Fila superior: Bienvenida + Botón Solicitar Ticket */}
+            <div className={styles.topRow}>
+                <h2 className={styles.welcome}>
+                    Bienvenido {user?.nombre || 'Empleado'}
+                </h2>
+                <ActionButton
+                    tipo="nuevo"
+                    onClick={() => console.log("Solicitar nuevo ticket")}
+                />
+            </div>
 
             {/* Sección de estadísticas */}
             <div className={styles.stats}>
                 <div className={styles.statBox}>
-                    <span className={styles.number}>
-                        {estadisticas.asignados}
-                    </span>
-                    <span className={styles.label}>Asignados</span>
+                    <span className={styles.number}>{estadisticas.solicitados}</span>
+                    <span className={styles.label}>Solicitados</span>
                 </div>
                 <div className={styles.statBox}>
-                    <span className={styles.number}>
-                        {estadisticas.pendientes}
-                    </span>
-                    <span className={styles.label}>Pendientes</span>
+                    <span className={styles.number}>{estadisticas.sinAsignar}</span>
+                    <span className={styles.label}>Sin asignar</span>
                 </div>
                 <div className={styles.statBox}>
-                    <span className={styles.number}>
-                        {estadisticas.proceso}
-                    </span>
+                    <span className={styles.number}>{estadisticas.proceso}</span>
                     <span className={styles.label}>En proceso</span>
                 </div>
                 <div className={styles.statBox}>
-                    <span className={styles.number}>
-                        {estadisticas.resueltos}
-                    </span>
+                    <span className={styles.number}>{estadisticas.resueltos}</span>
                     <span className={styles.label}>Resueltos</span>
                 </div>
             </div>
@@ -66,27 +65,21 @@ const DashboardContent = ({ user }) => {
                     <h3 className={styles.distTitle}>Distribución</h3>
                     <div className={styles.distRow}>
                         <span className={styles.distLabel}>Redes:</span>
-                        <span className={styles.distValue}>
-                            {distribucion.redes}
-                        </span>
+                        <span className={styles.distValue}>{distribucion.redes}</span>
                     </div>
                     <div className={styles.distRow}>
                         <span className={styles.distLabel}>Sistemas:</span>
-                        <span className={styles.distValue}>
-                            {distribucion.sistemas}
-                        </span>
+                        <span className={styles.distValue}>{distribucion.sistemas}</span>
                     </div>
                     <div className={styles.distRow}>
                         <span className={styles.distLabel}>Hardware:</span>
-                        <span className={styles.distValue}>
-                            {distribucion.hardware}
-                        </span>
+                        <span className={styles.distValue}>{distribucion.hardware}</span>
                     </div>
                 </div>
 
                 <div className={styles.tableWrapper}>
                     <TablaDashboard
-                        titulo="Tickets asignados pendientes"
+                        titulo="Tickets solicitados pendientes"
                         filas={ticketsPendientes}
                     />
                 </div>

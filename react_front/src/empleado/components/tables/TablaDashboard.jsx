@@ -11,7 +11,10 @@ const TablaDashboard = ({ titulo, filas }) => {
                     <div key={idx} className={styles.row}>
                         <span className={styles.name}>{fila.nombre}</span>
                         <span className={styles.type}>Tipo: {fila.tipo}</span>
-                        <button className={styles.viewButton}>
+                        <button
+                            className={styles.viewButton}
+                            onClick={() => console.log("Ver ticket", fila)}
+                        >
                             <img src={verIcon} alt="Ver" className={styles.viewIcon} />
                             Ver
                         </button>
