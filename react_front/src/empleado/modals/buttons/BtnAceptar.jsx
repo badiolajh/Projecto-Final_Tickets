@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./BtnAceptarDark.module.css";
+import styles from "./BtnAceptar.module.css";
 import iconAceptarDark from "../../icons/i_ver_dashboard.png"
 
-const BtnAceptarDark = ({ onClick }) => {
+const BtnAceptar = ({ onClick }) => {
   let label = "Aceptar";
   let className = "styles.aceptar";
   let icon = iconAceptarDark;
@@ -15,4 +15,4 @@ const BtnAceptarDark = ({ onClick }) => {
   );
 };
 
-export default BtnAceptarDark;
+export default BtnAceptar;
