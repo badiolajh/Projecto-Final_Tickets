@@ -1,0 +1,46 @@
+.button {
+  font-family: 'Anonymous Pro', monospace;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+/* Ícono */
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.label {
+  display: inline;
+}
+
+/* Estilo del boton */
+.aceptar {
+  border: 1px solid #09A109;
+  color: #09A109;
+}
+
+.aceptar:hover {
+  background-color: rgba(9, 161, 9, 0.1);
+}
+
+/* Responsive: en móviles ocultamos el texto en todos los botones excepto el nuevo */
+@media (max-width: 768px) {
+  .button {
+    justify-content: center;
+    padding: 8px;
+  }
+
+  /* Oculta texto en todos los botones */
+  .button .label {
+    display: none;
+  }
+
+}
