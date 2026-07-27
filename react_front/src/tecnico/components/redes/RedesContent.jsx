@@ -9,16 +9,16 @@ const RedesContent = ({ acciones }) => {
   const [search, setSearch] = useState("");
   const [estado, setEstado] = useState("todos");
 
-  const encabezados = ["Solicitud", "Tipo", "Fecha", "Acciones"];
+  const encabezados = ["Empleado", "Estado", "Fecha", "Acciones"];
   const filas = [
-    ["Nueva conexión", "Redes", "20/07/26"],
-    ["Cambio de router", "Redes", "15/07/26"],
-    ["Instalación switch", "Redes", "10/07/26"],
+    ["Jorge", "Pendiente", "20/07/26"],
+    ["Julian", "Finalizado", "15/07/26"],
+    ["Cristian", "Finalizado", "10/07/26"],
   ];
 
   return (
     <div className={styles.redes}>
-      <h2 className={styles.title}>Gestión de solicitudes de red</h2>
+      <h2 className={styles.title}>Tus solicitudes de red!</h2>
 
       <div className={styles.controls}>
         <SearchBar onChange={setSearch} />
