@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./BtnCancelarDark.module.css";
+import styles from "./BtnCancelarLight.module.css";
 import iconAceptarDark from "../../icons/i_ver_dashboard.png"
 
 const BtnCancelarLight = ({ onClick }) => {
