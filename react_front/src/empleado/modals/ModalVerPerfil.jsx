@@ -13,7 +13,7 @@ const ModalVerPerfil = ({ info, onClick }) => {
         <div className={styles.cuerpo}>
             
         </div>
-        {/* Acciones, contenedor de los botones*/}
+        {/* Acciones, contenedor de los botones, */}
         <div className={styles.modal}>
             
         </div> 

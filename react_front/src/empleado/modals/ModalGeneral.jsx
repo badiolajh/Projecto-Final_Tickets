@@ -5,7 +5,7 @@ import styles from "./ModalGeneral.module.css";
 const ModalGeneral = ({ info, onClick }) => {
 
   return (
-    // Contenedor del modal general
+    // Contenedor del modal
     <div className={styles.modal}>
         {/* Cabecera */}
         <div className={styles.cabecera}>
