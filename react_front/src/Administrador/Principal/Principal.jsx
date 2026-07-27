@@ -8,6 +8,7 @@ import './Principal.css';
 import SlideBar from '../../Componentes/SlideBar/SlideBar.jsx';
 import NavBar from '../../Componentes/NavBar/NavBar.jsx';
 import Usuarios_F from '../../Componentes/Administrador_componentes/Usuarios-Frame/Usuarios_F.jsx';
+import DashBoardAdmin from "../../Componentes/Administrador_componentes/DashBoardAdmin/DashBoardAdmin.jsx";
 
 function Principal({onLogout}) {
   // if (!user) return <Navigate to="/" replace />;
@@ -24,7 +25,7 @@ function Principal({onLogout}) {
                 {/* La ruta base debe apuntar a usuarios explícitamente */}
                 <Route index element={<Navigate to="/dashboard" replace />} />
 
-                <Route path="/dashboard" element={<h1 className='en-proceso'>Bienvenido al Dashboard</h1>} />
+                <Route path="/dashboard" element={<DashBoardAdmin/>} />
                 <Route path="/usuarios" element={<Usuarios_F/>} />     {/* user={user}*/}
                 <Route path="/incidencias" element={<div className="en-proceso"><h1>incidencias: En proceso...</h1></div>} />
                 <Route path="/historial" element={<div className="en-proceso"><h1>historial: En proceso...</h1></div>} />
