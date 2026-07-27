@@ -1,0 +1,72 @@
+.button {
+  font-family: 'Anonymous Pro', monospace;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+/* Ícono */
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.label {
+  display: inline;
+}
+
+/* Variantes con estilo uniforme */
+.ver,
+.finalizar,
+.diagnostico {
+  border: 1px solid #09A109;
+  color: #09A109;
+}
+
+.ver:hover,
+.finalizar:hover,
+.diagnostico:hover {
+  background-color: rgba(9, 161, 9, 0.1);
+}
+
+/* Variante Nueva solicitud */
+.nuevo {
+  background-color: #09A109;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+.nuevo:hover {
+  opacity: 0.9;
+}
+
+/* Default */
+.default {
+  border: 1px solid #BCBEC0;
+  color: #BCBEC0;
+}
+
+/* Responsive: en móviles ocultamos el texto en todos los botones excepto el nuevo */
+@media (max-width: 768px) {
+  .button {
+    justify-content: center;
+    padding: 8px;
+  }
+
+  /* Oculta texto en todos los botones */
+  .button .label {
+    display: none;
+  }
+
+  /* Excepción: el botón nuevo sí muestra texto */
+  .nuevo .label {
+    display: inline;
+  }
+}

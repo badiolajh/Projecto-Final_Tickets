@@ -1,0 +1,112 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.welcome {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+  background-color: #242424;
+  border-radius: 15px;
+  
+}
+
+.statBox {
+  color: white;
+  flex: 1;
+  padding: 16px;
+  text-align: center;
+}
+
+.number {
+  font-size: xx-large;
+  display: block;
+}
+
+.label {
+  font-size: large;
+}
+
+/* Fila con distribución + tabla */
+.row {
+  display: flex;
+  gap: 16px;
+}
+
+.distribution {
+  background-color: #242424;
+  color: white;
+  padding: 1px 34px;
+  border-radius: 15px;
+  width: 380px;
+  height: 460px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+.distTitle {
+  text-align: center; /* título centrado */
+  font-size: 32px;
+  font-weight:lighter;
+  margin-bottom: 10px;
+}
+
+.distRow {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.distLabel {
+  font-size: large; /* igual que label de estadísticas */
+  width: 100px;
+  padding-top: 30px;
+}
+
+.distValue {
+  font-size: xx-large; /* igual que number de estadísticas */
+}
+
+
+.tableWrapper {
+  width: 100%;
+  height: 460px;
+}
+
+/* Responsive: todo en una sola columna */
+@media (max-width: 768px) {
+  .stats {
+    flex-direction: column;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .distribution,
+  .tableWrapper {
+    width: 100%;
+    height: auto;
+  }
+
+  .distribution{
+    height: 100%;
+    padding: 0px;
+  }
+
+  .distRow{
+    padding-left: 34px;
+  }
+
+}
