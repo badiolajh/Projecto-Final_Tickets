@@ -1,7 +1,14 @@
 import { FaEye } from "react-icons/fa";
 import './DashBoardAdmin.css';
+import Tick_Pendiente from "../Ver-ticket-pendiente/Ver-pendiente";
+
+import { useState } from "react";
+
 
 const DashBoardAdmin = ({ user }) => {
+
+  const [Verpendiente, ModaleVerPendiente]  = useState(false);
+
 
   const usuariosPagina = [
       { id: 1, firstName: 'Andres', tipo: 'Tipo:Sistemas' },
@@ -60,15 +67,15 @@ const DashBoardAdmin = ({ user }) => {
           <div className="contenedor-metricas">
             <div className='fila-distribucion'>
               <span className='eqtiueta-dist'>Redes :</span>
-              <span className='valor-distribucion'>%20</span>
+              <span className='valor-distribucion'>20%</span>
             </div>
             <div className='fila-distribucion'>
               <span className='eqtiueta-dist'>Sistemas :</span>
-              <span className='valor-distribucion'>%30</span>
+              <span className='valor-distribucion'>30%</span>
             </div>
             <div className='fila-distribucion'>
               <span className='eqtiueta-dist'>Hardware :</span>
-              <span className='valor-distribucion'>%50</ span>
+              <span className='valor-distribucion'>50%</ span>
             </div>
           </div>
 
@@ -89,7 +96,7 @@ const DashBoardAdmin = ({ user }) => {
                               <td className="acciones-boton" style={{ padding: '12px', textAlign: 'right' }}>
                                 <button
                                   className="btn-ver"
-                                  onClick={() => console.log('Ver ticket:', u.id)}
+                                  onClick={() => ModaleVerPendiente(true)}
                                 >
                                   <FaEye /> Ver
                                 </button>
@@ -102,6 +109,12 @@ const DashBoardAdmin = ({ user }) => {
           </div>
       </div>
 
+      {/* Modal de editar Usuario*/}
+      <Tick_Pendiente
+      isOpen={Verpendiente}
+      onClose={() => ModaleVerPendiente(false)}
+      title="Ver Ticket Pendiente"
+      />
     </div>
   );
 };

@@ -24,6 +24,8 @@
     width: 394px;
     height: 43px;
     font-size: 30px;
+    margin-bottom: 50px;
+
 }
 
 .barra-controles {
@@ -33,6 +35,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    overflow-x: auto;
 }
 
 .barra-controles .Buscar{
@@ -42,6 +45,10 @@
     padding-left: 0;
     padding-right: 15px;
     flex: 0 0 40%;
+}
+
+.barra-controles .Buscar input{
+    min-width: 200px;
 }
 
 
@@ -54,7 +61,7 @@
     border: none;
     padding: 8px 15px;
     border-radius: 4px;
-    min-width: 33dvh;
+    flex-shrink: 0;
 }
 
 .Boton-Verde:hover{
@@ -106,15 +113,14 @@
 .Tabla-Datos td {
     padding: 15px;
     text-align: left;
-    padding-left: 17px;
-    padding-right: 0;
     overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 
 .Tabla-Datos td:last-child {
+    justify-content: left;
     overflow: visible;
 }
 
@@ -129,8 +135,6 @@
 
 
 .acciones {
-    justify-content: center;
-    align-items: center;
     gap: 15px;
 }
 

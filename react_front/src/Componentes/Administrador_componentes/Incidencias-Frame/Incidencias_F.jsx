@@ -1,28 +1,27 @@
+import { FaEye } from "react-icons/fa";
+
 import { useSearchParams } from "react-router-dom";
-import { FiEdit } from "react-icons/fi";
-import { FaRegTrashAlt } from "react-icons/fa";
 import { useState } from "react";
 
-import UserModal from "../UserModal/UserModal";
-import UserEdit from "../UserEdit/UserEdit";
+import Tick_Pendiente from "../Ver-ticket-pendiente/Ver-pendiente";
 
-function Usuarios_Frame({ user }) {
+
+function Incidencias_Frame() {
   // Datos locales, aun no se implementa la API
     const [usuarios] = useState([
-      { id: 1, firstName: "Jonathan", lastName: "", email: "Jon123@correo.com", role: "Administrador" },
-      { id: 2, firstName: "Adrian", lastName: "", email: "Adrian123@correo.com", role: "Empleado" },
-      { id: 3, firstName: "Carlos", lastName: "", email: "C@r10s@correo.com", role: "Tecnico" },
-      { id: 4, firstName: "Andres", lastName: "", email: "And7e2@correo.com", role: "Empleado" },
-      { id: 5, firstName: "Abril", lastName: "", email: "Abr8211@correo.com", role: "Empleado" },
-      { id: 6, firstName: "Maria", lastName: "", email: "M@r1a@correo.com", role: "Empleado" },
+      { id: 1, firstName: "Andres", lastName: "", type: "Sistemas", date: "26/07/26" },
+      { id: 2, firstName: "Adrian", lastName: "", type: "Redes", date: "18/07/26" },
+      { id: 3, firstName: "Jorge", lastName: "", type: "Hardware", date: "16/07/26" },
+      { id: 4, firstName: "Jose", lastName: "", type: "Sistemas", date: "08/07/26" },
+      { id: 5, firstName: "Abril", lastName: "", type: "Hardware", date: "02/07/26" },
+      { id: 6, firstName: "Maria", lastName: "", type: "Redes", date: "28/06/26" },
     ]);
 
     const [registrosPorPagina, setRegistrosPorPagina] = useState(5);
     const [busqueda, setBusqueda] = useState("");
     const [filtroRol, setFiltroRol] = useState("Todos");
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [EditUserOpen, ModalEditUsuarioOpen] = useState(false);
+  const [Verpendiente, ModaleVerPendiente]  = useState(false);
 
     // Inicializa useSearchParams
     const [searchParams, setSearchParams] = useSearchParams();
@@ -53,7 +52,7 @@ function Usuarios_Frame({ user }) {
 
   return (
     <div className="contenedor-Opciones">
-          <h1 className="Bienvenida">Bienvenid@ <span>{user ? user.username : "Invitad@"}</span></h1>
+          <h1 className="tickets-pendientes">Estos son tus tickets pendientes!</h1>
 
           <div className="barra-controles">
             <label className="Buscar">
@@ -67,6 +66,7 @@ function Usuarios_Frame({ user }) {
                   cambiarPagina(1);
                 }}
           />
+
           <select
             className="select-estado"
             value={filtroRol}
@@ -82,18 +82,13 @@ function Usuarios_Frame({ user }) {
           </select>
             </label>
 
-
-
-            <button className="Boton-Verde" onClick={() => setIsModalOpen(true)}>
-                  Agregar Usuario
-                </button>
           </div>
 
           <div className="tarjeta-cabecera">
             <table className="Tabla-Header">
               <thead>
                 <tr>
-                  <th>Nombre</th><th>Correo</th><th>Rol</th><th className="acciones">Acciones</th>
+                  <th>Nombre</th><th>Tipo</th><th>Fecha</th><th className="acciones">Acciones</th>
                 </tr>
               </thead>
             </table>
@@ -105,12 +100,11 @@ function Usuarios_Frame({ user }) {
 
                     {usuariosPagina.map((u) => (
                       <tr key={u.id}>
-                        <td>{u.firstName} {u.lastName}</td>
-                        <td>{u.email}</td>
-                        <td className="columna-admin">{u.role || "user"}</td>
+                        <td>{u.firstName}</td>
+                        <td>{u.type}</td>
+                        <td className="columna-admin">{u.date}</td>
                         <td className="acciones-boton">
-                          <button className="btn-editar" onClick={() => ModalEditUsuarioOpen(true)}><FiEdit /> Editar</button>
-                          <button className="btn-eliminar"><FaRegTrashAlt /> Eliminar</button>
+                          <button className="btn-ver-incid" onClick={() => ModaleVerPendiente(true)}><FaEye /> Ver</button>
                         </td>
                       </tr>
                     ))}
@@ -147,20 +141,14 @@ function Usuarios_Frame({ user }) {
                               </label>
                             </div>
       </div>
-      {/* Modal de agregar Usuario*/}
-      <UserModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            title="Registro de usuario"
-      />
       {/* Modal de editar Usuario*/}
-      <UserEdit
-      isOpen={EditUserOpen}
-      onClose={() => ModalEditUsuarioOpen(false)}
-      title="Editar de usuario"
+      <Tick_Pendiente
+      isOpen={Verpendiente}
+      onClose={() => ModaleVerPendiente(false)}
+      title="Ver Ticket Pendiente"
       />
         </div>
   )
 }
 
-export default Usuarios_Frame;
+export default Incidencias_Frame;
