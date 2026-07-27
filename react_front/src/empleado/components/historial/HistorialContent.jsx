@@ -18,7 +18,7 @@ const HistorialContent = ({ acciones }) => {
 
   return (
     <div className={styles.historial}>
-      <h2 className={styles.title}>Historial de tickets</h2>
+      <h2 className={styles.title}>Estos son tus tickets finalizados!</h2>
 
       <div className={styles.controls}>
         <SearchBar onChange={setSearch} />

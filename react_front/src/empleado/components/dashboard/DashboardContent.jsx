@@ -31,7 +31,7 @@ const DashboardContent = ({ user }) => {
             {/* Fila superior: Bienvenida + Botón Solicitar Ticket */}
             <div className={styles.topRow}>
                 <h2 className={styles.welcome}>
-                    Bienvenido {user?.nombre || 'Empleado'}
+                    Bienvenido {user?.nombre || 'Empleado'}!
                 </h2>
                 <ActionButton
                     tipo="nuevo"
