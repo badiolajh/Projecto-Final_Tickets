@@ -10,7 +10,7 @@ import styles from './EmpleadoLayout.module.css';
 const EmpleadoLayout = () => {
     const [opcion, setOpcion] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
-    const user = { nombre: 'Jonathan', avatar: null };
+    const user = { nombre: 'Wilver Empleado', avatar: null };
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const closeMenu = () => setMenuOpen(false);
