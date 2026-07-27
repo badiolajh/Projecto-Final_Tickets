@@ -14,9 +14,9 @@ const Navbar = ({ onSelect, active, isVisible }) => {
         </button>
       </div>
 
-      {/* Sección central: Incidencias, Historial, Redes */}
+      {/* Sección central: Incidencias, Historial */}
       <div className={styles.middleSection}>
-        {["Incidencias", "Historial", "Redes"].map(op => (
+        {["Incidencias", "Historial"].map(op => (
           <button
             key={op}
             onClick={() => onSelect(op)}
