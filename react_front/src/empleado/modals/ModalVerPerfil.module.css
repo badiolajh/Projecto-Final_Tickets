@@ -12,11 +12,11 @@
 }
 
 .modal {
-  background-color: #2a2a2a;
+  background-color: #242424;
+  border: 1px solid #000000;
   border-radius: 12px;
   width: 500px;
   max-width: 90%;
-  color: white;
   font-family: 'Anonymous Pro', monospace;
   display: flex;
   flex-direction: column;
@@ -26,19 +26,20 @@
 .body {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .avatarContainer {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 12px;
   margin-bottom: 16px;
 }
 
 .avatar {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background-color: #444;
 }
@@ -50,14 +51,34 @@
   padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.iconUpload {
+  width: 16px;
+  height: 16px;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+label {
+  color: white;
+  flex: 0 0 100px;
 }
 
 input {
+  flex: 1;
   padding: 8px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #1e1e1e;
-  color: white;
+  border: 1px solid #BCBEC0;
+  background-color: #2D2D2D;
+  color: #808080;
 }
 
 .errorInput {
@@ -71,14 +92,15 @@ input {
 
 .actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 12px;
   margin-top: 20px;
 }
 
 .cancel {
-  background-color: #555;
-  border: none;
+  background: none;
+  border: 1px solid white;
+  color: white;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
@@ -87,6 +109,7 @@ input {
 .save {
   background-color: #09A109;
   border: none;
+  color: white;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
