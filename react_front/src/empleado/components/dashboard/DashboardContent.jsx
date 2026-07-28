@@ -3,7 +3,7 @@ import styles from './DashboardContent.module.css';
 import TablaDashboard from '../tables/TablaDashboard';
 import ActionButton from '../common/ActionButton';
 
-const DashboardContent = ({ user, onVerTicket }) => {
+const DashboardContent = ({ user, onVerTicket, onSolicitarTicket }) => {
     const estadisticas = {
         solicitados: 23,
         sinAsignar: 3,
@@ -35,7 +35,7 @@ const DashboardContent = ({ user, onVerTicket }) => {
                 </h2>
                 <ActionButton
                     tipo="nuevo"
-                    onClick={() => console.log("Solicitar nuevo ticket")}
+                    onClick={onSolicitarTicket} 
                 />
             </div>
 

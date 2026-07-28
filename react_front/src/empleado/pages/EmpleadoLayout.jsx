@@ -8,15 +8,25 @@ import HistorialContent from '../components/historial/HistorialContent';
 import ModalVerPerfil from '../modals/ModalVerPerfil';
 import ModalGeneral from '../modals/ModalGeneral';
 import DetalleTicketContent from '../modals/contents/DetalleTicketContent';
+import CrearTicketContent from '../modals/contents/CrearTicketContent';
 import BtnCerrar from '../modals/buttons/BtnCerrar';
+import BtnAceptar from '../modals/buttons/BtnAceptar';
+import BtnCancelar from '../modals/buttons/BtnCancelar';
 import styles from './EmpleadoLayout.module.css';
 
 const EmpleadoLayout = () => {
     const [opcion, setOpcion] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
+
+    // Modales
     const [showProfileModal, setShowProfileModal] = useState(false);
     const [showDetalleModal, setShowDetalleModal] = useState(false);
+    const [showCrearModal, setShowCrearModal] = useState(false);
+
+    // Datos de tickets
     const [ticketSeleccionado, setTicketSeleccionado] = useState(null);
+    const [crearValido, setCrearValido] = useState(false);
+    const [nuevoTicket, setNuevoTicket] = useState(null);
 
     const user = {
         nombre: 'Wilver Empleado',
@@ -100,11 +110,15 @@ const EmpleadoLayout = () => {
                                     });
                                     setShowDetalleModal(true);
                                 }}
+                                onSolicitarTicket={() =>
+                                    setShowCrearModal(true)
+                                }
                             />
                         )}
                         {opcion === 'Incidencias' && (
                             <IncidenciasContent
                                 acciones={accionesIncidencias}
+                                onSolicitarTicket={() => setShowCrearModal(true)}
                             />
                         )}
                         {opcion === 'Historial' && (
@@ -136,6 +150,35 @@ const EmpleadoLayout = () => {
                     }
                 >
                     <DetalleTicketContent ticket={ticketSeleccionado} />
+                </ModalGeneral>
+            )}
+
+            {/* Modal de crear ticket */}
+            {showCrearModal && (
+                <ModalGeneral
+                    titulo="Solicitar Ticket"
+                    onClose={() => setShowCrearModal(false)}
+                    acciones={
+                        <>
+                            <BtnCancelar
+                                onClick={() => setShowCrearModal(false)}
+                            />
+                            <BtnAceptar
+                                onClick={() => {
+                                    console.log('Ticket creado:', nuevoTicket);
+                                    setShowCrearModal(false);
+                                }}
+                                disabled={!crearValido}
+                            />
+                        </>
+                    }
+                >
+                    <CrearTicketContent
+                        onValidChange={(valido, data) => {
+                            setCrearValido(valido);
+                            setNuevoTicket(data);
+                        }}
+                    />
                 </ModalGeneral>
             )}
         </div>

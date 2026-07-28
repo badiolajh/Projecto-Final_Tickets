@@ -5,7 +5,7 @@ import FilterEstado from '../common/FilterEstado';
 import ActionButton from '../common/ActionButton';
 import styles from './IncidenciasContent.module.css';
 
-const IncidenciasContent = ({ acciones }) => {
+const IncidenciasContent = ({ acciones, onSolicitarTicket }) => {
     const [search, setSearch] = useState('');
     const [estado, setEstado] = useState('todos');
 
@@ -30,7 +30,7 @@ const IncidenciasContent = ({ acciones }) => {
                 </div>
                 <ActionButton
                     tipo="nuevo"
-                    onClick={() => console.log('Solicitar nuevo ticket')}
+                    onClick={onSolicitarTicket}
                 />
             </div>
 
