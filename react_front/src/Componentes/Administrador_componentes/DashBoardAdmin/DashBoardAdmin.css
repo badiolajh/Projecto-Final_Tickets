@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+    font-family: "Anonymous Pro", monospace;
+}
+
+
+.contenedor-principal-Dash {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px 40px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #F4F6F8;
+}
+
+.texto-resumen {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: -15px;
+}
+
+.Bienvenida {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #222;
+}
+
+.Bienvenida span {
+  font-weight: 700;
+}
+
+.contendor-arriba {
+  background-color: #232323;
+  color: #ffffff;
+  padding: 40px 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  width: 100%;
+}
+
+.tarjeta-datos {
+  margin-bottom: -15px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.item-datos {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-datos .numero {
+  font-size: 4rem;
+  font-weight: 300;
+}
+
+.item-datos .etiqueta {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin-top: 8px;
+  text-transform: lowercase;
+}
+
+.contenedor-abajo {
+  display: grid;
+  grid-template-columns: 1fr 1.7fr;
+  gap: 60px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.contenedor-izquierda,
+.contendor-derecha {
+  background-color: #242424;
+  padding: 36px 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo-seccion {
+    font-size: 1.7rem;
+  font-weight: normal;
+  color: #ffffff;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+.contenedor-izquierda {
+  justify-content: flex-start;
+}
+
+.contenedor-izquierda .contenido-distribucion {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 10px;
+}
+
+.contenedor-metricas{
+    margin-top: 45px;
+}
+
+.fila-distribucion {
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+  font-size: 1.5rem;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
+  align-items: center;
+  padding-right: 70px;
+}
+
+.fila-distribucion .eqtiueta-dist{
+    font-size: 1.5rem;
+}
+
+.fila-distribucion .valor-distribucion {
+  font-size: 3.5rem;
+}
+
+.contenedor-tabla-scroll {
+  max-height: 390px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.contenedor-tabla-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.contenedor-tabla-scroll::-webkit-scrollbar-thumb {
+  background: #232323;
+  border-radius: 4px;
+}
+
+.tabla-solicitudes-pendientes {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.tabla-solicitudes-pendientes tbody tr {
+  background-color: transparent; /* Ligeramente contrastado sobre el fondo del contenedor */
+  border-radius: 8px;
+}
+
+.tabla-solicitudes-pendientes td {
+  padding: 16px 20px; /* Celdas amplias y altas */
+  color: #ffffff;
+  font-size: 1.3rem;
+  border-top: 1px solid #BCBEC0;
+  border-bottom: 1px solid #BCBEC0;
+}
+
+.tabla-solicitudes-pendientes td:first-child {
+  border-left: 1px solid #BCBEC0;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.tabla-solicitudes-pendientes td:last-child {
+  border-right: 1px solid #BCBEC0;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.acciones-boton{
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.acciones-boton .btn-ver {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 10px;
+  background-color: transparent ;
+  border: 1px solid #BCBEC0 ;
+  color: #BCBEC0;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 25px;
+}
+
+.acciones-boton .btn-ver:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+/*celular*/
+@media (max-width: 900px) {
+  .contenedor-principal-Dash {
+    padding: 4px 8px;
+  }
+
+  .Bienvenida {
+    font-size: 1.2rem;
+  }
+
+  .contendor-arriba {
+    padding: 20px 10px;
+  }
+
+  .item-datos .numero {
+    font-size: 2rem;
+  }
+
+  .item-datos .etiqueta {
+    font-size: 0.5rem;
+    line-height: 1.1;
+  }
+
+  .tarjeta-datos {
+    justify-content: space-between;
+    gap: 3px;
+  }
+
+  .contenedor-abajo {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contenedor-izquierda,
+  .contendor-derecha {
+    padding: 20px 12px;
+  }
+
+  .titulo-seccion {
+    font-size: 1.2rem;
+    padding-left: 0;
+  }
+
+  .fila-distribucion {
+    padding-right: 5px;
+    font-size: 1rem;
+  }
+
+  .fila-distribucion .valor-distribucion {
+    font-size: 2rem;
+  }
+
+  .tabla-solicitudes-pendientes td {
+    padding: 8px 10px;
+    font-size: 0.65rem;
+  }
+}

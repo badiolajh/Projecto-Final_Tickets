@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body {
+  background-color: #F4F4F4;
+  font-family: "Anonymous Pro", monospace;
+
+}
+
+.contenedor-principal-registro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.tarjeta-formulario {
+  background-color: #1e1e1e;
+  padding: 40px;
+  border-radius: 16px;
+  width: 420px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+}
+
+.titulo-formulario {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 35px;
+  letter-spacing: 1px;
+}
+
+.formulario {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 18px;
+
+}
+
+.formulario .grupo-input::placeholder{
+    font-size: 16px;
+}
+
+.campo-texto {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: #2D2D2D;
+  border: 1px solid #808080;
+  border-radius: 6px;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.campo-texto::placeholder {
+  color: #777777;
+}
+
+.campo-texto:focus {
+  border-color: #666666;
+}
+
+.contenedor-enlace {
+    gap: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-editar-foto{
+    gap: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.Foto {
+  color: #a0a0a0;
+  font-size: 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+
+
+.modal-btnregistro {
+    display: flex;
+    gap: 15px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.modal-btnregistro .btn-cancel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 47%;
+    font-family: "Anonymous Pro", monospace;
+    color: #808080;
+    background: transparent;
+    border: 1px solid #808080;
+    padding: 5px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    gap: 4px;
+
+    font-size: 20px;
+}
+
+.modal-btnregistro .btn-cancel svg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+
+.modal-btnregistro .btn-cancel:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+.modal-btnregistro .btn-registrar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 47%;
+    font-family: "Anonymous Pro", monospace;
+    color: #F4F6F8;
+    border: 1px solid #00a82d;
+    padding: 5px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    background-color: #00a82d;
+    font-size: 20px;
+    gap: 4px;
+
+}
+.modal-btnregistro .btn-registrar svg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+}
+
+.texto-pie {
+  text-align: left;
+  font-size: 16px;
+  color: #a0a0a0;
+  margin-top: 15px;
+}
+
+.enlace-verde {
+  color: #0BC20B;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.enlace-verde:hover {
+  text-decoration: underline;
+}
+
+.btn-editar-foto {
+    font-family: "Anonymous Pro", monospace;
+    color: #00a82d;
+    padding: 4px 9px;
+    background: transparent;
+    border: 1px solid #00a82d;
+    padding: 4px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+.btn-editar-foto:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .tarjeta-formulario {
+    width: 90%;
+    padding: 25px 20px;
+  }
+}

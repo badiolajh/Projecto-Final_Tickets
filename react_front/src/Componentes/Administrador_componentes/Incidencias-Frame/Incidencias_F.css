@@ -1,0 +1,78 @@
+.tickets-pendientes{
+    color: #242424;
+    font-weight: normal;
+    width: auto;
+    height: 43px;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+.btn-ver-incid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Anonymous Pro", monospace;
+    color: #00a82d;
+    padding: 4px 10px;
+    background: transparent;
+    border: 1px solid #00a82d;
+    padding: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 4px;
+    gap: 7px;
+}
+.btn-ver-incid:hover{
+    background:#F4F6F8;
+    cursor: pointer;
+}
+
+svg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*celular*/
+@media (max-width: 900px) {
+  .contenedor-Opciones {
+    padding: 15px 10px;
+  }
+
+  .tickets-pendientes {
+    font-size: 1.3rem;
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+
+  .tarjeta-cabecera,
+  .tarjeta-cuerpo {
+    padding: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .Tabla-Header,
+  .Tabla-Datos {
+    table-layout: auto;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .Tabla-Header th {
+    width: auto !important;
+    padding: 10px 15px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .Tabla-Datos td {
+    width: auto !important;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: unset;
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+}
