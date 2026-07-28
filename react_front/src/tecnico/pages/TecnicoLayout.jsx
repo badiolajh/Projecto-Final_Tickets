@@ -12,6 +12,7 @@ import Tick_Pendiente from '../modals/Ver-ticket-pendiente/Ver-pendiente';
 import Tick_Finalizado from '../modals/Ver-ticket-finalizado/Ver-finalizado';
 import Solicitud_Red from '../modals/Ver-solicitud-red/Ver_red';
 import FinalizarTicket from '../modals/Finalizar-ticket/finalizar';
+import Diagnostico from '../modals/Diagnostico-ticket/diagnostico';
 
 const TecnicoLayout = () => {
     const [opcion, setOpcion] = useState('Dashboard');
@@ -28,6 +29,7 @@ const TecnicoLayout = () => {
     const [redMode, setRedMode] = useState('nuevo'); // "nuevo" o "ver"
     const [selectedSolicitud, setSelectedSolicitud] = useState(null);
     const [showFinalizarModal, setShowFinalizarModal] = useState(false);
+    const [showDiagnosticoModal, setShowDiagnosticoModal] = useState(false);
 
     const [user, setUser] = useState({
         nombre: 'Jonathan',
@@ -71,7 +73,10 @@ const TecnicoLayout = () => {
         },
         {
             tipo: 'diagnostico',
-            onClick: (fila) => console.log('Diagnóstico historial', fila),
+            onClick: (fila) => {
+                setSelectedTicket({ username: fila[0], tipo: fila[1] });
+                setShowDiagnosticoModal(true);
+            },
         },
     ];
 
@@ -201,6 +206,14 @@ const TecnicoLayout = () => {
                         console.log('Ticket finalizado con diagnóstico:', data);
                         setShowFinalizarModal(false);
                     }}
+                />
+            )}
+
+            {showDiagnosticoModal && (
+                <Diagnostico
+                    isOpen={showDiagnosticoModal}
+                    onClose={() => setShowDiagnosticoModal(false)}
+                    user={selectedTicket}
                 />
             )}
         </div>
