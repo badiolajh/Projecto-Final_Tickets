@@ -11,8 +11,8 @@ function App() {
 
   return (
     <>
-    <EmpleadoLayout></EmpleadoLayout>
-    {/* <TecnicoLayout></TecnicoLayout> */}
+    {/* <EmpleadoLayout></EmpleadoLayout> */}
+    <TecnicoLayout></TecnicoLayout>
     </>
   )
 }
