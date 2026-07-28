@@ -8,7 +8,7 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
     const fakeUser = {
       nombre: "Jonathan",
       correo: "jonathan@correo.com",
-      rol: "admin", // Cambia a "admin" o "empleado" para probar
+      rol: "empleado", // Cambia a "admin" o "empleado" para probar
     };
 
     alIniciarSesion(fakeUser);
