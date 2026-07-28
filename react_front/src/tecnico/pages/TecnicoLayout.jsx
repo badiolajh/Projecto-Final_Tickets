@@ -11,6 +11,7 @@ import ModalVerPerfil from '../modals/Ver-perfil/ModalVerPerfil';
 import Tick_Pendiente from '../modals/Ver-ticket-pendiente/Ver-pendiente';
 import Tick_Finalizado from '../modals/Ver-ticket-finalizado/Ver-finalizado';
 import Solicitud_Red from '../modals/Ver-solicitud-red/Ver_red';
+import FinalizarTicket from '../modals/Finalizar-ticket/finalizar';
 
 const TecnicoLayout = () => {
     const [opcion, setOpcion] = useState('Dashboard');
@@ -26,6 +27,7 @@ const TecnicoLayout = () => {
     const [selectedTicket, setSelectedTicket] = useState(null);
     const [redMode, setRedMode] = useState('nuevo'); // "nuevo" o "ver"
     const [selectedSolicitud, setSelectedSolicitud] = useState(null);
+    const [showFinalizarModal, setShowFinalizarModal] = useState(false);
 
     const [user, setUser] = useState({
         nombre: 'Jonathan',
@@ -51,7 +53,10 @@ const TecnicoLayout = () => {
         },
         {
             tipo: 'finalizar',
-            onClick: (fila) => console.log('Finalizar incidencia', fila),
+            onClick: (fila) => {
+                setSelectedTicket({ username: fila[0], tipo: fila[1] });
+                setShowFinalizarModal(true);
+            },
         },
     ];
 
@@ -184,6 +189,18 @@ const TecnicoLayout = () => {
                     onClose={() => setShowRedModal(false)}
                     mode={redMode}
                     info={selectedSolicitud}
+                />
+            )}
+
+            {showFinalizarModal && (
+                <FinalizarTicket
+                    isOpen={showFinalizarModal}
+                    onClose={() => setShowFinalizarModal(false)}
+                    user={selectedTicket}
+                    onAccept={(data) => {
+                        console.log('Ticket finalizado con diagnóstico:', data);
+                        setShowFinalizarModal(false);
+                    }}
                 />
             )}
         </div>
