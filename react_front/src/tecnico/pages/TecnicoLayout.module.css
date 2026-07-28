@@ -30,14 +30,14 @@ body {
   height: 100vh;
 }
 
-.layout-body {
+.layoutBody {
   display: flex;
   flex: 1;
   margin-top: 60px; /* mismo alto que el header */
 }
 
 /* El main debe dejar espacio para el navbar fijo */
-.main-content {
+.mainContent {
   margin-left: 230px; /* espacio para el navbar fijo */
   flex: 1;
   overflow-y: auto;   /* solo el contenido se desplaza */
@@ -56,7 +56,7 @@ body {
 
 /* En móviles el main ocupa todo el ancho */
 @media (max-width: 768px) {
-  .main-content {
+  .mainContent {
     margin-left: 0; /* quitar margen izquierdo */
   }
 }

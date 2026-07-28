@@ -3,7 +3,7 @@ import Header from '../components/grid/Header';
 import Navbar from '../components/grid/Navbar';
 import MainGeneral from '../components/grid/MainGeneral';
 import DashboardContent from '../components/dashboard/DashboardContent';
-import './TecnicoLayout.module.css';
+import styles from './TecnicoLayout.module.css';
 import RedesContent from '../components/redes/RedesContent';
 import HistorialContent from '../components/historial/HistorialContent';
 import IncidenciasContent from '../components/incidencias/IncidenciasContent';
@@ -108,7 +108,7 @@ const TecnicoLayout = () => {
     ];
 
     return (
-        <div className="layout">
+        <div className={styles.layout}>
             <Header
                 user={user}
                 onMenuToggle={toggleMenu}
@@ -116,7 +116,7 @@ const TecnicoLayout = () => {
                 onProfileClick={() => setShowPerfilModal(true)}
             />
 
-            <div className="layout-body">
+            <div className={styles.layoutBody}>
                 <Navbar
                     onSelect={setOpcion}
                     active={opcion}
@@ -124,10 +124,10 @@ const TecnicoLayout = () => {
                 />
 
                 {menuOpen && (
-                    <div className="overlay" onClick={closeMenu}></div>
+                    <div className={styles.overlay} onClick={closeMenu}></div>
                 )}
 
-                <div className="main-content">
+                <div className={styles.mainContent}>
                     <MainGeneral titulo={opcion}>
                         {opcion === 'Dashboard' && (
                             <DashboardContent
