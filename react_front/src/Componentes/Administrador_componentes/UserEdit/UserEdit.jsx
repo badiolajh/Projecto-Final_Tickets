@@ -36,7 +36,7 @@ const UserEdit = ({ isOpen, onClose }) => {
           </div>
         </div>
         <div className="modal-actions">
-          <button className="btn-cancel" onClick={onClose}><ImCancelCircle /> Descartar Cambios</button>
+          <button className="btn-cancel" onClick={onClose}><ImCancelCircle /> Cancelar</button>
           <button className="btn-registrar"  onClick={onClose}> <IoCheckmark /> Guardar</button>
         </div>
       </div>

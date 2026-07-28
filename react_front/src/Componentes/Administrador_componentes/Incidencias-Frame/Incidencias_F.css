@@ -32,3 +32,47 @@ svg{
     justify-content: center;
     align-items: center;
 }
+
+/*celular*/
+@media (max-width: 900px) {
+  .contenedor-Opciones {
+    padding: 15px 10px;
+  }
+
+  .tickets-pendientes {
+    font-size: 1.3rem;
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+
+  .tarjeta-cabecera,
+  .tarjeta-cuerpo {
+    padding: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .Tabla-Header,
+  .Tabla-Datos {
+    table-layout: auto;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .Tabla-Header th {
+    width: auto !important;
+    padding: 10px 15px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .Tabla-Datos td {
+    width: auto !important;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: unset;
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+}

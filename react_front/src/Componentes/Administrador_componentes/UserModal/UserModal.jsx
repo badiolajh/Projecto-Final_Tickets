@@ -33,7 +33,7 @@ const UserModal = ({ isOpen, onClose }) => {
           <div className='form-row'><label>Foto de perfil:<button className="btn-editar-form"><IoCloudUploadOutline /> Subir</button></label></div>
         </div>
         <div className="modal-actions">
-          <button className="btn-cancel" onClick={onClose}><ImCancelCircle /> Descartar Cambios</button>
+          <button className="btn-cancel" onClick={onClose}><ImCancelCircle /> Cancelar</button>
           <button className="btn-registrar"  onClick={onClose}> <IoCheckmark /> Registrar</button>
         </div>
       </div>

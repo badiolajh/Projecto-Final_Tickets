@@ -197,3 +197,61 @@
     background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
 }
+
+/*celular*/
+@media (max-width: 900px) {
+  .contenedor-principal-Dash {
+    padding: 4px 8px;
+  }
+
+  .Bienvenida {
+    font-size: 1.2rem;
+  }
+
+  .contendor-arriba {
+    padding: 20px 10px;
+  }
+
+  .item-datos .numero {
+    font-size: 2rem;
+  }
+
+  .item-datos .etiqueta {
+    font-size: 0.5rem;
+    line-height: 1.1;
+  }
+
+  .tarjeta-datos {
+    justify-content: space-between;
+    gap: 3px;
+  }
+
+  .contenedor-abajo {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contenedor-izquierda,
+  .contendor-derecha {
+    padding: 20px 12px;
+  }
+
+  .titulo-seccion {
+    font-size: 1.2rem;
+    padding-left: 0;
+  }
+
+  .fila-distribucion {
+    padding-right: 5px;
+    font-size: 1rem;
+  }
+
+  .fila-distribucion .valor-distribucion {
+    font-size: 2rem;
+  }
+
+  .tabla-solicitudes-pendientes td {
+    padding: 8px 10px;
+    font-size: 0.65rem;
+  }
+}

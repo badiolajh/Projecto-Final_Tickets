@@ -234,3 +234,98 @@
 .tabla-paginas button:disabled {
   opacity: 0.3;
 }
+
+/*Celulares*/
+@media (max-width: 900px) {
+  .contenedor-Opciones {
+    padding: 15px 10px;
+  }
+
+  .Bienvenida {
+    font-size: 1.3rem;
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+
+  .barra-controles {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .barra-controles .Buscar {
+    order: 1;
+    width: 100%;
+    flex: none;
+    padding: 0;
+    gap: 8px;
+  }
+
+  .barra-controles .Buscar input {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .select-estado {
+    order: 2;
+    width: 100%;
+  }
+
+  .Boton-Verde {
+    order: 3;
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .tarjeta-cabecera,
+  .tarjeta-cuerpo {
+    padding: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .Tabla-Header,
+  .Tabla-Datos {
+    table-layout: auto;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .Tabla-Header th {
+    width: auto !important;
+    padding: 10px 15px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .Tabla-Datos td {
+    width: auto !important;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: unset;
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+
+  .pie-tabla {
+
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+  }
+  .pie-tabla .tabla-paginas{
+
+      font-size: 13px;
+      text-align: start;
+    flex-direction:row;
+    gap: 12px;
+    align-items: self-start;
+  }
+
+}

@@ -116,3 +116,10 @@ body {
 .enlace-verde:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 480px) {
+  .tarjeta-formulario {
+    width: 90%;
+    padding: 25px 20px;
+  }
+}
