@@ -1,0 +1,32 @@
+.crearTicket {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: 'Anonymous Pro', monospace;
+}
+
+label {
+  font-weight: bold;
+}
+
+select, textarea {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.errorInput {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
