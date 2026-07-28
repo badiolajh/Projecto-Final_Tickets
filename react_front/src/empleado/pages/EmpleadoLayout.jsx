@@ -5,13 +5,18 @@ import MainGeneral from '../components/grid/MainGeneral';
 import DashboardContent from '../components/dashboard/DashboardContent';
 import IncidenciasContent from '../components/incidencias/IncidenciasContent';
 import HistorialContent from '../components/historial/HistorialContent';
-import ModalVerPerfil from '../modals/ModalVerPerfil'; // ✅ importar el modal
+import ModalVerPerfil from '../modals/ModalVerPerfil';
+import ModalGeneral from '../modals/ModalGeneral';
+import DetalleTicketContent from '../modals/contents/DetalleTicketContent';
+import BtnCerrar from '../modals/buttons/BtnCerrar';
 import styles from './EmpleadoLayout.module.css';
 
 const EmpleadoLayout = () => {
     const [opcion, setOpcion] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
-    const [showProfileModal, setShowProfileModal] = useState(false); // ✅ estado para modal
+    const [showProfileModal, setShowProfileModal] = useState(false);
+    const [showDetalleModal, setShowDetalleModal] = useState(false);
+    const [ticketSeleccionado, setTicketSeleccionado] = useState(null);
 
     const user = { 
         nombre: 'Wilver Empleado', 
@@ -28,11 +33,25 @@ const EmpleadoLayout = () => {
 
     // Acciones específicas para el rol Empleado
     const accionesIncidencias = [
-        { tipo: 'ver', onClick: (fila) => console.log('Ver incidencia', fila) },
+        { tipo: 'ver', onClick: (fila) => {
+            setTicketSeleccionado({
+                tipo: fila[1],
+                descripcion: "Descripción de ejemplo del ticket",
+                asignado: "Carlos"
+            });
+            setShowDetalleModal(true);
+        }},
     ];
 
     const accionesHistorial = [
-        { tipo: 'ver', onClick: (fila) => console.log('Ver historial', fila) },
+        { tipo: 'ver', onClick: (fila) => {
+            setTicketSeleccionado({
+                tipo: fila[1],
+                descripcion: "Ticket finalizado con detalles",
+                asignado: "Andrés"
+            });
+            setShowDetalleModal(true);
+        }},
     ];
 
     return (
@@ -41,7 +60,7 @@ const EmpleadoLayout = () => {
                 user={user}
                 onMenuToggle={toggleMenu}
                 isMenuOpen={menuOpen}
-                onProfileClick={() => setShowProfileModal(true)} // ✅ abrir modal
+                onProfileClick={() => setShowProfileModal(true)}
             />
 
             <div className={styles.layoutBody}>
@@ -74,13 +93,24 @@ const EmpleadoLayout = () => {
                 </div>
             </div>
 
-            {/* ✅ Renderizar el modal si está activo */}
+            {/* Modal de perfil */}
             {showProfileModal && (
                 <ModalVerPerfil
                     info={user}
                     onClose={() => setShowProfileModal(false)}
                     onSave={(data) => console.log("Datos guardados:", data)}
                 />
+            )}
+
+            {/* Modal de detalle de ticket */}
+            {showDetalleModal && ticketSeleccionado && (
+                <ModalGeneral
+                    titulo="Detalle del Ticket"
+                    onClose={() => setShowDetalleModal(false)}
+                    acciones={<BtnCerrar onClick={() => setShowDetalleModal(false)} />}
+                >
+                    <DetalleTicketContent ticket={ticketSeleccionado} />
+                </ModalGeneral>
             )}
         </div>
     );
