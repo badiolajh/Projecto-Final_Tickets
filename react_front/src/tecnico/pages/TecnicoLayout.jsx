@@ -10,14 +10,22 @@ import IncidenciasContent from '../components/incidencias/IncidenciasContent';
 import ModalVerPerfil from '../modals/Ver-perfil/ModalVerPerfil';
 import Tick_Pendiente from '../modals/Ver-ticket-pendiente/Ver-pendiente';
 import Tick_Finalizado from '../modals/Ver-ticket-finalizado/Ver-finalizado';
+import Solicitud_Red from '../modals/Ver-solicitud-red/Ver_red';
 
 const TecnicoLayout = () => {
     const [opcion, setOpcion] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
+
+    // Estados para modales
     const [showPerfilModal, setShowPerfilModal] = useState(false);
     const [showPendienteModal, setShowPendienteModal] = useState(false);
     const [showFinalizadoModal, setShowFinalizadoModal] = useState(false);
+    const [showRedModal, setShowRedModal] = useState(false);
+
+    // Estado para ticket/solicitud seleccionada
     const [selectedTicket, setSelectedTicket] = useState(null);
+    const [redMode, setRedMode] = useState('nuevo'); // "nuevo" o "ver"
+    const [selectedSolicitud, setSelectedSolicitud] = useState(null);
 
     const [user, setUser] = useState({
         nombre: 'Jonathan',
@@ -26,7 +34,7 @@ const TecnicoLayout = () => {
         correo: 'jonathan@correo.com',
         contraseña: '********',
         extension: '123',
-        avatar: null
+        avatar: null,
     });
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -34,33 +42,59 @@ const TecnicoLayout = () => {
 
     // Acciones para incidencias
     const accionesIncidencias = [
-        { tipo: 'ver', onClick: (fila) => {
-            setSelectedTicket({ username: fila[0], tipo: fila[1] });
-            setShowPendienteModal(true);
-        }},
-        { tipo: 'finalizar', onClick: (fila) => console.log('Finalizar incidencia', fila) },
+        {
+            tipo: 'ver',
+            onClick: (fila) => {
+                setSelectedTicket({ username: fila[0], tipo: fila[1] });
+                setShowPendienteModal(true);
+            },
+        },
+        {
+            tipo: 'finalizar',
+            onClick: (fila) => console.log('Finalizar incidencia', fila),
+        },
     ];
 
     // Acciones para historial
     const accionesHistorial = [
-        { tipo: 'ver', onClick: (fila) => {
-            setSelectedTicket({ username: fila[0], tipo: fila[1] });
-            setShowFinalizadoModal(true);
-        }},
-        { tipo: 'diagnostico', onClick: (fila) => console.log('Diagnóstico historial', fila) },
+        {
+            tipo: 'ver',
+            onClick: (fila) => {
+                setSelectedTicket({ username: fila[0], tipo: fila[1] });
+                setShowFinalizadoModal(true);
+            },
+        },
+        {
+            tipo: 'diagnostico',
+            onClick: (fila) => console.log('Diagnóstico historial', fila),
+        },
     ];
 
     // Acciones para redes
     const accionesRedes = [
-        { tipo: 'ver', onClick: (fila) => console.log('Ver solicitud de red', fila) },
+        {
+            tipo: 'ver',
+            onClick: (fila) => {
+                setSelectedSolicitud({
+                    nombre: fila[0],
+                    estado: fila[1],
+                    fecha: fila[2],
+                });
+                setRedMode('ver');
+                setShowRedModal(true);
+            },
+        },
     ];
 
     // Acciones para dashboard
     const accionesDashboard = [
-        { tipo: 'ver', onClick: (fila) => {
-            setSelectedTicket({ username: fila.nombre, tipo: fila.tipo });
-            setShowPendienteModal(true);
-        }}
+        {
+            tipo: 'ver',
+            onClick: (fila) => {
+                setSelectedTicket({ username: fila.nombre, tipo: fila.tipo });
+                setShowPendienteModal(true);
+            },
+        },
     ];
 
     return (
@@ -86,16 +120,28 @@ const TecnicoLayout = () => {
                 <div className="main-content">
                     <MainGeneral titulo={opcion}>
                         {opcion === 'Dashboard' && (
-                            <DashboardContent user={user} acciones={accionesDashboard} />
+                            <DashboardContent
+                                user={user}
+                                acciones={accionesDashboard}
+                            />
                         )}
                         {opcion === 'Incidencias' && (
-                            <IncidenciasContent acciones={accionesIncidencias} />
+                            <IncidenciasContent
+                                acciones={accionesIncidencias}
+                            />
                         )}
                         {opcion === 'Historial' && (
                             <HistorialContent acciones={accionesHistorial} />
                         )}
                         {opcion === 'Redes' && (
-                            <RedesContent acciones={accionesRedes} />
+                            <RedesContent
+                                acciones={accionesRedes}
+                                onNuevaSolicitud={() => {
+                                    setRedMode('nuevo');
+                                    setSelectedSolicitud(null);
+                                    setShowRedModal(true);
+                                }}
+                            />
                         )}
                     </MainGeneral>
                 </div>
@@ -108,7 +154,7 @@ const TecnicoLayout = () => {
                     onClose={() => setShowPerfilModal(false)}
                     onSave={(updatedUser) => {
                         setUser(updatedUser);
-                        console.log("Perfil actualizado:", updatedUser);
+                        console.log('Perfil actualizado:', updatedUser);
                     }}
                 />
             )}
@@ -128,6 +174,16 @@ const TecnicoLayout = () => {
                     isOpen={showFinalizadoModal}
                     onClose={() => setShowFinalizadoModal(false)}
                     user={selectedTicket}
+                />
+            )}
+
+            {/* Modal de solicitud de red */}
+            {showRedModal && (
+                <Solicitud_Red
+                    isOpen={showRedModal}
+                    onClose={() => setShowRedModal(false)}
+                    mode={redMode}
+                    info={selectedSolicitud}
                 />
             )}
         </div>
