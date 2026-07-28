@@ -3,7 +3,7 @@ import Header from '../components/grid/Header';
 import Navbar from '../components/grid/Navbar';
 import MainGeneral from '../components/grid/MainGeneral';
 import DashboardContent from '../components/dashboard/DashboardContent';
-import '../tecnico.css';
+import './TecnicoLayout.module.css';
 import RedesContent from '../components/redes/RedesContent';
 import HistorialContent from '../components/historial/HistorialContent';
 import IncidenciasContent from '../components/incidencias/IncidenciasContent';
