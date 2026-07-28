@@ -1,24 +1,26 @@
 import React from "react";
 import styles from "./ModalGeneral.module.css";
 
-
-const ModalGeneral = ({ info, onClick }) => {
-
+const ModalGeneral = ({ titulo, children, acciones, onClose }) => {
   return (
-    // Contenedor del modal
-    <div className={styles.modal}>
+    <div className={styles.overlay}>
+      <div className={styles.modal}>
         {/* Cabecera */}
         <div className={styles.cabecera}>
-            <span className={styles.titulo}>Titulo</span>
+          <span className={styles.titulo}>{titulo}</span>
+          <button className={styles.close} onClick={onClose}>✕</button>
         </div>
-        {/* Cuerpo */}
+
+        {/* Cuerpo dinámico */}
         <div className={styles.cuerpo}>
-            {/* Contenido dinamico, se insertara el content segun se requiera */}
+          {children}
         </div>
-        {/* Acciones, contenedor de los botones*/}
-        <div className={styles.modal}>
-            {/* Contenido dinamico con los botones */}
-        </div> 
+
+        {/* Acciones */}
+        <div className={styles.acciones}>
+          {acciones}
+        </div>
+      </div>
     </div>
   );
 };
