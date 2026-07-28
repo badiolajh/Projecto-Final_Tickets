@@ -7,11 +7,22 @@ import '../tecnico.css';
 import RedesContent from '../components/redes/RedesContent';
 import HistorialContent from '../components/historial/HistorialContent';
 import IncidenciasContent from '../components/incidencias/IncidenciasContent';
+import ModalVerPerfil from '../modals/Ver-perfil/ModalVerPerfil';
 
 const TecnicoLayout = () => {
     const [opcion, setOpcion] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
-    const user = { nombre: 'Jonathan', avatar: null };
+    const [showPerfilModal, setShowPerfilModal] = useState(false);
+
+    const [user, setUser] = useState({
+        nombre: 'Jonathan',
+        puesto: 'Técnico',
+        area: 'Soporte',
+        correo: 'jonathan@correo.com',
+        contraseña: '********',
+        extension: '123',
+        avatar: null
+    });
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const closeMenu = () => setMenuOpen(false);
@@ -37,6 +48,7 @@ const TecnicoLayout = () => {
                 user={user}
                 onMenuToggle={toggleMenu}
                 isMenuOpen={menuOpen}
+                onProfileClick={() => setShowPerfilModal(true)} 
             />
 
             <div className="layout-body">
@@ -67,6 +79,18 @@ const TecnicoLayout = () => {
                     </MainGeneral>
                 </div>
             </div>
+
+            {/* Modal de perfil */}
+            {showPerfilModal && (
+                <ModalVerPerfil
+                    info={user}
+                    onClose={() => setShowPerfilModal(false)}
+                    onSave={(updatedUser) => {
+                        setUser(updatedUser); // ✅ actualiza datos
+                        console.log("Perfil actualizado:", updatedUser);
+                    }}
+                />
+            )}
         </div>
     );
 };
