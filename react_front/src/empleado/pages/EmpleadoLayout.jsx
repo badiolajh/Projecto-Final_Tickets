@@ -5,12 +5,23 @@ import MainGeneral from '../components/grid/MainGeneral';
 import DashboardContent from '../components/dashboard/DashboardContent';
 import IncidenciasContent from '../components/incidencias/IncidenciasContent';
 import HistorialContent from '../components/historial/HistorialContent';
+import ModalVerPerfil from '../modals/ModalVerPerfil'; // ✅ importar el modal
 import styles from './EmpleadoLayout.module.css';
 
 const EmpleadoLayout = () => {
     const [opcion, setOpcion] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
-    const user = { nombre: 'Wilver Empleado', avatar: null };
+    const [showProfileModal, setShowProfileModal] = useState(false); // ✅ estado para modal
+
+    const user = { 
+        nombre: 'Wilver Empleado', 
+        avatar: null,
+        puesto: 'Empleado de Soporte',
+        area: 'Sistemas',
+        correo: 'wilver@correo.com',
+        contraseña: '********',
+        extension: '452'
+    };
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const closeMenu = () => setMenuOpen(false);
@@ -30,6 +41,7 @@ const EmpleadoLayout = () => {
                 user={user}
                 onMenuToggle={toggleMenu}
                 isMenuOpen={menuOpen}
+                onProfileClick={() => setShowProfileModal(true)} // ✅ abrir modal
             />
 
             <div className={styles.layoutBody}>
@@ -61,6 +73,15 @@ const EmpleadoLayout = () => {
                     </MainGeneral>
                 </div>
             </div>
+
+            {/* ✅ Renderizar el modal si está activo */}
+            {showProfileModal && (
+                <ModalVerPerfil
+                    info={user}
+                    onClose={() => setShowProfileModal(false)}
+                    onSave={(data) => console.log("Datos guardados:", data)}
+                />
+            )}
         </div>
     );
 };
