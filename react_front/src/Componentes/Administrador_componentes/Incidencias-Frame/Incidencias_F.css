@@ -8,6 +8,9 @@
 }
 
 .btn-ver-incid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: "Anonymous Pro", monospace;
     color: #00a82d;
     padding: 4px 10px;
@@ -17,8 +20,15 @@
     padding-right: 15px;
     padding-left: 15px;
     border-radius: 4px;
+    gap: 7px;
 }
 .btn-ver-incid:hover{
     background:#F4F6F8;
     cursor: pointer;
+}
+
+svg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -145,6 +145,10 @@
 }
 
 .btn-editar {
+    gap: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: "Anonymous Pro", monospace;
     color: #00a82d;
     padding: 4px 10px;
@@ -159,6 +163,10 @@
 }
 
 .btn-eliminar {
+    gap: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: "Anonymous Pro", monospace;
     color: #00a82d;
     padding: 4px 10px;
@@ -175,6 +183,7 @@
     background:#F4F6F8;
     cursor: pointer;
 }
+
 
 .pie-tabla label {
   font-family: "Anonymous Pro", monospace;

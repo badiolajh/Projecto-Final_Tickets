@@ -30,7 +30,10 @@ const UserEdit = ({ isOpen, onClose }) => {
         <div className="section-title">Datos del Empleado Opcionales</div>
         <div className='tarjeta-cuerpo-formulario'>
         <div className="form-row"><label>Num.ext:</label> <input type="text" placeholder="951 673 52 12" /></div>
-          <div className='form-row'><label>Foto de perfil:<button className="btn-editar-form"><IoCloudUploadOutline /> Subir</button></label></div>
+          <div className='form-row'>
+            <label>Foto de perfil:</label>
+            <button className="btn-editar-form"><IoCloudUploadOutline /> Subir</button>
+          </div>
         </div>
         <div className="modal-actions">
           <button className="btn-cancel" onClick={onClose}><ImCancelCircle /> Descartar Cambios</button>

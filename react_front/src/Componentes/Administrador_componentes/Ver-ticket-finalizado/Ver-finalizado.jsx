@@ -25,7 +25,7 @@ const Tick_Finalizado = ({ isOpen, onClose , user}) => {
                     </div>
         </div>
 
-        <div className="modal-actions-etiqueta">
+        <div className="modal-actions-finalizado">
           <label className="etiqueta-asignar">Asignado a:</label>
         </div>
         <div className="modal-actions">

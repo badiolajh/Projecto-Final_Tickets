@@ -86,6 +86,10 @@
 }
 
 .form-row label {
+  gap: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
   flex: 1;
   font-weight: normal;
   color: #2a2a2a;
@@ -122,6 +126,10 @@
 }
 
 .modal-actions .btn-cancel{
+    gap: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 47%;
     font-family: "Anonymous Pro", monospace;
     color: #808080;
@@ -134,12 +142,16 @@
 
 }
 .modal-actions .btn-registrar{
+    gap: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 47%;
     font-family: "Anonymous Pro", monospace;
     color: #F4F6F8;
     padding: 4px 9px;
     border: 1px solid #00a82d;
-    padding: 4px;
+    padding: 6px;
     border-radius: 4px;
     flex-shrink: 0;
     background-color: #00a82d;
@@ -149,6 +161,10 @@
 
 
 .btn-editar-form {
+    gap: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: "Anonymous Pro", monospace;
     color: #00a82d;
     padding: 4px 9px;

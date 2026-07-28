@@ -1,14 +1,12 @@
 import "./Login.css";
 
 
-const Login = ({ alIniciarSesion }) => {
 
-  // Provicional para pasar a la ventana de administrador
+const Login = ({ alIniciarSesion, alIrARegistro }) => {
+
+  // Provisional para pasar a la ventana de administrador
   const manejarSubmit = (e) => {
       e.preventDefault();
-
-      // Aquí puedes validar usuario y contraseña si lo deseas en el futuro.
-      // Como pusiste el botón de sign in, al presionarlo ejecutamos la función:
       alIniciarSesion();
     };
 
@@ -17,7 +15,7 @@ const Login = ({ alIniciarSesion }) => {
             <div className="tarjeta-formulario">
               <h2 className="titulo-formulario">Inicia sesion</h2>
 
-              <form className="formulario" onSubmit={(e) => e.preventDefault()}>
+              <form className="formulario" onSubmit={manejarSubmit}>
                 <div className="grupo-input">
                   <input
                     type="email"
@@ -48,8 +46,15 @@ const Login = ({ alIniciarSesion }) => {
 
 
                 <div className="texto-pie">
-                  Aun no tienes cuenta? <a href="#registro" className="enlace-verde">Registrate</a>
-                </div>
+                                  Aun no tienes cuenta?{" "}
+                                  <span
+                                    onClick={alIrARegistro}
+                                    className="enlace-verde"
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    Registrate
+                                  </span>
+                                </div>
               </form>
             </div>
           </div>

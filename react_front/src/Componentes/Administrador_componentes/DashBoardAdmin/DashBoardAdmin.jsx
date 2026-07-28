@@ -22,7 +22,7 @@ const DashBoardAdmin = ({ user }) => {
     ];
 
   return (
-    <div className="contenedor-principal">
+    <div className="contenedor-principal-Dash">
 
       {/* Parte  de arriba */}
       <div className="texto-resumen">
