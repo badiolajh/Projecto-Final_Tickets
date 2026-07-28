@@ -11,7 +11,8 @@
   background-color: #09A109; 
   color: white;             
   font-weight: bold;
-  border: none;              
+  border: none;     
+  border: 1px solid #09A109;          
 }
 
 .aceptar:hover {
