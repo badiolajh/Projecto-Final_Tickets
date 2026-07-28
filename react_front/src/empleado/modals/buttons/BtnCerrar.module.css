@@ -1,0 +1,9 @@
+.cerrar {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Anonymous Pro', monospace;
+}
