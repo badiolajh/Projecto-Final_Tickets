@@ -3,7 +3,7 @@ import styles from './DashboardContent.module.css';
 import TablaDashboard from '../tables/TablaDashboard';
 import ActionButton from '../common/ActionButton';
 
-const DashboardContent = ({ user }) => {
+const DashboardContent = ({ user, onVerTicket }) => {
     const estadisticas = {
         solicitados: 23,
         sinAsignar: 3,
@@ -81,6 +81,7 @@ const DashboardContent = ({ user }) => {
                     <TablaDashboard
                         titulo="Tickets solicitados pendientes"
                         filas={ticketsPendientes}
+                        onVer={onVerTicket}
                     />
                 </div>
             </div>
