@@ -18,14 +18,14 @@ const EmpleadoLayout = () => {
     const [showDetalleModal, setShowDetalleModal] = useState(false);
     const [ticketSeleccionado, setTicketSeleccionado] = useState(null);
 
-    const user = { 
-        nombre: 'Wilver Empleado', 
+    const user = {
+        nombre: 'Wilver Empleado',
         avatar: null,
         puesto: 'Empleado de Soporte',
         area: 'Sistemas',
         correo: 'wilver@correo.com',
         contraseña: '********',
-        extension: '452'
+        extension: '452',
     };
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -33,25 +33,31 @@ const EmpleadoLayout = () => {
 
     // Acciones específicas para el rol Empleado
     const accionesIncidencias = [
-        { tipo: 'ver', onClick: (fila) => {
-            setTicketSeleccionado({
-                tipo: fila[1],
-                descripcion: "Descripción de ejemplo del ticket",
-                asignado: "Carlos"
-            });
-            setShowDetalleModal(true);
-        }},
+        {
+            tipo: 'ver',
+            onClick: (fila) => {
+                setTicketSeleccionado({
+                    tipo: fila[1],
+                    descripcion: 'Descripción de ejemplo del ticket',
+                    asignado: 'Carlos',
+                });
+                setShowDetalleModal(true);
+            },
+        },
     ];
 
     const accionesHistorial = [
-        { tipo: 'ver', onClick: (fila) => {
-            setTicketSeleccionado({
-                tipo: fila[1],
-                descripcion: "Ticket finalizado con detalles",
-                asignado: "Andrés"
-            });
-            setShowDetalleModal(true);
-        }},
+        {
+            tipo: 'ver',
+            onClick: (fila) => {
+                setTicketSeleccionado({
+                    tipo: fila[1],
+                    descripcion: 'Ticket finalizado con detalles',
+                    asignado: 'Andrés',
+                });
+                setShowDetalleModal(true);
+            },
+        },
     ];
 
     return (
@@ -68,7 +74,12 @@ const EmpleadoLayout = () => {
                     onSelect={setOpcion}
                     active={opcion}
                     isVisible={menuOpen}
-                    opciones={['Dashboard', 'Incidencias', 'Historial', 'Cerrar sesión']}
+                    opciones={[
+                        'Dashboard',
+                        'Incidencias',
+                        'Historial',
+                        'Cerrar sesión',
+                    ]}
                 />
 
                 {menuOpen && (
@@ -78,10 +89,23 @@ const EmpleadoLayout = () => {
                 <div className={styles.mainContent}>
                     <MainGeneral titulo={opcion}>
                         {opcion === 'Dashboard' && (
-                            <DashboardContent user={user} />
+                            <DashboardContent
+                                user={user}
+                                onVerTicket={(fila) => {
+                                    setTicketSeleccionado({
+                                        tipo: fila.tipo,
+                                        descripcion:
+                                            'Descripción de ejemplo del ticket',
+                                        asignado: 'Carlos',
+                                    });
+                                    setShowDetalleModal(true);
+                                }}
+                            />
                         )}
                         {opcion === 'Incidencias' && (
-                            <IncidenciasContent acciones={accionesIncidencias} />
+                            <IncidenciasContent
+                                acciones={accionesIncidencias}
+                            />
                         )}
                         {opcion === 'Historial' && (
                             <HistorialContent acciones={accionesHistorial} />
@@ -98,7 +122,7 @@ const EmpleadoLayout = () => {
                 <ModalVerPerfil
                     info={user}
                     onClose={() => setShowProfileModal(false)}
-                    onSave={(data) => console.log("Datos guardados:", data)}
+                    onSave={(data) => console.log('Datos guardados:', data)}
                 />
             )}
 
@@ -107,7 +131,9 @@ const EmpleadoLayout = () => {
                 <ModalGeneral
                     titulo="Detalle del Ticket"
                     onClose={() => setShowDetalleModal(false)}
-                    acciones={<BtnCerrar onClick={() => setShowDetalleModal(false)} />}
+                    acciones={
+                        <BtnCerrar onClick={() => setShowDetalleModal(false)} />
+                    }
                 >
                     <DetalleTicketContent ticket={ticketSeleccionado} />
                 </ModalGeneral>
