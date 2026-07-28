@@ -1,0 +1,83 @@
+.crearTicket {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Anonymous Pro', monospace;
+}
+
+/* Título */
+.titulo {
+  background-color: #242424;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* Cuerpo */
+.cuerpo {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* Campos en fila */
+.fieldRow {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.label {
+  color: #2D2D2D;
+  font-size: 14px;
+  margin-right: 8px;
+  flex: 0 0 100px;
+}
+
+select {
+  flex: 1;
+  background-color: #2D2D2D;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+/* Campo en columna (Descripción) */
+.fieldColumn {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.labelWrapper {
+  margin-bottom: 2px;
+}
+
+.labelDescripcion {
+  color: #2D2D2D;
+  font-size: 14px;
+  line-height: 1; 
+}
+
+textarea {
+  background-color: #2D2D2D;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  min-height: 100px;
+  resize: none;
+}
+
+.errorInput {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}

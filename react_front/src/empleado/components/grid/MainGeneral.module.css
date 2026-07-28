@@ -1,0 +1,19 @@
+.main {
+  flex: 1;
+  background-color: #f5f5f5;
+  color: black;
+  padding: 24px;
+  height: calc(100% - 50px) ;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: var(--color-secundario);
+}
+
+.content {
+  min-height: 300; /* espacio para contenido dinámico */
+  
+}

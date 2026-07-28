@@ -27,7 +27,7 @@ const ActionButton = ({ tipo, onClick }) => {
       icon = iconDiagnostico;
       break;
     case "nuevo":
-      label = "Nueva Solicitud de Red";
+      label = "Solicitar Ticket";
       className = styles.nuevo;
       icon = iconNuevo;
       break;

@@ -3,7 +3,7 @@ import styles from "./MainGeneral.module.css";
 
 const MainGeneral = ({ titulo, children }) => {
   return (
-    <main className={styles.main}>
+    <main className={styles.main}>      
       <div className={styles.content}>{children}</div>
     </main>
   );
