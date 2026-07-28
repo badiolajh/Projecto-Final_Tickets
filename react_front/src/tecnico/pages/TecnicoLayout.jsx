@@ -9,12 +9,14 @@ import HistorialContent from '../components/historial/HistorialContent';
 import IncidenciasContent from '../components/incidencias/IncidenciasContent';
 import ModalVerPerfil from '../modals/Ver-perfil/ModalVerPerfil';
 import Tick_Pendiente from '../modals/Ver-ticket-pendiente/Ver-pendiente';
+import Tick_Finalizado from '../modals/Ver-ticket-finalizado/Ver-finalizado';
 
 const TecnicoLayout = () => {
     const [opcion, setOpcion] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
     const [showPerfilModal, setShowPerfilModal] = useState(false);
     const [showPendienteModal, setShowPendienteModal] = useState(false);
+    const [showFinalizadoModal, setShowFinalizadoModal] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState(null);
 
     const [user, setUser] = useState({
@@ -41,7 +43,10 @@ const TecnicoLayout = () => {
 
     // Acciones para historial
     const accionesHistorial = [
-        { tipo: 'ver', onClick: (fila) => console.log('Ver historial', fila) },
+        { tipo: 'ver', onClick: (fila) => {
+            setSelectedTicket({ username: fila[0], tipo: fila[1] });
+            setShowFinalizadoModal(true);
+        }},
         { tipo: 'diagnostico', onClick: (fila) => console.log('Diagnóstico historial', fila) },
     ];
 
@@ -113,6 +118,15 @@ const TecnicoLayout = () => {
                 <Tick_Pendiente
                     isOpen={showPendienteModal}
                     onClose={() => setShowPendienteModal(false)}
+                    user={selectedTicket}
+                />
+            )}
+
+            {/* Modal de ticket finalizado */}
+            {showFinalizadoModal && (
+                <Tick_Finalizado
+                    isOpen={showFinalizadoModal}
+                    onClose={() => setShowFinalizadoModal(false)}
                     user={selectedTicket}
                 />
             )}
