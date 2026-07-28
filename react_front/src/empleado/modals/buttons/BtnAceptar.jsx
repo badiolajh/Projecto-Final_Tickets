@@ -1,16 +1,14 @@
 import React from "react";
 import styles from "./BtnAceptar.module.css";
-import iconAceptarDark from "../../icons/i_ver_dashboard.png"
 
-const BtnAceptar = ({ onClick }) => {
-  let label = "Aceptar";
-  let className = "styles.aceptar";
-  let icon = iconAceptarDark;
-
+const BtnAceptar = ({ onClick, disabled }) => {
   return (
-    <button className={`${styles.button} ${className}`} onClick={onClick}>
-      {icon && <img src={icon} alt={label} className={styles.icon} />}
-      <span className={styles.label}>{label}</span>
+    <button 
+      className={`${styles.button} ${styles.aceptar}`} 
+      onClick={onClick} 
+      disabled={disabled}
+    >
+      ✓ Aceptar
     </button>
   );
 };
