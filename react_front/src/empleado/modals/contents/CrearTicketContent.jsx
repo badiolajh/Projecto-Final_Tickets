@@ -24,24 +24,33 @@ const CrearTicketContent = ({ onValidChange }) => {
 
   return (
     <div className={styles.crearTicket}>
-      <h3>Completa el formulario</h3>
+      {/* Título */}
+      <h3 className={styles.titulo}>Completa el formulario</h3>
 
-      <label>Tipo:</label>
-      <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
-        <option>Hardware</option>
-        <option>Sistemas</option>
-        <option>Redes</option>
-      </select>
+      {/* Cuerpo */}
+      <div className={styles.cuerpo}>
+        <div className={styles.fieldRow}>
+          <label className={styles.label}>Tipo:</label>
+          <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
+            <option>Hardware</option>
+            <option>Sistemas</option>
+            <option>Redes</option>
+          </select>
+        </div>
 
-      <label>Descripción:</label>
-      <textarea
-        value={descripcion}
-        onChange={handleChange}
-        placeholder="Describe detalladamente el problema..."
-        className={error ? styles.errorInput : ""}
-      />
-
-      {error && <span className={styles.error}>{error}</span>}
+        <div className={styles.fieldColumn}>
+          <div className={styles.labelWrapper}>
+            <label className={styles.labelDescripcion}>Descripción:</label>
+          </div>
+          <textarea
+            value={descripcion}
+            onChange={handleChange}
+            placeholder="Describe detalladamente el problema..."
+            className={error ? styles.errorInput : ""}
+          />
+          {error && <span className={styles.error}>{error}</span>}
+        </div>
+      </div>
     </div>
   );
 };
