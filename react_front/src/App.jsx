@@ -9,7 +9,8 @@ import './Componentes/Administrador_componentes/Usuarios-Frame/Usuarios_F.css'
 import Principal from "./Administrador/Principal/Principal";
 import Login from "./Login/Login";
 import Registro from "./Registro/Registro";
-
+// import TecnicoLayout from './tecnico/pages/TecnicoLayout';
+// import EmpleadoLayout from './empleado/pages/EmpleadoLayout';
 
   function App() {
 
