@@ -108,114 +108,121 @@ const TecnicoLayout = () => {
     ];
 
     return (
-        <div className={styles.layout}>
-            <Header
-                user={user}
-                onMenuToggle={toggleMenu}
-                isMenuOpen={menuOpen}
-                onProfileClick={() => setShowPerfilModal(true)}
-            />
-
-            <div className={styles.layoutBody}>
-                <Navbar
-                    onSelect={setOpcion}
-                    active={opcion}
-                    isVisible={menuOpen}
+        <div className={styles.tecnicoLayoutRoot}>
+            <div className={styles.layout}>
+                <Header
+                    user={user}
+                    onMenuToggle={toggleMenu}
+                    isMenuOpen={menuOpen}
+                    onProfileClick={() => setShowPerfilModal(true)}
                 />
 
-                {menuOpen && (
-                    <div className={styles.overlay} onClick={closeMenu}></div>
+                <div className={styles.layoutBody}>
+                    <Navbar
+                        onSelect={setOpcion}
+                        active={opcion}
+                        isVisible={menuOpen}
+                    />
+
+                    {menuOpen && (
+                        <div
+                            className={styles.overlay}
+                            onClick={closeMenu}
+                        ></div>
+                    )}
+
+                    <div className={styles.mainContent}>
+                        <MainGeneral titulo={opcion}>
+                            {opcion === 'Dashboard' && (
+                                <DashboardContent
+                                    user={user}
+                                    acciones={accionesDashboard}
+                                />
+                            )}
+                            {opcion === 'Incidencias' && (
+                                <IncidenciasContent
+                                    acciones={accionesIncidencias}
+                                />
+                            )}
+                            {opcion === 'Historial' && (
+                                <HistorialContent
+                                    acciones={accionesHistorial}
+                                />
+                            )}
+                            {opcion === 'Redes' && (
+                                <RedesContent
+                                    acciones={accionesRedes}
+                                    onNuevaSolicitud={() => {
+                                        setRedMode('nuevo');
+                                        setSelectedSolicitud(null);
+                                        setShowRedModal(true);
+                                    }}
+                                />
+                            )}
+                        </MainGeneral>
+                    </div>
+                </div>
+
+                {/* Modales */}
+                {showPerfilModal && (
+                    <ModalVerPerfil
+                        info={user}
+                        onClose={() => setShowPerfilModal(false)}
+                        onSave={(updatedUser) => {
+                            setUser(updatedUser);
+                            console.log('Perfil actualizado:', updatedUser);
+                        }}
+                    />
                 )}
 
-                <div className={styles.mainContent}>
-                    <MainGeneral titulo={opcion}>
-                        {opcion === 'Dashboard' && (
-                            <DashboardContent
-                                user={user}
-                                acciones={accionesDashboard}
-                            />
-                        )}
-                        {opcion === 'Incidencias' && (
-                            <IncidenciasContent
-                                acciones={accionesIncidencias}
-                            />
-                        )}
-                        {opcion === 'Historial' && (
-                            <HistorialContent acciones={accionesHistorial} />
-                        )}
-                        {opcion === 'Redes' && (
-                            <RedesContent
-                                acciones={accionesRedes}
-                                onNuevaSolicitud={() => {
-                                    setRedMode('nuevo');
-                                    setSelectedSolicitud(null);
-                                    setShowRedModal(true);
-                                }}
-                            />
-                        )}
-                    </MainGeneral>
-                </div>
+                {showPendienteModal && (
+                    <Tick_Pendiente
+                        isOpen={showPendienteModal}
+                        onClose={() => setShowPendienteModal(false)}
+                        user={selectedTicket}
+                    />
+                )}
+
+                {showFinalizadoModal && (
+                    <Tick_Finalizado
+                        isOpen={showFinalizadoModal}
+                        onClose={() => setShowFinalizadoModal(false)}
+                        user={selectedTicket}
+                    />
+                )}
+
+                {showRedModal && (
+                    <Solicitud_Red
+                        isOpen={showRedModal}
+                        onClose={() => setShowRedModal(false)}
+                        mode={redMode}
+                        info={selectedSolicitud}
+                    />
+                )}
+
+                {showFinalizarModal && (
+                    <FinalizarTicket
+                        isOpen={showFinalizarModal}
+                        onClose={() => setShowFinalizarModal(false)}
+                        user={selectedTicket}
+                        onAccept={(data) => {
+                            console.log(
+                                'Ticket finalizado con diagnóstico:',
+                                data
+                            );
+                            setShowFinalizarModal(false);
+                        }}
+                    />
+                )}
+
+                {showDiagnosticoModal && (
+                    <Diagnostico
+                        isOpen={showDiagnosticoModal}
+                        onClose={() => setShowDiagnosticoModal(false)}
+                        user={selectedTicket}
+                    />
+                )}
             </div>
-
-            {/* Modal de perfil */}
-            {showPerfilModal && (
-                <ModalVerPerfil
-                    info={user}
-                    onClose={() => setShowPerfilModal(false)}
-                    onSave={(updatedUser) => {
-                        setUser(updatedUser);
-                        console.log('Perfil actualizado:', updatedUser);
-                    }}
-                />
-            )}
-
-            {/* Modal de ticket pendiente */}
-            {showPendienteModal && (
-                <Tick_Pendiente
-                    isOpen={showPendienteModal}
-                    onClose={() => setShowPendienteModal(false)}
-                    user={selectedTicket}
-                />
-            )}
-
-            {/* Modal de ticket finalizado */}
-            {showFinalizadoModal && (
-                <Tick_Finalizado
-                    isOpen={showFinalizadoModal}
-                    onClose={() => setShowFinalizadoModal(false)}
-                    user={selectedTicket}
-                />
-            )}
-
-            {/* Modal de solicitud de red */}
-            {showRedModal && (
-                <Solicitud_Red
-                    isOpen={showRedModal}
-                    onClose={() => setShowRedModal(false)}
-                    mode={redMode}
-                    info={selectedSolicitud}
-                />
-            )}
-
-            {showFinalizarModal && (
-                <FinalizarTicket
-                    isOpen={showFinalizarModal}
-                    onClose={() => setShowFinalizarModal(false)}
-                    user={selectedTicket}
-                    onAccept={(data) => {
-                        console.log('Ticket finalizado con diagnóstico:', data);
-                        setShowFinalizarModal(false);
-                    }}
-                />
-            )}
-
-            {showDiagnosticoModal && (
-                <Diagnostico
-                    isOpen={showDiagnosticoModal}
-                    onClose={() => setShowDiagnosticoModal(false)}
-                    user={selectedTicket}
-                />
-            )}
         </div>
     );
 };

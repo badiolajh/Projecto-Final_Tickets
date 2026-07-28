@@ -16,47 +16,53 @@
   --color-terciario: #808080;
 }
 
-body {
-  margin: 0;
+.tecnicoLayoutRoot {
   font-family: 'Anonymous Pro', monospace;
   background-color: var(--color-secundario);
   color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  padding-bottom: 20px;
 }
 
 /* Layout general */
 .layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  flex: 1;
+  min-height: 0;
 }
 
 .layoutBody {
   display: flex;
   flex: 1;
-  margin-top: 60px; /* mismo alto que el header */
+  margin-top: 60px;
+  min-height: 0;
 }
 
-/* El main debe dejar espacio para el navbar fijo */
 .mainContent {
-  margin-left: 230px; /* espacio para el navbar fijo */
+  margin-left: 230px;
   flex: 1;
-  overflow-y: auto;   /* solo el contenido se desplaza */
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem;
 }
 
-/* Overlay para mobile */
 .overlay {
   position: fixed;
   top: 60px;
   left: 0;
   width: 100%;
   height: calc(100vh - 60px);
-  background-color: rgba(0, 0, 0, 0.4); /* semitransparente */
-  z-index: 998; /* debajo del navbar pero encima del contenido */
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 998;
 }
 
-/* En móviles el main ocupa todo el ancho */
 @media (max-width: 768px) {
   .mainContent {
-    margin-left: 0; /* quitar margen izquierdo */
+    margin-left: 0;
   }
 }
