@@ -14,7 +14,7 @@ import BtnAceptar from '../modals/buttons/BtnAceptar';
 import BtnCancelar from '../modals/buttons/BtnCancelar';
 import styles from './EmpleadoLayout.module.css';
 
-const EmpleadoLayout = () => {
+const EmpleadoLayout = ({ onLogout }) => {
     const [opcion, setOpcion] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -91,6 +91,7 @@ return (
             'Historial',
             'Cerrar sesión',
           ]}
+           onLogout={onLogout}
         />
 
         {menuOpen && (

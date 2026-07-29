@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Navbar.module.css";
 
-const Navbar = ({ onSelect, active, isVisible }) => {
+const Navbar = ({ onSelect, active, isVisible, onLogout }) => {
   return (
     <nav className={`${styles.navbar} ${isVisible ? styles.show : styles.hide}`}>
       {/* Sección superior: Dashboard */}
@@ -30,8 +30,8 @@ const Navbar = ({ onSelect, active, isVisible }) => {
       {/* Sección inferior: Cerrar sesión */}
       <div className={styles.bottomSection}>
         <button
-          onClick={() => onSelect("Cerrar sesión")}
-          className={`${styles.button} ${active === "Cerrar sesión" ? styles.active : ""}`}
+          onClick={onLogout}
+          className={styles.button}
         >
           Cerrar sesión
         </button>
@@ -39,5 +39,6 @@ const Navbar = ({ onSelect, active, isVisible }) => {
     </nav>
   );
 };
+
 
 export default Navbar;

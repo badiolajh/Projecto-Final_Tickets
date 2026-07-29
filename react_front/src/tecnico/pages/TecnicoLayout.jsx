@@ -14,7 +14,7 @@ import Solicitud_Red from '../modals/Ver-solicitud-red/Ver_red';
 import FinalizarTicket from '../modals/Finalizar-ticket/finalizar';
 import Diagnostico from '../modals/Diagnostico-ticket/diagnostico';
 
-const TecnicoLayout = () => {
+const TecnicoLayout = ({ onLogout }) => {
     const [opcion, setOpcion] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -122,6 +122,7 @@ const TecnicoLayout = () => {
                         onSelect={setOpcion}
                         active={opcion}
                         isVisible={menuOpen}
+                        onLogout={onLogout}
                     />
 
                     {menuOpen && (
