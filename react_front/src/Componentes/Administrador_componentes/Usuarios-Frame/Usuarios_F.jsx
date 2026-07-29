@@ -55,8 +55,8 @@ function Usuarios_Frame({ user }) {
     <div className="contenedor-Opciones">
           <h1 className="Bienvenida">Bienvenid@ <span>{user ? user.username : "Invitad@"}</span></h1>
 
-          <div className="barra-controles">
-            <label className="Buscar">
+          <div className="barra-controles-admin">
+            <label className="Buscar-admin">
               Buscar
               <input
                 type="text"

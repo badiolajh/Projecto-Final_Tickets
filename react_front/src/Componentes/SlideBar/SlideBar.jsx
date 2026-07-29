@@ -9,7 +9,7 @@ function SlideBar({ onLogout }) {
     setMenuAbierto(!menuAbierto);
   };
 
-  // Cierra el menú automáticamente al hacer clic en cualquier enlace (ideal para celulares)
+  // Cierra el menú automáticamente al hacer clic en cualquier
   const cerrarMenuMovil = () => {
     setMenuAbierto(false);
   };

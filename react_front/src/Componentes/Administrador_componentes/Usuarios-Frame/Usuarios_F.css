@@ -28,7 +28,7 @@
 
 }
 
-.barra-controles {
+.barra-controles-admin{
     display: flex;
     gap: 15px;
     flex-direction: row;
@@ -38,7 +38,7 @@
     overflow-x: auto;
 }
 
-.barra-controles .Buscar{
+.barra-controles-admin .Buscar-admin{
     display: flex;
     align-items: center;
     gap: 10px;
@@ -47,8 +47,13 @@
     flex: 0 0 40%;
 }
 
-.barra-controles .Buscar input{
+.barra-controles-admin .Buscar-admin input{
     min-width: 200px;
+    color: white;
+}
+
+.barra-controles-admin .Buscar-admin input::placeholder{
+    color: #808080;
 }
 
 

@@ -4,7 +4,6 @@
     font-family: 'Anonymous Pro', monospace;
     overflow-x: auto; /* habilita scroll horizontal */
     width: 100%;
-    border-radius: 8px;
 }
 
 /* Encabezado con borde y separación */
@@ -12,7 +11,6 @@
     border-radius: 5px;
     margin-bottom: 15px;
     background-color: #242424;
-    min-width: 500px;
 }
 
 /* Tabla */
@@ -44,7 +42,6 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     background-color: white;
-    min-width: 500px;
 }
 
 .table td {

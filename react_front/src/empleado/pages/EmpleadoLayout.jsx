@@ -96,7 +96,7 @@ const EmpleadoLayout = () => {
                     <div className={styles.overlay} onClick={closeMenu}></div>
                 )}
 
-                <div className={styles.mainContent}>
+                <div className={styles.mainContentempleado}>
                     <MainGeneral titulo={opcion}>
                         {opcion === 'Dashboard' && (
                             <DashboardContent

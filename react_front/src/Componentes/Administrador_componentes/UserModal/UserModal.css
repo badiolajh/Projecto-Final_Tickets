@@ -86,6 +86,7 @@
 }
 
 .form-row label {
+    display: flex;
   flex: 1;
   font-weight: normal;
   color: #2a2a2a;
@@ -109,6 +110,14 @@
     border-radius: 4px;
     font-family: "Anonymous Pro", monospace;
 }
+.form-row button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+
 
 .modal-actions {
     display: flex;

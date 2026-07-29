@@ -54,8 +54,8 @@ function Historial_Frame() {
     <div className="contenedor-Opciones">
           <h1 className="tickets-pendientes">Todos tus tickets finalizados!</h1>
 
-          <div className="barra-controles">
-            <label className="Buscar">
+          <div className="barra-controles-admin">
+            <label className="Buscar-admin">
               Buscar
               <input
                 type="text"
