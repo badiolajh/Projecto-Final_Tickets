@@ -10,10 +10,10 @@ class EquipoRedResource extends JsonResource
     {
         return [
             'id' => $this->id_equipos,
-            'usuario' => [
+            'usuario' => $this->usuario ? [
                 'id' => $this->usuario->id_usuario,
                 'nombre' => $this->usuario->nombre_completo,
-            ],
+            ] : null,
             'nombre_equipo' => $this->nombre_equipo,
             'direccion_mac' => $this->direccion_mac,
             'numero_inventario' => $this->numero_inventario,

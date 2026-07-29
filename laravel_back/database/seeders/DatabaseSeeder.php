@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Equipo de red asociado al empleado
-        DB::table('equipos_red')->insert([
+        $equipoId = DB::table('equipos_red')->insertGetId([
             'id_usuario' => $empleadoId,
             'nombre_equipo' => 'PC-Empleado-01',
             'direccion_mac' => 'AA:BB:CC:DD:EE:01',
@@ -100,6 +100,5 @@ class DatabaseSeeder extends Seeder
             'id_usuario' => $tecnicoId,
             'descripcion_trabajo' => 'Se revisó la fuente de poder y se reemplazó.',
         ]);
-
     }
 }

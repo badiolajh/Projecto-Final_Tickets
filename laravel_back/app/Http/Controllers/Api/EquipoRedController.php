@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -10,7 +11,7 @@ class EquipoRedController extends Controller
 {
     public function index()
     {
-        return EquipoRedResource::collection(EquipoRed::all());
+        return EquipoRedResource::collection(EquipoRed::with('usuario')->get());
     }
 
     public function store(Request $request)
@@ -26,20 +27,28 @@ class EquipoRedController extends Controller
         return new EquipoRedResource($equipo);
     }
 
-    public function show(EquipoRed $equipoRed)
+    public function show($id)
     {
+        $equipoRed = EquipoRed::with('usuario')->findOrFail($id);
         return new EquipoRedResource($equipoRed);
     }
 
-    public function update(Request $request, EquipoRed $equipoRed)
+
+    public function update(Request $request, $id)
     {
+        $equipoRed = EquipoRed::findOrFail($id);
+
         $equipoRed->update($request->all());
-        return new EquipoRedResource($equipoRed);
+
+        return new EquipoRedResource($equipoRed->load('usuario'));
     }
 
-    public function destroy(EquipoRed $equipoRed)
+    public function destroy($id)
     {
+        $equipoRed = EquipoRed::findOrFail($id);
+
         $equipoRed->delete();
+
         return response()->json(null, 204);
     }
 }
