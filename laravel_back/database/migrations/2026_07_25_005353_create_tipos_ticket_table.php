@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('tipos_ticket', function (Blueprint $table) {
             $table->id('id_tipo');
             $table->string('nombre_tipo');
+            $table->timestamps();
         });
     }
 

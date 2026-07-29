@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             'nombre_completo' => 'Jonathan',
             'puesto' => 'Soporte IT',
             'correo_electronico' => 'admin@empresa.com',
-            'contrasena_hash' => Hash::make('12345'),
+            'contrasena_hash' => Hash::make('12345678'),
             'extension_telefono' => '104',
             'id_rol' => 1,
             'id_area' => 1,
