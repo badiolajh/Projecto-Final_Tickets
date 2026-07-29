@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('puesto');
             $table->string('correo_electronico')->unique();
             $table->string('contrasena_hash');
-            $table->string('extension_telefono')->nullable();
+            $table->string('extension_telefono',4)->nullable();
             $table->string('foto_url')->nullable();
             $table->timestamp('fecha_de_creacion')->useCurrent();
-
             $table->foreignId('id_rol')->constrained('rol', 'id_rol');
             $table->foreignId('id_area')->constrained('areas', 'id_area');
+            $table->timestamps();
         });
     }
 

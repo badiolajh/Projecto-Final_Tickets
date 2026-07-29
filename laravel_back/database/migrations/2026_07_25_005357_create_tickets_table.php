@@ -22,6 +22,8 @@ return new class extends Migration
 
             $table->foreignId('categoria_id')->constrained('tipos_ticket', 'id_tipo');
             $table->foreignId('estado_id')->constrained('estados_ticket', 'id_estado');
+
+            $table->timestamps();
         });
     }
 
