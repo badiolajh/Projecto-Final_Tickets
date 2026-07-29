@@ -105,12 +105,12 @@
 
 .menuToggle div:first-child {
     width: 40%;
-    transform: rotate(-35deg) translate(-30%, 150%);
+    transform: rotate(-35deg) translate(-30%, 245%);
 }
 
 .menuToggle div:last-child {
     width: 40%;
-    transform: rotate(35deg) translate(-30%, -150%);
+    transform: rotate(35deg) translate(-30%, -245%);
 }
 
 /* Responsive */

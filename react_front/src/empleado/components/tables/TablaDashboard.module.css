@@ -7,7 +7,6 @@
     max-height: 460px;
     display: flex;
     flex-direction: column;
-    padding-bottom: 20px;
 }
 
 .title {
