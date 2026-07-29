@@ -14,7 +14,6 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
       <div className="contenedor-principal">
             <div className="tarjeta-formulario">
           <h2 className="titulo-formulario">Inicia sesion</h2>
-          <p>Sistema de tickets</p>
 
               <form className="formulario" onSubmit={manejarSubmit}>
                 <div className="grupo-input">
