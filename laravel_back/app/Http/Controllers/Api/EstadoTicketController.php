@@ -13,8 +13,9 @@ class EstadoTicketController extends Controller
         return EstadoTicketResource::collection(EstadoTicket::all());
     }
 
-    public function show(EstadoTicket $estadoTicket)
+    public function show($id)
     {
+        $estadoTicket = EstadoTicket::findOrFail($id);
         return new EstadoTicketResource($estadoTicket);
     }
 }
