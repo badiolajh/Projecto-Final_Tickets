@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './DashboardContent.module.css';
 import TablaDashboard from '../tables/TablaDashboard';
 
-const DashboardContent = ({ user }) => {
-    // Datos estáticos de ejemplo (luego vendrán del backend)
+const DashboardContent = ({ user, acciones }) => {   
+    // Datos estáticos de ejemplo
     const estadisticas = {
         asignados: 23,
         pendientes: 6,
@@ -35,52 +35,38 @@ const DashboardContent = ({ user }) => {
             {/* Sección de estadísticas */}
             <div className={styles.stats}>
                 <div className={styles.statBox}>
-                    <span className={styles.number}>
-                        {estadisticas.asignados}
-                    </span>
+                    <span className={styles.number}>{estadisticas.asignados}</span>
                     <span className={styles.label}>Asignados</span>
                 </div>
                 <div className={styles.statBox}>
-                    <span className={styles.number}>
-                        {estadisticas.pendientes}
-                    </span>
+                    <span className={styles.number}>{estadisticas.pendientes}</span>
                     <span className={styles.label}>Pendientes</span>
                 </div>
                 <div className={styles.statBox}>
-                    <span className={styles.number}>
-                        {estadisticas.proceso}
-                    </span>
+                    <span className={styles.number}>{estadisticas.proceso}</span>
                     <span className={styles.label}>En proceso</span>
                 </div>
                 <div className={styles.statBox}>
-                    <span className={styles.number}>
-                        {estadisticas.resueltos}
-                    </span>
+                    <span className={styles.number}>{estadisticas.resueltos}</span>
                     <span className={styles.label}>Resueltos</span>
                 </div>
             </div>
 
-            {/* Sección de distribución + tabla en la misma fila */}
+            {/* Sección de distribución + tabla */}
             <div className={styles.row}>
                 <div className={styles.distribution}>
                     <h3 className={styles.distTitle}>Distribución</h3>
                     <div className={styles.distRow}>
                         <span className={styles.distLabel}>Redes:</span>
-                        <span className={styles.distValue}>
-                            {distribucion.redes}
-                        </span>
+                        <span className={styles.distValue}>{distribucion.redes}</span>
                     </div>
                     <div className={styles.distRow}>
                         <span className={styles.distLabel}>Sistemas:</span>
-                        <span className={styles.distValue}>
-                            {distribucion.sistemas}
-                        </span>
+                        <span className={styles.distValue}>{distribucion.sistemas}</span>
                     </div>
                     <div className={styles.distRow}>
                         <span className={styles.distLabel}>Hardware:</span>
-                        <span className={styles.distValue}>
-                            {distribucion.hardware}
-                        </span>
+                        <span className={styles.distValue}>{distribucion.hardware}</span>
                     </div>
                 </div>
 
@@ -88,6 +74,7 @@ const DashboardContent = ({ user }) => {
                     <TablaDashboard
                         titulo="Tickets asignados pendientes"
                         filas={ticketsPendientes}
+                        acciones={acciones}  
                     />
                 </div>
             </div>

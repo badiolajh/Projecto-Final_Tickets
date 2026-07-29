@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './TablaDashboard.module.css';
 import verIcon from '../../icons/i_ver_dashboard.png';
 
-const TablaDashboard = ({ titulo, filas }) => {
+const TablaDashboard = ({ titulo, filas, acciones = [] }) => {
     return (
         <div className={styles.dashboardTable}>
             <h3 className={styles.title}>{titulo}</h3>
@@ -11,7 +11,13 @@ const TablaDashboard = ({ titulo, filas }) => {
                     <div key={idx} className={styles.row}>
                         <span className={styles.name}>{fila.nombre}</span>
                         <span className={styles.type}>Tipo: {fila.tipo}</span>
-                        <button className={styles.viewButton}>
+                        <button
+                            className={styles.viewButton}
+                            onClick={() => {
+                                const accionVer = acciones.find(a => a.tipo === 'ver');
+                                if (accionVer) accionVer.onClick(fila);
+                            }}
+                        >
                             <img src={verIcon} alt="Ver" className={styles.viewIcon} />
                             Ver
                         </button>

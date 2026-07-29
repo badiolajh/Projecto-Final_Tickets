@@ -3,7 +3,7 @@ import styles from "./ActionButton.module.css";
 import iconVer from "../../icons/i_ver_general.png";
 import iconFinalizar from "../../icons/i_finalizar.png";
 import iconDiagnostico from "../../icons/i_diagnostico.png";
-import iconNuevo from "../../icons/i_mas_circulo.svg";
+import iconNuevo from "../../icons/i_mas.png";
 
 const ActionButton = ({ tipo, onClick }) => {
   let label = "";

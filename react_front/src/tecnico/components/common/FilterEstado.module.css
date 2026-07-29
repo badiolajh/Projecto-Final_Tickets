@@ -8,4 +8,5 @@
     width: 120px;
     cursor: pointer;
     font-family: 'Anonymous Pro', monospace;
+    max-width: 120px;
 }
