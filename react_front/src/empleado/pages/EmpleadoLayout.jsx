@@ -70,119 +70,113 @@ const EmpleadoLayout = () => {
         },
     ];
 
-    return (
-        <div className={styles.layout}>
-            <Header
+return (
+  <div className={styles.empleadoLayoutRoot}>
+    <div className={styles.layout}>
+      <Header
+        user={user}
+        onMenuToggle={toggleMenu}
+        isMenuOpen={menuOpen}
+        onProfileClick={() => setShowProfileModal(true)}
+      />
+
+      <div className={styles.layoutBody}>
+        <Navbar
+          onSelect={setOpcion}
+          active={opcion}
+          isVisible={menuOpen}
+          opciones={[
+            'Dashboard',
+            'Incidencias',
+            'Historial',
+            'Cerrar sesión',
+          ]}
+        />
+
+        {menuOpen && (
+          <div className={styles.overlay} onClick={closeMenu}></div>
+        )}
+
+        <div className={styles.mainContent}>
+          <MainGeneral titulo={opcion}>
+            {opcion === 'Dashboard' && (
+              <DashboardContent
                 user={user}
-                onMenuToggle={toggleMenu}
-                isMenuOpen={menuOpen}
-                onProfileClick={() => setShowProfileModal(true)}
-            />
-
-            <div className={styles.layoutBody}>
-                <Navbar
-                    onSelect={setOpcion}
-                    active={opcion}
-                    isVisible={menuOpen}
-                    opciones={[
-                        'Dashboard',
-                        'Incidencias',
-                        'Historial',
-                        'Cerrar sesión',
-                    ]}
-                />
-
-                {menuOpen && (
-                    <div className={styles.overlay} onClick={closeMenu}></div>
-                )}
-
-                <div className={styles.mainContentempleado}>
-                    <MainGeneral titulo={opcion}>
-                        {opcion === 'Dashboard' && (
-                            <DashboardContent
-                                user={user}
-                                onVerTicket={(fila) => {
-                                    setTicketSeleccionado({
-                                        tipo: fila.tipo,
-                                        descripcion:
-                                            'Descripción de ejemplo del ticket',
-                                        asignado: 'Carlos',
-                                    });
-                                    setShowDetalleModal(true);
-                                }}
-                                onSolicitarTicket={() =>
-                                    setShowCrearModal(true)
-                                }
-                            />
-                        )}
-                        {opcion === 'Incidencias' && (
-                            <IncidenciasContent
-                                acciones={accionesIncidencias}
-                                onSolicitarTicket={() => setShowCrearModal(true)}
-                            />
-                        )}
-                        {opcion === 'Historial' && (
-                            <HistorialContent acciones={accionesHistorial} />
-                        )}
-                        {opcion === 'Cerrar sesión' && (
-                            <div>Cerrando sesión...</div>
-                        )}
-                    </MainGeneral>
-                </div>
-            </div>
-
-            {/* Modal de perfil */}
-            {showProfileModal && (
-                <ModalVerPerfil
-                    info={user}
-                    onClose={() => setShowProfileModal(false)}
-                    onSave={(data) => console.log('Datos guardados:', data)}
-                />
+                onVerTicket={(fila) => {
+                  setTicketSeleccionado({
+                    tipo: fila.tipo,
+                    descripcion: 'Descripción de ejemplo del ticket',
+                    asignado: 'Carlos',
+                  });
+                  setShowDetalleModal(true);
+                }}
+                onSolicitarTicket={() => setShowCrearModal(true)}
+              />
             )}
-
-            {/* Modal de detalle de ticket */}
-            {showDetalleModal && ticketSeleccionado && (
-                <ModalGeneral
-                    titulo="Detalle del Ticket"
-                    onClose={() => setShowDetalleModal(false)}
-                    acciones={
-                        <BtnCerrar onClick={() => setShowDetalleModal(false)} />
-                    }
-                >
-                    <DetalleTicketContent ticket={ticketSeleccionado} />
-                </ModalGeneral>
+            {opcion === 'Incidencias' && (
+              <IncidenciasContent
+                acciones={accionesIncidencias}
+                onSolicitarTicket={() => setShowCrearModal(true)}
+              />
             )}
-
-            {/* Modal de crear ticket */}
-            {showCrearModal && (
-                <ModalGeneral
-                    titulo="Solicitar Ticket"
-                    onClose={() => setShowCrearModal(false)}
-                    acciones={
-                        <>
-                            <BtnCancelar
-                                onClick={() => setShowCrearModal(false)}
-                            />
-                            <BtnAceptar
-                                onClick={() => {
-                                    console.log('Ticket creado:', nuevoTicket);
-                                    setShowCrearModal(false);
-                                }}
-                                disabled={!crearValido}
-                            />
-                        </>
-                    }
-                >
-                    <CrearTicketContent
-                        onValidChange={(valido, data) => {
-                            setCrearValido(valido);
-                            setNuevoTicket(data);
-                        }}
-                    />
-                </ModalGeneral>
+            {opcion === 'Historial' && (
+              <HistorialContent acciones={accionesHistorial} />
             )}
+            {opcion === 'Cerrar sesión' && (
+              <div>Cerrando sesión...</div>
+            )}
+          </MainGeneral>
         </div>
-    );
+      </div>
+
+      {/* Modales */}
+      {showProfileModal && (
+        <ModalVerPerfil
+          info={user}
+          onClose={() => setShowProfileModal(false)}
+          onSave={(data) => console.log('Datos guardados:', data)}
+        />
+      )}
+
+      {showDetalleModal && ticketSeleccionado && (
+        <ModalGeneral
+          titulo="Detalle del Ticket"
+          onClose={() => setShowDetalleModal(false)}
+          acciones={<BtnCerrar onClick={() => setShowDetalleModal(false)} />}
+        >
+          <DetalleTicketContent ticket={ticketSeleccionado} />
+        </ModalGeneral>
+      )}
+
+      {showCrearModal && (
+        <ModalGeneral
+          titulo="Solicitar Ticket"
+          onClose={() => setShowCrearModal(false)}
+          acciones={
+            <>
+              <BtnCancelar onClick={() => setShowCrearModal(false)} />
+              <BtnAceptar
+                onClick={() => {
+                  console.log('Ticket creado:', nuevoTicket);
+                  setShowCrearModal(false);
+                }}
+                disabled={!crearValido}
+              />
+            </>
+          }
+        >
+          <CrearTicketContent
+            onValidChange={(valido, data) => {
+              setCrearValido(valido);
+              setNuevoTicket(data);
+            }}
+          />
+        </ModalGeneral>
+      )}
+    </div>
+  </div>
+);
+
 };
 
 export default EmpleadoLayout;
