@@ -1,11 +1,12 @@
 import { useState } from "react";
-import {ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import './App.css'
+import './App.css';
 
-import './Componentes/SlideBar/SlideBar.css'
-import './Componentes/NavBar/NavBar.css'
-import './Componentes/Administrador_componentes/Usuarios-Frame/Usuarios_F.css'
+import './Componentes/SlideBar/SlideBar.css';
+import './Componentes/NavBar/NavBar.css';
+import './Componentes/Administrador_componentes/Usuarios-Frame/Usuarios_F.css';
+
 import Principal from "./Administrador/Principal/Principal";
 import Login from "./Login/Login";
 import Registro from "./Registro/Registro";

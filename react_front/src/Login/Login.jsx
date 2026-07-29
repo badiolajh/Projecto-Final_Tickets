@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./Login.css";
 
-
-
 const Login = ({ alIniciarSesion, alIrARegistro }) => {
   // 1. Creamos un estado local para guardar lo que el usuario escribe en el input
   const [correo, setCorreo] = useState("");
@@ -29,6 +27,13 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
             />
           </div>
 
+          <div className="grupo-input">
+            <input
+              type="password"
+              placeholder="contraseña"
+              className="campo-texto"
+            />
+          </div>
           <div className="grupo-input">
             <input
               type="password"
