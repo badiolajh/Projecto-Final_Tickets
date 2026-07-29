@@ -32,7 +32,6 @@ const TecnicoLayout = () => {
     ];
 
     return (
-<<<<<<< HEAD
         <div className={styles.layout}>
             <Header
                 user={user}
@@ -66,61 +65,6 @@ const TecnicoLayout = () => {
                             <RedesContent acciones={accionesRedes} />
                         )}
                     </MainGeneral>
-                </div>
-=======
-        <div className={styles.tecnicoLayoutRoot}>
-            <div className={styles.layout}>
-                <Header
-                    user={user}
-                    onMenuToggle={toggleMenu}
-                    isMenuOpen={menuOpen}
-                    onProfileClick={() => setShowPerfilModal(true)}
-                />
-
-                <div className={styles.layoutBody}>
-                    <Navbar
-                        onSelect={setOpcion}
-                        active={opcion}
-                        isVisible={menuOpen}
-                    />
-
-                    {menuOpen && (
-                        <div
-                            className={styles.overlay}
-                            onClick={closeMenu}
-                        ></div>
-                    )}
-
-                    <div className={styles.mainContent}>
-                        <MainGeneral titulo={opcion}>
-                            {opcion === 'Dashboard' && (
-                                <DashboardContent
-                                    user={user}
-                                    acciones={accionesDashboard}
-                                />
-                            )}
-                            {opcion === 'Incidencias' && (
-                                <IncidenciasContent
-                                    acciones={accionesIncidencias}
-                                />
-                            )}
-                            {opcion === 'Historial' && (
-                                <HistorialContent
-                                    acciones={accionesHistorial}
-                                />
-                            )}
-                            {opcion === 'Redes' && (
-                                <RedesContent
-                                    acciones={accionesRedes}
-                                    onNuevaSolicitud={() => {
-                                        setRedMode('nuevo');
-                                        setSelectedSolicitud(null);
-                                        setShowRedModal(true);
-                                    }}
-                                />
-                            )}
-                        </MainGeneral>
-                    </div>
                 </div>
 
                 {/* Modales */}
@@ -182,7 +126,6 @@ const TecnicoLayout = () => {
                         user={selectedTicket}
                     />
                 )}
->>>>>>> parent of 3cdf355 (Revert "Merge branch 'conexion_back'")
             </div>
         </div>
     );
