@@ -17,7 +17,8 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuario = Usuario::paginate(10);
+        // MODIFICADO: Solo traemos los usuarios cuyo campo 'activo' sea true (1)
+        $usuario = Usuario::where('activo', true)->paginate(10);
 
         return UsuarioResource::collection($usuario);
     }
@@ -35,6 +36,7 @@ class UsuarioController extends Controller
             'foto_url' => $data['foto_url'] ?? null,
             'id_rol' => $data['id_rol'],
             'id_area' => $data['id_area'],
+            'activo' => true, // Por defecto al crear usuario nace activo
         ]);
 
         return response()->json([
@@ -73,10 +75,12 @@ class UsuarioController extends Controller
 
     public function destroy(Usuario $usuario)
     {
-        $usuario->delete();
+        // MODIFICADO: Borrado lógico. No se borra de la BD, solo se desactiva.
+        $usuario->activo = false;
+        $usuario->save();
 
         return response()->json([
-            'message' => 'Usuario eliminado',
+            'message' => 'Usuario desactivado correctamente',
         ], 200);
     }
 }

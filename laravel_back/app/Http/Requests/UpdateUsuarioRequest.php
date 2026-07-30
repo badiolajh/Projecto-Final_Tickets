@@ -21,28 +21,25 @@ class UpdateUsuarioRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
-        // Obtenemos el usuario de la ruta
-        $usuario = $this->route('usuario');
+     public function rules(): array
+         {
+             // Obtenemos el ID del usuario que se está actualizando para ignorar su propio correo en la regla unique
+             $usuarioId = $this->route('usuario')?->id_usuario ?? $this->route('usuario');
 
-        // Determinamos si es una petición PUT o PATCH para ajustar las reglas 'sometimes'
-        $isPatch = $this->isMethod('patch');
-        $prefix = $isPatch ? 'sometimes|' : '';
-
-        return [
-            'nombre_completo' => [$prefix . 'required', 'string', 'max:255'],
-            'puesto' => [$prefix . 'required', 'string', 'max:255'],
-            'correo_electronico' => [
-                $prefix . 'required',
-                'email',
-                Rule::unique('usuarios', 'correo_electronico')->ignore($usuario->id_usuario, 'id_usuario')
-            ],
-            'contrasena_hash' => [$prefix . 'required', 'string', 'min:8'],
-            'extension_telefono' => ['nullable', 'string', 'max:4'],
-            'foto_url' => ['nullable', 'string', 'max:255'],
-            'id_rol' => [$prefix . 'required', 'integer', 'exists:rol,id_rol'],
-            'id_area' => [$prefix . 'required', 'integer', 'exists:areas,id_area'],
-        ];
-    }
+             return [
+                 'nombre_completo' => ['sometimes', 'required', 'string', 'max:255'],
+                 'puesto' => ['sometimes', 'required', 'string', 'max:255'],
+                 'correo_electronico' => [
+                     'sometimes',
+                     'required',
+                     'email',
+                     Rule::unique('usuarios', 'correo_electronico')->ignore($usuarioId, 'id_usuario')
+                 ],
+                 'contrasena_hash' => ['nullable', 'string', 'min:8'],
+                 'extension_telefono' => ['nullable', 'string', 'max:4'],
+                 'foto_url' => ['nullable', 'string', 'max:255'],
+                 'id_rol' => ['sometimes', 'required', 'integer', 'exists:rol,id_rol'],
+                 'id_area' => ['sometimes', 'required', 'integer', 'exists:areas,id_area'],
+             ];
+         }
 }

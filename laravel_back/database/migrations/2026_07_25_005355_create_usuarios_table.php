@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('fecha_de_creacion')->useCurrent();
             $table->foreignId('id_rol')->constrained('rol', 'id_rol');
             $table->foreignId('id_area')->constrained('areas', 'id_area');
+            $table->boolean('activo')->default(true); // <--- Esto es para no borrar el usuario, ya que podria tener tickets asociados
             $table->timestamps();
         });
     }
