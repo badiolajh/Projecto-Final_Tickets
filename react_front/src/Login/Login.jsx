@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
+import axios from "axios";
 import "./Login.css";
 
 const Login = ({ alIniciarSesion, alIrARegistro }) => {
@@ -14,7 +15,7 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
     setError("");
     setCargando(true);
 
-    //Mensajes de validacion
+    // Mensajes de validacion
     const correoTrim = correo.trim();
     if (!correoTrim) {
       setError("El correo esta vacio.");
@@ -41,32 +42,22 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
     try {
       const API_URL = import.meta.env.VITE_API_URL;
 
-      const response = await fetch(`${API_URL}/login`, {
-        method: "POST",
+      const response = await axios.post(`${API_URL}/login`, {
+        correo_electronico: correoTrim,
+        contrasena_hash: contrasena,
+      }, {
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-        },
-        body: JSON.stringify({
-          correo_electronico: correoTrim,
-          contrasena_hash: contrasena,
-        }),
+        }
       });
 
-      const data = await response.json();
-
-      // Si la API falla, transformamos el mensaje técnico a uno amigable
-      if (!response.ok) {
-        // Laravel suele mandar los errores de validación en data.errors o data.message
-        if (response.status === 422 || response.status === 401) {
-          throw new Error("El correo electrónico o la contraseña son incorrectos.");
-        }
-        throw new Error(data.message || "Fallo en el sistema, intentalo mas tarde");
-      }
+      // Axios guarda la respuesta en response.data de forma automática
+      const data = response.data;
 
       localStorage.setItem("token", data.token);
 
-      //Evaluamos el rol recibido desde App.jsx
+      // Evaluamos el rol recibido desde App.jsx
       const resultadoRol = alIniciarSesion(data.usuario);
 
       if (resultadoRol && !resultadoRol.success) {
@@ -74,7 +65,17 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
       }
 
     } catch (err) {
-      setError(err.message);
+      // Manejo de errores específicos de Axios
+      if (err.response) {
+        const status = err.response.status;
+        if (status === 422 || status === 401) {
+          setError("El correo electrónico o la contraseña son incorrectos.");
+        } else {
+          setError(err.response.data.message || "Fallo en el sistema, intentalo mas tarde");
+        }
+      } else {
+        setError(err.message || "Fallo en el sistema, intentalo mas tarde");
+      }
     } finally {
       setCargando(false);
     }
@@ -85,8 +86,7 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
       <div className="tarjeta-formulario">
         <h2 className="titulo-formulario">Inicia sesion</h2>
 
-
-        {error && <p style={{ color: "#d9534f", textAlign: "center",fontSize: "22px", marginBottom: "18px", marginTop:"18px"}}>{error}</p>}
+        {error && <p style={{ color: "#d9534f", textAlign: "center", fontSize: "22px", marginBottom: "18px", marginTop:"18px"}}>{error}</p>}
 
         <form className="formulario" onSubmit={handleSubmit}>
           <div className="grupo-input">
@@ -97,7 +97,6 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
               value={correo}
               onChange={(e) => setCorreo(e.target.value)}
             />
-
           </div>
 
           <div className="grupo-input" style={{ position: "relative" }}>
@@ -106,18 +105,26 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
               placeholder="contraseña"
               className="campo-texto"
               value={contrasena}
-              onChange={(e) => setContrasena(e.target.value)}style={{ paddingRight: "40px" }}
+              onChange={(e) => setContrasena(e.target.value)}
+              style={{ paddingRight: "40px" }}
             />
             <span
-            onClick={() => setMostrarContrasena(!mostrarContrasena)}
-            style={{position: "absolute",right: "15px",top: "50%",transform: "translateY(-50%)",cursor: "pointer",color: "#666",fontSize: "18px",display: "flex",
-              alignItems: "center"
-            }}
-          >
-            {mostrarContrasena ? <FaEye /> : <FaRegEyeSlash />}
-          </span>
+              onClick={() => setMostrarContrasena(!mostrarContrasena)}
+              style={{
+                position: "absolute",
+                right: "15px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                color: "#666",
+                fontSize: "18px",
+                display: "flex",
+                alignItems: "center"
+              }}
+            >
+              {mostrarContrasena ? <FaEye /> : <FaRegEyeSlash />}
+            </span>
           </div>
-
 
           <div className="contenedor-enlace">
             <a href="#recuperar" className="enlace-secundario">
@@ -146,4 +153,5 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
     </div>
   );
 };
+
 export default Login;
