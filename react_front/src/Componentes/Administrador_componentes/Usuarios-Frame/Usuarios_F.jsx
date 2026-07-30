@@ -7,7 +7,6 @@ import axios from "axios";
 import UserModal from "../UserModal/UserModal";
 import UserEdit from "../UserEdit/UserEdit";
 
-// Diccionario para mapear el ID del rol a su nombre correspondiente
 const rolesMap = {
   1: "Administrador",
   2: "Tecnico",
@@ -24,34 +23,34 @@ function Usuarios_Frame({ user }) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [EditUserOpen, ModalEditUsuarioOpen] = useState(false);
+    const [usuarioSeleccionadoId, setUsuarioSeleccionadoId] = useState(null); // <-- Estado para el ID
 
     const [searchParams, setSearchParams] = useSearchParams();
     const paginaActual = parseInt(searchParams.get("page")) || 1;
 
-    // Consumir la API usando Axios y la variable global del .env
+    const obtenerUsuarios = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const apiUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+
+            const response = await axios.get(`${apiUrl}/usuarios`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            const data = response.data;
+            setUsuarios(data.data || data);
+        } catch (error) {
+            console.error("Hubo un error al cargar los usuarios:", error.response?.data || error.message);
+        } finally {
+            setCargando(false);
+        }
+    };
+
     useEffect(() => {
-        const obtenerUsuarios = async () => {
-            try {
-                const token = localStorage.getItem("token");
-                const apiUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
-
-                const response = await axios.get(`${apiUrl}/usuarios`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    }
-                });
-
-                const data = response.data;
-                setUsuarios(data.data || data);
-            } catch (error) {
-                console.error("Hubo un error al cargar los usuarios:", error.response?.data || error.message);
-            } finally {
-                setCargando(false);
-            }
-        };
-
         obtenerUsuarios();
     }, []);
 
@@ -93,8 +92,8 @@ function Usuarios_Frame({ user }) {
                   setBusqueda(e.target.value);
                   cambiarPagina(1);
                 }}
-          />
-          <select
+         />
+         <select
             className="select-estado"
             value={filtroRol}
             onChange={(e) => {
@@ -142,7 +141,10 @@ function Usuarios_Frame({ user }) {
                           <td>{u.correo_electronico}</td>
                           <td className="columna-admin">{rolesMap[u.id_rol] || "Desconocido"}</td>
                           <td className="acciones-boton">
-                            <button className="btn-editar" onClick={() => ModalEditUsuarioOpen(true)}><FiEdit /> Editar</button>
+                            <button className="btn-editar" onClick={() => {
+                              setUsuarioSeleccionadoId(u.id_usuario);
+                              ModalEditUsuarioOpen(true);
+                            }}><FiEdit /> Editar</button>
                             <button className="btn-eliminar"><FaRegTrashAlt /> Eliminar</button>
                           </td>
                         </tr>
@@ -188,9 +190,11 @@ function Usuarios_Frame({ user }) {
             title="Registro de usuario"
       />
       <UserEdit
-      isOpen={EditUserOpen}
-      onClose={() => ModalEditUsuarioOpen(false)}
-      title="Editar de usuario"
+        isOpen={EditUserOpen}
+        onClose={() => ModalEditUsuarioOpen(false)}
+        usuarioId={usuarioSeleccionadoId}
+        onUsuarioActualizado={obtenerUsuarios}
+        title="Editar de usuario"
       />
         </div>
   )
