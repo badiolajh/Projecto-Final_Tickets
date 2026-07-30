@@ -25,25 +25,26 @@ const [cargando, setCargando] = useState(false);
 
 // Cargar las áreas desde la API al montar el componente
 useEffect(() => {
-  const obtenerAreas = async () => {
-    try {
-      const API_URL = import.meta.env.VITE_API_URL;
-      const response = await fetch(`${API_URL}/areas`);
-      if (response.ok) {
-        const json = await response.json();
+const obtenerAreas = async () => {
+  try {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const response = await fetch(`${API_URL}/areas`);
+    if (response.ok) {
+      const json = await response.json();
+      console.log("JSON recibido de /areas:", json);
 
-        // Si usas AreaResource, Laravel devuelve { data: [...] }
-        const listado = json.data || json;
 
-        setAreas(Array.isArray(listado) ? listado : []);
-      }
-    } catch (err) {
-      console.error("No se pudieron cargar las áreas", err);
+      const listado = json.data ? json.data : json;
+      setAreas(Array.isArray(listado) ? listado : []);
     }
-  };
+  } catch (err) {
+    console.error("No se pudieron cargar las áreas", err);
+  }
+};
 
   obtenerAreas();
 }, []);
+
   // Función para manejar el envío del registro
 const manejarRegistro = async (e) => {
 e.preventDefault();
@@ -159,31 +160,27 @@ try {
             />
           </div>
           {/*Selector desplegable de area, segun la bd */}
-          <div className="grupo-input">
-            <select
-              className="campo-texto"
-              value={idArea}
-              onChange={(e) => setIdArea(e.target.value)}
-              style={{ color: idArea ? "#fff" : "#757575", backgroundColor: "#1f1f1f" }}
-            >
-              <option value="" disabled hidden style={{ color: "#757575", backgroundColor: "#1f1f1f" }}>
-                Selecciona un Área
-              </option>
-              {Array.isArray(areas) &&
-                areas
-                  .filter((area) => area && area.nombre && area.nombre.trim() !== "")
-                  .map((area) => (
-                    <option
-                      key={area.id}
-                      value={area.id}
-                      style={{ color: "#fff", backgroundColor: "#1f1f1f" }}
-                    >
-                      {area.nombre}
-                    </option>
-                  ))
-              }
-            </select>
-          </div>
+                    <div className="grupo-input">
+                      <select
+                        className="campo-texto"
+                        value={idArea}
+                        onChange={(e) => setIdArea(e.target.value)}
+                        style={{ color: idArea ? "#fff" : "#757575", backgroundColor: "#1f1f1f" }}
+                      >
+                        <option value="" disabled hidden style={{ color: "#757575", backgroundColor: "#1f1f1f" }}>
+                          Selecciona un Área
+                        </option>
+                        {Array.isArray(areas) && areas.map((area) => (
+                          <option
+                            key={area.id}
+                            value={area.id}
+                            style={{ color: "#fff", backgroundColor: "#1f1f1f" }}
+                          >
+                            {area.nombre}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
           <div className="grupo-input">
             <input
