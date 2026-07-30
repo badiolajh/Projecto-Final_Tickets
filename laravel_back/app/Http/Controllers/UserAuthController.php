@@ -36,6 +36,9 @@ class UserAuthController extends Controller
             'id_area' => $data['id_area'],
         ]);
 
+        //Eventro de registro
+        event(new \App\Events\UsuarioRegistrado($usuario));
+
         $token = $usuario->createToken('token-api')->plainTextToken;
 
         return response()->json([
