@@ -122,7 +122,7 @@ El proyecto tiene las siguientes credenciales por default para poder probar el s
 ```
 Nombre: admin
 Correo: admin@empresa.com
-Contraseña: 123456789
+Contraseña: 12345678
 ```
 
 ## Diseño del sistema
