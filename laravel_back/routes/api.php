@@ -26,6 +26,10 @@ use App\Http\Controllers\Api\EquipoRedController;
 use App\Http\Controllers\Api\BitacoraTicketController;
 
 
+//Rutas para recuperar contraseña
+Route::post('/forgot-password', [UserAuthController::class, 'sendResetLinkEmail']);
+Route::post('/reset-password', [UserAuthController::class, 'resetPassword']);
+
 // Sirve para la tabla de usuarios
 Route::post('/register',[UserAuthController::class,'register']);
 Route::post('/login', [UserAuthController::class,'login']);

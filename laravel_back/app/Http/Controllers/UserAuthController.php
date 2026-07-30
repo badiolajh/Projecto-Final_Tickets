@@ -13,6 +13,10 @@ use App\Http\Resources\UsuarioResource;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 
+//FormRequest para recuperar constraseña
+use App\Http\Requests\ForgotPasswordRequest;
+use App\Http\Requests\ResetPasswordRequest;
+
 class UserAuthController extends Controller
 {
     // Registro de usuario
@@ -72,6 +76,54 @@ class UserAuthController extends Controller
 
         return response()->json([
             'message' => 'Sesión cerrada',
+        ], 200);
+    }
+
+    // Solicitar token de recuperación
+    public function forgotPassword(ForgotPasswordRequest $request)
+    {
+        $data = $request->validated();
+        $token = Str::random(64);
+
+        // Guardar el token en la tabla que Laravel trae por defecto
+        DB::table('password_reset_tokens')->updateOrInsert(
+            ['email' => $data['correo_electronico']],
+            ['token' => $token, 'created_at' => now()]
+        );
+
+        return response()->json([
+            'message' => 'Se ha enviado un enlace/token de recuperación a tu correo.'
+        ], 200);
+    }
+
+    // Restablecer la contraseña
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+        $data = $request->validated();
+
+        // Verificar que el token sea válido y coincida con el correo
+        $resetRequest = DB::table('password_reset_tokens')
+            ->where('email', $data['correo_electronico'])
+            ->where('token', $data['token'])
+            ->first();
+
+        if (!$resetRequest) {
+            throw ValidationException::withMessages([
+                'token' => ['El token de recuperación es inválido o ha expirado.'],
+            ]);
+        }
+
+        // Actualizar la contraseña
+        $usuario = Usuario::where('correo_electronico', $data['correo_electronico'])->first();
+        $usuario->update([
+            'contrasena_hash' => Hash::make($data['contrasena_hash'])
+        ]);
+
+        // Eliminar el token usado
+        DB::table('password_reset_tokens')->where('email', $data['correo_electronico'])->delete();
+
+        return response()->json([
+            'message' => 'Contraseña restablecida correctamente.'
         ], 200);
     }
 }
