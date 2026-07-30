@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 import UserModal from "../UserModal/UserModal";
 import UserEdit from "../UserEdit/UserEdit";
@@ -27,28 +28,25 @@ function Usuarios_Frame({ user }) {
     const [searchParams, setSearchParams] = useSearchParams();
     const paginaActual = parseInt(searchParams.get("page")) || 1;
 
-    // Consumir la API usando la variable global del .env
+    // Consumir la API usando Axios y la variable global del .env
     useEffect(() => {
         const obtenerUsuarios = async () => {
             try {
                 const token = localStorage.getItem("token");
                 const apiUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
 
-                const respuesta = await fetch(`${apiUrl}/usuarios`, {
+                const response = await axios.get(`${apiUrl}/usuarios`, {
                     headers: {
                         "Content-Type": "application/json",
+                        "Accept": "application/json",
                         "Authorization": `Bearer ${token}`
                     }
                 });
 
-                if (!respuesta.ok) {
-                    throw new Error("Error al obtener los usuarios");
-                }
-
-                const data = await respuesta.json();
+                const data = response.data;
                 setUsuarios(data.data || data);
             } catch (error) {
-                console.error("Hubo un error al cargar los usuarios:", error);
+                console.error("Hubo un error al cargar los usuarios:", error.response?.data || error.message);
             } finally {
                 setCargando(false);
             }
@@ -58,16 +56,16 @@ function Usuarios_Frame({ user }) {
     }, []);
 
     const usuariosFiltrados = usuarios.filter((u) => {
-      const nombre = u.nombre_completo || "";
-      const correo = u.correo_electronico || "";
-      const rolUser = rolesMap[u.id_rol] || "";
+    const nombre = u.nombre_completo || "";
+    const correo = u.correo_electronico || "";
+    const rolUser = rolesMap[u.id_rol] || "";
 
-      const coincideBusqueda =
-        nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
-        correo.toLowerCase().includes(busqueda.toLowerCase());
-      const coincideRol =
-        filtroRol === "Todos" || rolUser.toLowerCase() === filtroRol.toLowerCase();
-      return coincideBusqueda && coincideRol;
+    const coincideBusqueda =
+      nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+      correo.toLowerCase().includes(busqueda.toLowerCase());
+    const coincideRol =
+      filtroRol === "Todos" || rolUser.toLowerCase() === filtroRol.toLowerCase();
+    return coincideBusqueda && coincideRol;
     });
 
     const totalPaginas = Math.ceil(usuariosFiltrados.length / registrosPorPagina) || 1;
@@ -112,8 +110,8 @@ function Usuarios_Frame({ user }) {
             </label>
 
             <button className="Boton-Verde" onClick={() => setIsModalOpen(true)}>
-                  Agregar Usuario
-                </button>
+                Agregar Usuario
+            </button>
           </div>
 
           <div className="tarjeta-cabecera">
