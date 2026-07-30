@@ -1,6 +1,7 @@
 import { FaEye } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 import Tick_Pendiente from "../Ver-ticket-pendiente/Ver-pendiente";
 
@@ -23,21 +24,18 @@ function Incidencias_Frame() {
                 const token = localStorage.getItem("token");
                 const apiUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
 
-                const respuesta = await fetch(`${apiUrl}/tickets`, {
+                const response = await axios.get(`${apiUrl}/tickets`, {
                     headers: {
                         "Content-Type": "application/json",
+                        "Accept": "application/json",
                         "Authorization": `Bearer ${token}`
                     }
                 });
 
-                if (!respuesta.ok) {
-                    throw new Error("Error al obtener los tickets");
-                }
-
-                const data = await respuesta.json();
+                const data = response.data;
                 setTickets(data.data || data);
             } catch (error) {
-                console.error("Hubo un error al cargar los tickets:", error);
+                console.error("Hubo un error al cargar los tickets:", error.response?.data || error.message);
             } finally {
                 setCargando(false);
             }
