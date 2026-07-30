@@ -39,30 +39,14 @@ __SuportITO__ contará con tres roles de usuarios donde cada uno tiene definida 
 - __Tecnico:__ Se encargara de solucionar el problema de su ticket o tickets asignados, tendra la responsabilidad de actualizar el estado del ticket y detallar lo realizado. esto con la fianlidad de poder tener una bitacora de lo realizado.
 
 ## Tecnologias utilizadas
-### Frontend
-- HTML 5
-- CSS 3
-- JavaScript
-- React
-- Vite
-- Node.js
 
-### Backend
-- PHP
-- Laravel
-- Composer
+| Categoría           | Tecnologías                                                                 |
+|---------------------|------------------------------------------------------------------------------|
+| **Frontend**        | HTML 5, CSS 3, JavaScript, React, Vite, Node.js                             |
+| **Backend**         | PHP, Laravel, Composer                                                      |
+| **Servicios**       | VPS, MySQL, Nginx, Postfix, Twilio                                          |
+| **Herramientas CASE** | Draw.io, GitHub, GitHub Projects                                           |
 
-### Servicios
-- VPS
-- MySQL
-- Nginx
-- Postfix
-- Twilio
-
-### Herramientas CASE
-- Draw.io
-- GitHub
-- GitHub Proyects
 
 ## Guía de Instalación
 ### Requisitos del sistema
@@ -137,11 +121,15 @@ php artisan key:generate
 El proyecto tiene las siguientes credenciales por default para poder probar el sistema:
 ```
 Nombre: admin
-Correo: admin@correo.com
-Contraseña: Adm1n1$trad0r
+Correo: admin@empresa.com
+Contraseña: 123456789
 ```
 
 ## Diseño del sistema
+
+### Analisis y diseño
+- Link para el repositorio en [GitHub](https://github.com/badiolajh/Projecto-Final_Tickets)
+- Link para el tablero en [GitHub_Proyects](https://github.com/users/badiolajh/projects/1)
 
 ### Diagrama Entidad-Relacion
 ![Diagrama E-R](diagramas/Modelo_E-R.drawio.png)
@@ -150,9 +138,7 @@ Contraseña: Adm1n1$trad0r
 ### Modelo Relacional
 ![Diagrama UML](diagramas/UML.drawio.png)
 
-## Link a los recursos
-- Link para el repositorio en [GitHub](https://github.com/badiolajh/Projecto-Final_Tickets)
-- Link para el tablero en [GitHub_Proyects](https://github.com/users/badiolajh/projects/1)
+### Maquetacion en Figma
 - Link a mockup de figma:
   - Mockup para rol de administrador: [vista_administrador_figma](https://www.figma.com/proto/BKdEkqmCxr3Su8fVLPDhkY/Proyecto-tickets?node-id=1-253&p=f&t=KGyI5SY7SHO9KHBS-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A253)
   
@@ -160,7 +146,83 @@ Contraseña: Adm1n1$trad0r
 
   - Mokup para el rol de tecnico: [vista_tecnico_figma](https://www.figma.com/proto/BKdEkqmCxr3Su8fVLPDhkY/Proyecto-tickets?node-id=66-362&p=f&viewport=-2000%2C-299%2C0.62&t=wMwUssKte1WsT7Tg-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=66%3A1106&page-id=38%3A3)
 
-## Link del VPS
+
+
+## Backend con Laravel
+
+La API del backend está disponible en la siguiente URL base:
+
+```
+https://back.suportito.wilverafs.dev/api
+```
+
+
+### Endpoints principales
+
+#### Autenticación
+- `POST /register` → Registra un nuevo usuario
+- `POST /login` → Inicia sesión y devuelve token JWT
+- `GET /logout` → Cierra sesión del usuario autenticado
+
+#### Usuarios
+- `GET /usuarios` → Lista todos los usuarios
+- `GET /usuarios/{id}` → Obtiene información de un usuario específico
+- `POST /usuarios` → Crea un nuevo usuario
+- `PUT /usuarios/{id}` → Actualiza un usuario existente
+- `PATCH /usuarios/{id}` → Actualiza parcialmente un usuario
+- `DELETE /usuarios/{id}` → Elimina un usuario
+
+#### Tickets
+- `GET /tickets` → Lista todos los tickets
+- `GET /tickets/{id}` → Obtiene información de un ticket específico
+- `POST /tickets` → Crea un nuevo ticket
+- `PUT /tickets/{id}` → Actualiza un ticket existente
+- `PATCH /tickets/{id}/partial` → Actualiza parcialmente un ticket
+- `DELETE /tickets/{id}` → Elimina un ticket
+
+#### Tipos de Ticket
+- `GET /tipos-ticket` → Lista todos los tipos de ticket
+- `GET /tipos-ticket/{id}` → Obtiene información de un tipo de ticket específico
+- `POST /tipos-ticket` → Crea un nuevo tipo de ticket
+- `PUT /tipos-ticket/{id}` → Actualiza un tipo de ticket existente
+- `DELETE /tipos-ticket/{id}` → Elimina un tipo de ticket
+
+#### Roles
+- `GET /roles` → Lista todos los roles
+- `GET /roles/{id}` → Obtiene información de un rol específico
+- `POST /roles` → Crea un nuevo rol
+- `PUT /roles/{id}` → Actualiza un rol existente
+- `DELETE /roles/{id}` → Elimina un rol
+
+#### Áreas
+- `GET /areas` → Lista todas las áreas
+- `GET /areas/{id}` → Obtiene información de un área específica
+- `POST /areas` → Crea una nueva área
+- `PUT /areas/{id}` → Actualiza un área existente
+- `DELETE /areas/{id}` → Elimina un área
+
+#### Estados de Ticket
+- `GET /estados-ticket` → Lista todos los estados de ticket
+- `GET /estados-ticket/{id}` → Obtiene información de un estado específico  
+*(solo lectura, no se permite crear/editar/eliminar)*
+
+#### Equipos de Red
+- `GET /equipos-red` → Lista todos los equipos de red
+- `GET /equipos-red/{id}` → Obtiene información de un equipo específico
+- `POST /equipos-red` → Registra un nuevo equipo
+- `PUT /equipos-red/{id}` → Actualiza un equipo existente
+- `DELETE /equipos-red/{id}` → Elimina un equipo
+
+#### Bitácora de Tickets
+- `GET /bitacora-tickets` → Lista todas las entradas de bitácora
+- `GET /bitacora-tickets/{id}` → Obtiene información de una entrada específica
+- `POST /bitacora-tickets` → Registra una nueva entrada en la bitácora  
+*(solo lectura y creación, no se permite actualizar/eliminar)*
+
+
+
+
+## Links del VPS
 Demo del proyecto y su acceso en el VPS  
 Actualmente el sistema se encuentra en **fase de desarrollo**.  
 Se están implementando la conexión del backend con el frontend y la integración con el VPS para pruebas en línea.  
