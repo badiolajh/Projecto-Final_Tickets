@@ -1,0 +1,17 @@
+info:
+  name: Eliminar usuraio
+  type: http
+  seq: 8
+
+http:
+  method: DELETE
+  url: http://127.0.0.1:8000/api/usuarios/16
+  auth:
+    type: bearer
+    token: oWoKg3r9brA4KFQzLkhizvXq0K90tdvM01Hm4daZa57a8dd1
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

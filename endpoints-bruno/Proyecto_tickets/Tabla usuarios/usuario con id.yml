@@ -1,0 +1,20 @@
+info:
+  name: usuario con id
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: http://127.0.0.1:8000/api/usuarios/2
+  headers:
+    - name: Accept
+      value: application/json
+  auth:
+    type: bearer
+    token: 2|T8JAL10RyQBISO2WUhjiPXYJaqwmVBTDvnYoH7X15c48f65b
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,26 @@
+info:
+  name: Crear equipo de red
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/equipos-red
+  body:
+    type: json
+    data: |
+      {
+        "id_usuario": 2,
+        "nombre_equipo": "Nuevo equipo de prueba",
+        "direccion_mac": "AA:BB:CC:DD:EE:05",
+        "numero_inventario": "INV-EMP-005"
+      }
+  auth:
+    type: bearer
+    token: 0aVmgGx7zJlvggDBz4S37dfjUBumGdhDzjcxXW3l91b41e1b
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,35 @@
+info:
+  name: Actualizacion usuario con id
+  type: http
+  seq: 6
+
+http:
+  method: PUT
+  url: http://127.0.0.1:8000/api/usuarios/2
+  headers:
+    - name: Accept
+      value: application/json
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "nombre_completo": "Maria de Jesus",
+        "puesto": "Jefe de departamento",
+        "correo_electronico": "jonathanbadiola123@gmail.com",
+        "contrasena_hash": "12345678",
+        "extension_telefono": "0431",
+        "foto_url":"17881819202190",
+        "id_rol":"3",
+        "id_area":"5"
+      }
+  auth:
+    type: bearer
+    token: 3|T8JAL10RyQBISO2WUhjiPXYJaqwmVBTDvnYoH7X15c48f65b
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

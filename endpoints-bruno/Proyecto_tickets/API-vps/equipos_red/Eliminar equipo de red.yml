@@ -1,0 +1,17 @@
+info:
+  name: Eliminar equipo de red
+  type: http
+  seq: 5
+
+http:
+  method: DELETE
+  url: https://back.suportito.wilverafs.dev/api/equipos-red/3
+  auth:
+    type: bearer
+    token: WZftzec9CkDQdZ1DzBBEOVvUo82sTZzX7Vv3EBQLe29bd617
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

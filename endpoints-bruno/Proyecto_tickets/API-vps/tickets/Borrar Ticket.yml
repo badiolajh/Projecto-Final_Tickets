@@ -1,0 +1,17 @@
+info:
+  name: Borrar Ticket
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: https://back.suportito.wilverafs.dev/api/tickets/2
+  auth:
+    type: bearer
+    token: WZftzec9CkDQdZ1DzBBEOVvUo82sTZzX7Vv3EBQLe29bd617
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

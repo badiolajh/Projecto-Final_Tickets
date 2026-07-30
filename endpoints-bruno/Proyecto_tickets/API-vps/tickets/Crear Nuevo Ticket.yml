@@ -1,0 +1,28 @@
+info:
+  name: Crear Nuevo Ticket
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://back.suportito.wilverafs.dev/api/tickets
+  body:
+    type: json
+    data: |-
+      {
+        "descripcion_empleado": "Nuvo ticket de prueba creado.",
+        "prioridad": "Alta",
+        "empleado_id": 2,
+        "tecnico_id": null,
+        "categoria_id": 3,
+        "estado_id": 1
+      }
+  auth:
+    type: bearer
+    token: 1|WZftzec9CkDQdZ1DzBBEOVvUo82sTZzX7Vv3EBQLe29bd617
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

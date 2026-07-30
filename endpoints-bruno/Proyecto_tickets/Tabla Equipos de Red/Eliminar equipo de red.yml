@@ -1,0 +1,17 @@
+info:
+  name: Eliminar equipo de red
+  type: http
+  seq: 5
+
+http:
+  method: DELETE
+  url: http://127.0.0.1:8000/api/equipos-red/2
+  auth:
+    type: bearer
+    token: 0aVmgGx7zJlvggDBz4S37dfjUBumGdhDzjcxXW3l91b41e1b
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

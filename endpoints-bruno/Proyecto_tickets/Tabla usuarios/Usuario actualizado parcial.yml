@@ -1,0 +1,28 @@
+info:
+  name: Usuario actualizado parcial
+  type: http
+  seq: 7
+
+http:
+  method: PATCH
+  url: http://127.0.0.1:8000/api/usuarios/2
+  headers:
+    - name: Accept
+      value: application/json
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "extension_telefono": "5612"
+      }
+  auth:
+    type: bearer
+    token: 3|hvF3ZKJddZBEtzwICdwSuT780k3mA6y9ETsi6vcHee5e0afd
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,35 @@
+info:
+  name: Actualizacion usuario con id
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: https://back.suportito.wilverafs.dev/api/usuarios/4
+  headers:
+    - name: Accept
+      value: application/json
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "nombre_completo": "Santiago",
+        "puesto": "Pasante",
+        "correo_electronico": "santiago@correo.com",
+        "contrasena_hash": "Santiago123",
+        "extension_telefono": "0431",
+        "foto_url":"",
+        "id_rol":"3",
+        "id_area":"5"
+      }
+  auth:
+    type: bearer
+    token: Ylc1TVBYZrzHMkX1En3FSUs4TCqYAMt4gsttIu7Oab2962fc
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

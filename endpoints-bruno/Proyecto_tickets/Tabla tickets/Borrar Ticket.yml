@@ -1,0 +1,17 @@
+info:
+  name: Borrar Ticket
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: http://127.0.0.1:8000/api/tickets/2
+  auth:
+    type: bearer
+    token: 2|mejxwXtg7vwlRpu9cVJywd6GDTQv6Qv6Fj7K7YBPeec1a066
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

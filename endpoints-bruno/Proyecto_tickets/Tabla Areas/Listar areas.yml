@@ -1,0 +1,17 @@
+info:
+  name: Listar areas
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: http://127.0.0.1:8000/api/areas
+  auth:
+    type: bearer
+    token: R5K6GPcdYs3PY7rbBFa7L2mkupcsy6pCkGohhAG038ee502f
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

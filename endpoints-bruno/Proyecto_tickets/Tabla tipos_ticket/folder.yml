@@ -1,0 +1,7 @@
+info:
+  name: Tabla tipos_ticket
+  type: folder
+  seq: 3
+
+request:
+  auth: inherit

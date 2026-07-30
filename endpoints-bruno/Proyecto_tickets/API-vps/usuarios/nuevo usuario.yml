@@ -1,0 +1,35 @@
+info:
+  name: nuevo usuario
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: https://back.suportito.wilverafs.dev/api/usuarios
+  headers:
+    - name: Accept
+      value: application/json
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "nombre_completo": "Alfredo",
+        "puesto": "Becario",
+        "correo_electronico": "prueba@correo.com",
+        "contrasena_hash": "alfredo123",
+        "extension_telefono": "2001",
+        "foto_url":"http://url.com",
+        "id_rol":"3",
+        "id_area":"2"
+      }
+  auth:
+    type: bearer
+    token: Ylc1TVBYZrzHMkX1En3FSUs4TCqYAMt4gsttIu7Oab2962fc
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

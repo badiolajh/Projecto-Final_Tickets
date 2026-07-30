@@ -1,0 +1,17 @@
+info:
+  name: borrar usuario
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: https://back.suportito.wilverafs.dev/api/usuarios/7
+  auth:
+    type: bearer
+    token: Ylc1TVBYZrzHMkX1En3FSUs4TCqYAMt4gsttIu7Oab2962fc
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

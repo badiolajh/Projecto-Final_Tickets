@@ -1,0 +1,21 @@
+info:
+  name: Actualizar equipo de red
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: https://back.suportito.wilverafs.dev/api/equipos-red/3
+  body:
+    type: json
+    data: |
+      { "nombre_equipo": "Equipo de red-Actualizada" }
+  auth:
+    type: bearer
+    token: WZftzec9CkDQdZ1DzBBEOVvUo82sTZzX7Vv3EBQLe29bd617
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

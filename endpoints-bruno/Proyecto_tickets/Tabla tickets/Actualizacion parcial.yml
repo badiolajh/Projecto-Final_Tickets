@@ -1,0 +1,28 @@
+info:
+  name: Actualizacion parcial
+  type: http
+  seq: 5
+
+http:
+  method: PATCH
+  url: http://127.0.0.1:8000/api/tickets/1
+  body:
+    type: json
+    data: |-
+      {
+        "descripcion_empleado": "Problema solucionado",
+        "prioridad": "Baja",
+        "tecnico_id": null,
+        "empleado_id":2,
+        "estado_id": 2,
+        "categoria_id":2
+      }
+  auth:
+    type: bearer
+    token: 2|mejxwXtg7vwlRpu9cVJywd6GDTQv6Qv6Fj7K7YBPeec1a066
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

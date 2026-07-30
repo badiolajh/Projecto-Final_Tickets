@@ -1,0 +1,35 @@
+info:
+  name: nuevo usuario
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/usuarios
+  headers:
+    - name: Accept
+      value: application/json
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "nombre_completo": "Andres Juan Perez",
+        "puesto": "Honorarios",
+        "correo_electronico": "andres123@gmail.com",
+        "contrasena_hash": "andrespass",
+        "extension_telefono": "2001",
+        "foto_url":"http://url.com",
+        "id_rol":"3",
+        "id_area":"6"
+      }
+  auth:
+    type: bearer
+    token: 2|T8JAL10RyQBISO2WUhjiPXYJaqwmVBTDvnYoH7X15c48f65b
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

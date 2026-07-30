@@ -1,0 +1,22 @@
+info:
+  name: login
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://back.suportito.wilverafs.dev/api/login
+  body:
+    type: json
+    data: |-
+      {
+        "correo_electronico": "admin@empresa.com",
+        "contrasena_hash": "12345678"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,21 @@
+info:
+  name: D-Crear area
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/areas
+  body:
+    type: json
+    data: |
+      { "nombre_area": "Logística" }
+  auth:
+    type: bearer
+    token: R5K6GPcdYs3PY7rbBFa7L2mkupcsy6pCkGohhAG038ee502f
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,25 @@
+info:
+  name: Registrar bitacora de ticket
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://back.suportito.wilverafs.dev/api/bitacora-tickets
+  body:
+    type: json
+    data: |
+      {
+        "id_ticket": 1,
+        "id_usuario": 2,
+        "descripcion_trabajo": "Se reinstaló el sistema operativo."
+      }
+  auth:
+    type: bearer
+    token: WZftzec9CkDQdZ1DzBBEOVvUo82sTZzX7Vv3EBQLe29bd617
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

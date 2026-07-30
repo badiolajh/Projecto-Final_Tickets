@@ -1,0 +1,7 @@
+info:
+  name: bitacora_tickets
+  type: folder
+  seq: 8
+
+request:
+  auth: inherit

@@ -1,0 +1,7 @@
+info:
+  name: Tabla Bitácora de Tickets
+  type: folder
+  seq: 7
+
+request:
+  auth: inherit

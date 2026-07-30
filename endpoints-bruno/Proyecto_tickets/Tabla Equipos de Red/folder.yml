@@ -1,0 +1,7 @@
+info:
+  name: Tabla Equipos de Red
+  type: folder
+  seq: 6
+
+request:
+  auth: inherit

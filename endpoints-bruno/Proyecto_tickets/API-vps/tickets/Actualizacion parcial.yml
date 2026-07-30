@@ -1,0 +1,23 @@
+info:
+  name: Actualizacion parcial
+  type: http
+  seq: 5
+
+http:
+  method: PATCH
+  url: https://back.suportito.wilverafs.dev/api/tickets/3
+  body:
+    type: json
+    data: |-
+      {
+        "descripcion_empleado": "Problema solucionado"
+      }
+  auth:
+    type: bearer
+    token: WZftzec9CkDQdZ1DzBBEOVvUo82sTZzX7Vv3EBQLe29bd617
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,28 @@
+info:
+  name: Crear Nuevo Ticket
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/tickets
+  body:
+    type: json
+    data: |-
+      {
+        "descripcion_empleado": "No cuento con conexion a la impresora.",
+        "prioridad": "Alta",
+        "empleado_id": 2,
+        "tecnico_id": null,
+        "categoria_id": 3,
+        "estado_id": 1
+      }
+  auth:
+    type: bearer
+    token: 1|dycrqahQinlzGaGTiVP51UGmABdKcNZ9jeXwubzJ73f9f79d
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,25 @@
+info:
+  name: Registrar bitacora de ticket
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/bitacora-tickets
+  body:
+    type: json
+    data: |
+      {
+        "id_ticket": 1,
+        "id_usuario": 2,
+        "descripcion_trabajo": "Se reinstaló el sistema operativo."
+      }
+  auth:
+    type: bearer
+    token: R5K6GPcdYs3PY7rbBFa7L2mkupcsy6pCkGohhAG038ee502f
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

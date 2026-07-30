@@ -1,0 +1,26 @@
+info:
+  name: Crear equipo de red
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://back.suportito.wilverafs.dev/api/equipos-red
+  body:
+    type: json
+    data: |
+      {
+        "id_usuario": 2,
+        "nombre_equipo": "Nuevo equipo de prueba",
+        "direccion_mac": "AA:BB:CC:DD:EE:05",
+        "numero_inventario": "INV-EMP-005"
+      }
+  auth:
+    type: bearer
+    token: WZftzec9CkDQdZ1DzBBEOVvUo82sTZzX7Vv3EBQLe29bd617
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
