@@ -236,9 +236,10 @@ const usuariosPagina = usuariosFiltrados.slice(indicePrimero, indiceUltimo);
                       </div>
 
       <UserModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            title="Registro de usuario"
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onUsuarioCreado={obtenerUsuarios}
+        title="Registro de usuario"
       />
       <UserEdit
         isOpen={EditUserOpen}
