@@ -30,4 +30,10 @@ class Usuario extends Authenticatable
     'contrasena_hash',
     'remember_token'
     ];
+
+    // <-- Agregamos esta relación para validar el rol del usuario -->
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class, 'id_rol', 'id_rol');
+    }
 }

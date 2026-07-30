@@ -16,9 +16,10 @@ class TicketController extends Controller
     // Muestra todos los tickets
     public function index()
     {
-        $ticket = Ticket::paginate(10);
-
-        return TicketResource::collection($ticket);
+        // Cargamos las relaciones 'empleado' y 'categoria' (tipos_ticket)
+        // Esto para la vista de incidencias
+        $tickets = Ticket::with(['empleado', 'categoria'])->get();
+        return response()->json($tickets);
     }
 
     // Almacena un nuevo ticket

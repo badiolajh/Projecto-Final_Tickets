@@ -31,4 +31,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(Usuario::class, 'tecnico_id', 'id_usuario');
     }
+
+    // <-- Agregamos esta relación para el tipo/categoría del ticket -->
+    public function categoria()
+    {
+        return $this->belongsTo(TipoTicket::class, 'categoria_id', 'id_tipo');
+    }
 }

@@ -1,54 +1,79 @@
 import { FaEye } from "react-icons/fa";
-
 import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Tick_Pendiente from "../Ver-ticket-pendiente/Ver-pendiente";
 
-
 function Incidencias_Frame() {
-  // Datos locales, aun no se implementa la API
-    const [usuarios] = useState([
-      { id: 1, firstName: "Andres", lastName: "", type: "Sistemas", date: "26/07/26" },
-      { id: 2, firstName: "Adrian", lastName: "", type: "Redes", date: "18/07/26" },
-      { id: 3, firstName: "Jorge", lastName: "", type: "Hardware", date: "16/07/26" },
-      { id: 4, firstName: "Jose", lastName: "", type: "Sistemas", date: "08/07/26" },
-      { id: 5, firstName: "Abril", lastName: "", type: "Hardware", date: "02/07/26" },
-      { id: 6, firstName: "Maria", lastName: "", type: "Redes", date: "28/06/26" },
-    ]);
+    const [tickets, setTickets] = useState([]);
+    const [cargando, setCargando] = useState(true);
 
     const [registrosPorPagina, setRegistrosPorPagina] = useState(5);
     const [busqueda, setBusqueda] = useState("");
-    const [filtroRol, setFiltroRol] = useState("Todos");
+    const [filtroTipo, setFiltroTipo] = useState("Todos");
 
-  const [Verpendiente, ModaleVerPendiente]  = useState(false);
+    const [Verpendiente, ModaleVerPendiente] = useState(false);
 
-    // Inicializa useSearchParams
     const [searchParams, setSearchParams] = useSearchParams();
-
-    // Lee la página desde la URL (o default a 1)
     const paginaActual = parseInt(searchParams.get("page")) || 1;
 
-    const usuariosFiltrados = usuarios.filter((u) => {
+    useEffect(() => {
+        const obtenerTickets = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const apiUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+
+                const respuesta = await fetch(`${apiUrl}/tickets`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+
+                if (!respuesta.ok) {
+                    throw new Error("Error al obtener los tickets");
+                }
+
+                const data = await respuesta.json();
+                setTickets(data.data || data);
+            } catch (error) {
+                console.error("Hubo un error al cargar los tickets:", error);
+            } finally {
+                setCargando(false);
+            }
+        };
+
+        obtenerTickets();
+    }, []);
+
+    const ticketsFiltrados = tickets.filter((t) => {
+      const nombreEmpleado = t.empleado?.nombre_completo || "Desconocido";
+      const tipoTicket = t.categoria?.nombre_tipo || "General";
+
       const coincideBusqueda =
-        u.firstName.toLowerCase().includes(busqueda.toLowerCase()) ||
-        u.email.toLowerCase().includes(busqueda.toLowerCase());
-      const coincideRol =
-        filtroRol === "Todos" || (u.role || "user") === filtroRol.toLowerCase();
-      return coincideBusqueda && coincideRol;
+        nombreEmpleado.toLowerCase().includes(busqueda.toLowerCase()) ||
+        String(tipoTicket).toLowerCase().includes(busqueda.toLowerCase());
+
+      const coincideTipo =
+        filtroTipo === "Todos" || String(tipoTicket).toLowerCase() === filtroTipo.toLowerCase();
+
+      return coincideBusqueda && coincideTipo;
     });
 
-    const totalPaginas = Math.ceil(usuariosFiltrados.length / registrosPorPagina) || 1;
+    const totalPaginas = Math.ceil(ticketsFiltrados.length / registrosPorPagina) || 1;
 
-    // Función para cambiar página y actualizar URL
     const cambiarPagina = (nuevaPagina) => {
       setSearchParams({ page: nuevaPagina });
     };
 
     const indiceUltimo = paginaActual * registrosPorPagina;
     const indicePrimero = indiceUltimo - registrosPorPagina;
-    const usuariosPagina = usuariosFiltrados.slice(indicePrimero, indiceUltimo);
+    const ticketsPagina = ticketsFiltrados.slice(indicePrimero, indiceUltimo);
 
+    const formatearFecha = (fechaStr) => {
+      if (!fechaStr) return "N/A";
+      return fechaStr.split("T")[0].split(" ")[0];
+    };
 
   return (
     <div className="contenedor-Opciones">
@@ -69,19 +94,18 @@ function Incidencias_Frame() {
 
           <select
             className="select-estado"
-            value={filtroRol}
+            value={filtroTipo}
             onChange={(e) => {
-              setFiltroRol(e.target.value);
+              setFiltroTipo(e.target.value);
               cambiarPagina(1);
             }}
           >
             <option value="Todos">Todos</option>
-            <option value="Administrador">Admin</option>
-            <option value="Tecnico">Tecnico</option>
-            <option value="Empleado">Empleado</option>
+            <option value="Hardware">Hardware</option>
+            <option value="Software">Software</option>
+            <option value="Redes">Redes</option>
           </select>
             </label>
-
           </div>
 
           <div className="tarjeta-cabecera">
@@ -97,17 +121,26 @@ function Incidencias_Frame() {
           <div className="tarjeta-cuerpo">
             <table className="Tabla-Datos">
                   <tbody>
-
-                    {usuariosPagina.map((u) => (
-                      <tr key={u.id}>
-                        <td>{u.firstName}</td>
-                        <td>{u.type}</td>
-                        <td className="columna-admin">{u.date}</td>
-                        <td className="acciones-boton">
-                          <button className="btn-ver-incid" onClick={() => ModaleVerPendiente(true)}><FaEye /> Ver</button>
-                        </td>
+                    {cargando ? (
+                      <tr>
+                        <td colSpan="4" style={{ textAlign: "center" }}>Cargando tickets...</td>
                       </tr>
-                    ))}
+                    ) : ticketsPagina.length === 0 ? (
+                      <tr>
+                        <td colSpan="4" style={{ textAlign: "center" }}>No se encontraron tickets.</td>
+                      </tr>
+                    ) : (
+                      ticketsPagina.map((t) => (
+                        <tr key={t.id_ticket || t.id}>
+                          <td>{t.empleado?.nombre_completo || "Desconocido"}</td>
+                          <td>{t.categoria?.nombre_tipo || "General"}</td>
+                          <td className="columna-admin">{formatearFecha(t.fecha_creacion || t.created_at)}</td>
+                          <td className="acciones-boton">
+                            <button className="btn-ver-incid" onClick={() => ModaleVerPendiente(true)}><FaEye /> Ver</button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
 
@@ -140,8 +173,8 @@ function Incidencias_Frame() {
                                 </select> Registros
                               </label>
                             </div>
-      </div>
-      {/* Modal de editar Usuario*/}
+                      </div>
+
       <Tick_Pendiente
       isOpen={Verpendiente}
       onClose={() => ModaleVerPendiente(false)}
