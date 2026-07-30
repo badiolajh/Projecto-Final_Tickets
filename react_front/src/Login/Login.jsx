@@ -85,6 +85,7 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
       <div className="tarjeta-formulario">
         <h2 className="titulo-formulario">Inicia sesion</h2>
 
+
         {error && <p style={{ color: "#d9534f", textAlign: "center",fontSize: "22px", marginBottom: "18px", marginTop:"18px"}}>{error}</p>}
 
         <form className="formulario" onSubmit={handleSubmit}>
