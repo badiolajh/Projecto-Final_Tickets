@@ -116,13 +116,7 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
             {mostrarContrasena ? <FaEye /> : <FaRegEyeSlash />}
           </span>
           </div>
-          <div className="grupo-input">
-            <input
-              type="password"
-              placeholder="contraseña"
-              className="campo-texto"
-            />
-          </div>
+
 
           <div className="contenedor-enlace">
             <a href="#recuperar" className="enlace-secundario">
