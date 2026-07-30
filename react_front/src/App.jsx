@@ -18,24 +18,36 @@ import EmpleadoLayout from './empleado/pages/EmpleadoLayout'
   function App() {
 
     const [vistaActual, setVistaActual] = useState('login');
+    //Guarda informacion del usuario autentificado
+    const [usuario, setUsuario] = useState(null);
+    // Recibe el objeto usuario que manda el Login (desde la respuesta de Laravel)
+    const manejarInicioSesion = (datosUsuario) => {
+        // Leemos directamente el id_rol que ya te manda tu API actual
+        const idRol = datosUsuario.id_rol;
 
-    // Función que decide a dónde redirigir según lo que ingrese el usuario
-      const manejarInicioSesion = (emailOUser) => {
-        const texto = emailOUser.toLowerCase();
-
-        if (texto.includes('tecnico')) {
-          setVistaActual('tecnico');
-        } else if (texto.includes('empleado')) {
-          setVistaActual('empleado');
+        if (idRol === 1) {
+          setUsuario(datosUsuario);
+          setVistaActual('principal'); // Vista de Administrador
+        } else if (idRol === 2) {
+          setUsuario(datosUsuario);
+          setVistaActual('tecnico');   // Vista de Técnico
+        } else if (idRol === 3) {
+          setUsuario(datosUsuario);
+          setVistaActual('empleado');  // Vista de Empleado
         } else {
-          // Por defecto (si escribes otra cosa o admin) lo mandamos al panel principal
-          setVistaActual('principal');
+          localStorage.removeItem("token");
+          throw new Error("Tu cuenta no tiene un rol válido asignado.");
         }
+      };
+
+    const manejarCerrarSesion = () => {
+        localStorage.removeItem("token");
+        setUsuario(null);
+        setVistaActual('login');
       };
 
 
     return (
-
       <div className="app-layout">
             <ToastContainer position="top-right" autoClose={2000} theme="dark" />
 
@@ -56,17 +68,17 @@ import EmpleadoLayout from './empleado/pages/EmpleadoLayout'
 
             {/* Vista Principal (Administrador) */}
             {vistaActual === 'principal' && (
-              <Principal onLogout={() => setVistaActual('login')} />
+              <Principal usuario={usuario} onLogout={manejarCerrarSesion} />
             )}
 
             {/* Vista de Técnico */}
             {vistaActual === 'tecnico' && (
-              <TecnicoLayout onLogout={() => setVistaActual('login')} />
+              <TecnicoLayout usuario={usuario} onLogout={manejarCerrarSesion} />
             )}
 
-            {/* Vista de Empleado (Corregida con condición para que no se muestre siempre) */}
+            {/* Vista de Empleado */}
             {vistaActual === 'empleado' && (
-              <EmpleadoLayout onLogout={() => setVistaActual('login')} />
+              <EmpleadoLayout usuario={usuario} onLogout={manejarCerrarSesion} />
             )}
           </div>
         );
