@@ -23,6 +23,7 @@ Se busca que cada empleado cuente con un usuario para ingresar al sistema, con l
 ## Modulos
 Indicar los modulos principales del sistema (minimo 4 entidades no triviales)
 Modulos propuestos:
+- Dashboard
 - Usuarios
 - Tickets
 - Equipos de red
