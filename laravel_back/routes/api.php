@@ -30,6 +30,9 @@ use App\Http\Controllers\Api\BitacoraTicketController;
 Route::post('/register',[UserAuthController::class,'register']);
 Route::post('/login', [UserAuthController::class,'login']);
 
+// Ruta de áreas pública para que aparezca en el Registro
+Route::apiResource('areas', AreaController::class)->only(['index', 'show']);
+
 Route::middleware('auth:sanctum')->group(function()
 {
     Route::get('/logout',[UserAuthController::class,'logout']);
@@ -65,7 +68,6 @@ Route::middleware('auth:sanctum')->group(function()
 // Rutas nuevas
 Route::middleware('auth:sanctum')->group(function()
 {
-    Route::apiResource('areas', AreaController::class);
 
     Route::apiResource('estados-ticket', EstadoTicketController::class)
         ->only(['index','show']);
