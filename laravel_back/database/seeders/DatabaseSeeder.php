@@ -55,50 +55,64 @@ class DatabaseSeeder extends Seeder
             'id_area' => 1,
         ]);
 
-        // Otros Usuarios iniciales para pruebas en los roles tenico y empleado
-        $tecnicoId = DB::table('usuarios')->insertGetId([
-            'nombre_completo' => 'Carlos Pérez',
-            'puesto' => 'Técnico de Redes',
-            'correo_electronico' => 'tecnico@empresa.com',
-            'contrasena_hash' => Hash::make('12345678'),
-            'extension_telefono' => '105',
-            'id_rol' => 2, // Técnico
-            'id_area' => 1,
-        ]);
+        // Técnicos
+        $tecnicos = [];
+        for ($i = 1; $i <= 5; $i++) {
+            $tecnicos[] = DB::table('usuarios')->insertGetId([
+                'nombre_completo' => "Tecnico $i",
+                'puesto' => 'Técnico de Soporte',
+                'correo_electronico' => "tecnico$i@empresa.com",
+                'contrasena_hash' => Hash::make('12345678'),
+                'extension_telefono' => "20$i",
+                'id_rol' => 2,
+                'id_area' => 1,
+            ]);
+        }
 
-        $empleadoId = DB::table('usuarios')->insertGetId([
-            'nombre_completo' => 'María López',
-            'puesto' => 'Asistente Administrativo',
-            'correo_electronico' => 'empleado@empresa.com',
-            'contrasena_hash' => Hash::make('12345678'),
-            'extension_telefono' => '106',
-            'id_rol' => 3, // Empleado
-            'id_area' => 2,
-        ]);
+        // Empleados
+        $empleados = [];
+        for ($i = 1; $i <= 5; $i++) {
+            $empleados[] = DB::table('usuarios')->insertGetId([
+                'nombre_completo' => "Empleado $i",
+                'puesto' => 'Empleado de área',
+                'correo_electronico' => "empleado$i@empresa.com",
+                'contrasena_hash' => Hash::make('12345678'),
+                'extension_telefono' => "30$i",
+                'id_rol' => 3,
+                'id_area' => rand(2, 9), // asignar a distintas áreas
+            ]);
+        }
 
-        // Equipo de red asociado al empleado
-        $equipoId = DB::table('equipos_red')->insertGetId([
-            'id_usuario' => $empleadoId,
-            'nombre_equipo' => 'PC-Empleado-01',
-            'direccion_mac' => 'AA:BB:CC:DD:EE:01',
-            'numero_inventario' => 'INV-EMP-001',
-        ]);
+        // Equipos de red (15 en total, repartidos entre empleados)
+        for ($i = 1; $i <= 15; $i++) {
+            DB::table('equipos_red')->insert([
+                'id_usuario' => $empleados[array_rand($empleados)],
+                'nombre_equipo' => "Equipo-$i",
+                'direccion_mac' => sprintf("AA:BB:CC:DD:EE:%02d", $i),
+                'numero_inventario' => "INV-$i",
+            ]);
+        }
 
-        // Ticket de prueba creado por empleado y asignado al técnico
-        $ticketId = DB::table('tickets')->insertGetId([
-            'descripcion_empleado' => 'La computadora no enciende.',
-            'prioridad' => 'Alta',
-            'empleado_id' => $empleadoId,
-            'tecnico_id' => $tecnicoId,
-            'categoria_id' => 1, // Hardware
-            'estado_id' => 2, // En proceso
-        ]);
+        // Tickets de prueba (15 en total, repartidos entre técnicos y empleados)
+        $tickets = [];
+        for ($i = 1; $i <= 15; $i++) {
+            $tickets[] = DB::table('tickets')->insertGetId([
+                'descripcion_empleado' => "Problema de prueba $i",
+                'prioridad' => ['Alta', 'Normal', 'Baja'][array_rand(['Alta', 'Normal', 'Baja'])],
+                'empleado_id' => $empleados[array_rand($empleados)],
+                'tecnico_id' => $tecnicos[array_rand($tecnicos)],
+                'categoria_id' => rand(1, 3),
+                'estado_id' => rand(1, 3),
+            ]);
+        }
 
-        // Bitácora del ticket registrada por el técnico
-        DB::table('bitacora_tickets')->insert([
-            'id_ticket' => $ticketId,
-            'id_usuario' => $tecnicoId,
-            'descripcion_trabajo' => 'Se revisó la fuente de poder y se reemplazó.',
-        ]);
+        // Bitácora de tickets (15 registros, uno por ticket)
+        foreach ($tickets as $ticketId) {
+            DB::table('bitacora_tickets')->insert([
+                'id_ticket' => $ticketId,
+                'id_usuario' => $tecnicos[array_rand($tecnicos)],
+                'descripcion_trabajo' => "Trabajo realizado en ticket $ticketId",
+            ]);
+        }
     }
 }

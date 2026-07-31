@@ -37,4 +37,9 @@ class Ticket extends Model
     {
         return $this->belongsTo(TipoTicket::class, 'categoria_id', 'id_tipo');
     }
+
+    public function estado()
+    {
+        return $this->belongsTo(EstadoTicket::class, 'estado_id', 'id_estado');
+    }
 }

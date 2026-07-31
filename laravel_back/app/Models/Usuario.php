@@ -36,4 +36,11 @@ class Usuario extends Authenticatable
     {
         return $this->belongsTo(Rol::class, 'id_rol', 'id_rol');
     }
+
+        // Relación con Área
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'id_area', 'id_area');
+    }
+
 }

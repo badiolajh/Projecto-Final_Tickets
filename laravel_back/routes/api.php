@@ -80,4 +80,6 @@ Route::middleware('auth:sanctum')->group(function()
 
     Route::apiResource('bitacora-tickets', BitacoraTicketController::class)
         ->only(['index','store','show']);
+
+    Route::get('/tickets/tecnico/{id}', [TicketController::class, 'ticketsPorTecnico']);
 });

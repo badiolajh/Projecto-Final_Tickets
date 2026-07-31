@@ -17,7 +17,7 @@ class TicketController extends Controller
     public function index()
     {
         // Cargamos el ticket con su empleado, el área del empleado y la categoría/tipo
-            $tickets = Ticket::with(['empleado.area', 'categoria', 'tecnico'])->get();
+            $tickets = Ticket::with(['empleado.area', 'categoria', 'tecnico', 'estado'])->get();
 
             return TicketResource::collection($tickets);
     }
@@ -74,5 +74,20 @@ class TicketController extends Controller
         return response()->json([
             'message' => 'Ticket eliminado',
         ], 200);
+    }
+
+    public function ticketsPorTecnico($id)
+    {
+        // Traemos los tickets asignados al técnico con todas sus relaciones
+        $tickets = Ticket::with([
+            'empleado',     // datos del empleado que creó el ticket
+            'tecnico',      // datos del técnico asignado
+            'categoria',    // tipo/categoría del ticket
+            'estado'        // estado actual del ticket
+        ])
+            ->where('tecnico_id', $id)
+            ->get();
+
+        return TicketResource::collection($tickets);
     }
 }

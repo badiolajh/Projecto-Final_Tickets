@@ -28,7 +28,13 @@ class TicketResource extends JsonResource
              'categoria' => [
                  'nombre_tipo' => $this->categoria->nombre_tipo ?? 'General'
              ],
-             'tecnico_id' => $this->tecnico_id,
+             'tecnico' => [
+            'id' => $this->tecnico->id_usuario ?? null,
+            'nombre_completo' => $this->tecnico->nombre_completo ?? 'No asignado',
+            ],
+            'estado' => [
+            'nombre_estado' => $this->estado->nombre_estado ?? 'Sin estado',
+            ],
          ];
      }
 }
