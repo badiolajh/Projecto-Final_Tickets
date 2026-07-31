@@ -3,21 +3,52 @@ import styles from './DashboardContent.module.css';
 import TablaDashboard from '../tables/TablaDashboard';
 
 const DashboardContent = ({ user, acciones, tickets }) => {
+    console.log("Usuario en Dashboard:", user); // 🔍 Verificar
+    console.log("Tickets recibidos:", tickets);
+
+    const ticketsFiltrados = React.useMemo(() => {
+            if (!user || !Array.isArray(tickets)) return [];
+
+            const esTecnico = user.id_rol === 2 || user.rol_id === 2 || user.rol?.id === 2;
+
+            console.log("¿Es técnico?", esTecnico);
+
+            if (esTecnico) {
+                // Obtenemos el ID del usuario asegurando que sea numérico
+                const idUsuarioActual = Number(user.id_usuario || user.id);
+
+                const filtrados = tickets.filter(ticket => {
+                    const tecnicoIdTicket = Number(ticket.tecnico_id || ticket.tecnico?.id_usuario);
+
+                    // Comparamos ambos como números
+                    const coincide = tecnicoIdTicket === idUsuarioActual;
+
+                    console.log(`Ticket ${ticket.id_ticket}: tecnico_id=${tecnicoIdTicket} vs usuario=${idUsuarioActual}, coincide=${coincide}`);
+                    return coincide;
+                });
+
+                console.log("Tickets filtrados para técnico:", filtrados);
+                return filtrados;
+            }
+
+            return tickets;
+        }, [user, tickets]);
+
     const estadisticas = {
-        asignados: tickets.length,
-        pendientes: tickets.filter(t => t.estado?.nombre_estado === 'Sin asignar').length,
-        proceso: tickets.filter(t => t.estado?.nombre_estado === 'En proceso').length,
-        resueltos: tickets.filter(t => t.estado?.nombre_estado === 'Finalizado').length,
+        asignados: ticketsFiltrados.length,
+        pendientes: ticketsFiltrados.filter(t => t.estado?.nombre_estado === 'Sin asignar').length,
+        proceso: ticketsFiltrados.filter(t => t.estado?.nombre_estado === 'En proceso').length,
+        resueltos: ticketsFiltrados.filter(t => t.estado?.nombre_estado === 'Finalizado').length,
     };
 
-    const total = tickets.length || 1;
+    const total = ticketsFiltrados.length || 1;
     const distribucion = {
-        redes: `${Math.round((tickets.filter(t => t.categoria?.nombre_tipo === 'Redes').length / total) * 100)}%`,
-        sistemas: `${Math.round((tickets.filter(t => t.categoria?.nombre_tipo === 'Software').length / total) * 100)}%`,
-        hardware: `${Math.round((tickets.filter(t => t.categoria?.nombre_tipo === 'Hardware').length / total) * 100)}%`,
+        redes: `${Math.round((ticketsFiltrados.filter(t => t.categoria?.nombre_tipo === 'Redes').length / total) * 100)}%`,
+        sistemas: `${Math.round((ticketsFiltrados.filter(t => t.categoria?.nombre_tipo === 'Software').length / total) * 100)}%`,
+        hardware: `${Math.round((ticketsFiltrados.filter(t => t.categoria?.nombre_tipo === 'Hardware').length / total) * 100)}%`,
     };
 
-    const ticketsPendientes = tickets
+    const ticketsPendientes = ticketsFiltrados
         .filter(t => t.estado?.nombre_estado !== 'Finalizado')
         .map(t => ({
             nombre: t.empleado?.nombre_completo || 'Desconocido',

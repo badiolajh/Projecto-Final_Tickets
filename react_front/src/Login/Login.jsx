@@ -4,6 +4,7 @@ import axios from "axios";
 import "./Login.css";
 
 const Login = ({ alIniciarSesion, alIrARegistro }) => {
+
   const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [mostrarContrasena, setMostrarContrasena] = useState(false);
@@ -55,10 +56,15 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
       // Axios guarda la respuesta en response.data de forma automática
       const data = response.data;
 
-      localStorage.setItem("token", data.token);
+      console.log("Usuario recibido:", data.usuario); // 🔍 Ver estructura
 
-      // Guardamos el objeto usuario para que esté disponible en todo el sistema
+      localStorage.setItem("token", data.token);
       localStorage.setItem("usuario", JSON.stringify(data.usuario));
+
+      // localStorage.setItem("token", data.token);
+
+      // // Guardamos el objeto usuario para que esté disponible en todo el sistema
+      // localStorage.setItem("usuario", JSON.stringify(data.usuario));
       // Evaluamos el rol recibido desde App.jsx
       const resultadoRol = alIniciarSesion(data.usuario);
 

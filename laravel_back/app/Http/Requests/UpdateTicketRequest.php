@@ -21,17 +21,15 @@ class UpdateTicketRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-     public function rules(): array
-         {
-             $isPatch = $this->isMethod('patch');
-
-             return [
-                 'descripcion_empleado' => [$isPatch ? 'sometimes' : 'required', 'string'],
-                 'prioridad'            => [$isPatch ? 'sometimes' : 'required', 'string', 'max:50'],
-                 'empleado_id'          => [$isPatch ? 'sometimes' : 'required', 'integer', 'exists:usuarios,id_usuario'],
-                 'tecnico_id'           => ['nullable', 'integer', 'exists:usuarios,id_usuario'],
-                 'categoria_id'         => [$isPatch ? 'sometimes' : 'required', 'integer', 'exists:tipos_ticket,id_tipo'],
-                 'estado_id'            => [$isPatch ? 'sometimes' : 'required', 'integer', 'exists:estados_ticket,id_estado'],
-             ];
-         }
+    public function rules(): array
+    {
+        return [
+            'descripcion_empleado' => 'sometimes|string',
+            'prioridad'            => 'sometimes|string',
+            'empleado_id'          => 'sometimes|exists:usuarios,id_usuario',
+            'categoria_id'         => 'sometimes|exists:tipos_ticket,id_tipo', // También ajustado por seguridad con base en tu migración
+            'tecnico_id'           => 'nullable|exists:usuarios,id_usuario',
+            'estado_id'            => 'sometimes|exists:estados_ticket,id_estado', // ⬅️ CAMBIADO DE 'estados' A 'estados_ticket'
+        ];
+    }
 }

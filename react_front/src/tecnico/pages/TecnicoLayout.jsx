@@ -36,6 +36,9 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
     const { tickets, loading, error } = useTicketsTecnico(usuario.id_usuario);
 
     const [user, setUser] = useState({
+        id_usuario: usuario.id_usuario,  // ✅ AGREGADO
+        id_rol: usuario.id_rol,  // ✅ AGREGADO
+        rol_id: usuario.rol_id,  // ✅ AGREGADO
         nombre: usuario.nombre_completo,
         avatar: usuario.foto_url,
         puesto: usuario.puesto,

@@ -1,30 +1,41 @@
 import { useState, useEffect } from "react";
 import api from "../api/api";
 
-export const useTicketsTecnico = (tecnicoId) => {
-  const [tickets, setTickets] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+export const useTicketsTecnico = (idUsuario) => {
+    const [tickets, setTickets] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchTickets = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get(`/tickets/tecnico/${tecnicoId}`);
-        // Si el backend devuelve un Resource::collection, la data está en response.data.data
-        const data = Array.isArray(response.data) ? response.data : response.data.data;
-        setTickets(data || []);
-      } catch (err) {
-        setError("No se pudieron cargar los tickets asignados.");
-      } finally {
-        setLoading(false);
-      }
-    };
+    useEffect(() => {
+        const obtenerTickets = async () => {
+            try {
+                const token = localStorage.getItem('token');
 
-    if (tecnicoId) {
-      fetchTickets();
-    }
-  }, [tecnicoId]);
+                // Usamos 'api' en lugar de 'axios'
+                const response = await api.get('/tickets', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
 
-  return { tickets, loading, error };
+                const todosLosTickets = response.data.data || response.data || [];
+
+                const ticketsFiltrados = todosLosTickets.filter(ticket =>
+                    Number(ticket.tecnico_id) === Number(idUsuario) ||
+                    Number(ticket.tecnico?.id_usuario) === Number(idUsuario)
+                );
+
+                setTickets(ticketsFiltrados);
+            } catch (err) {
+                console.error('Error al obtener tickets:', err);
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (idUsuario) {
+            obtenerTickets();
+        }
+    }, [idUsuario]);
+
+    return { tickets, loading, error };
 };

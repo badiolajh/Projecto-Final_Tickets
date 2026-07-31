@@ -52,7 +52,7 @@ class UserAuthController extends Controller
     {
         $data = $request->validated();
 
-        $usuario = Usuario::where('correo_electronico', $data['correo_electronico'])->first();
+        $usuario = Usuario::with('rol')->where('correo_electronico', $data['correo_electronico'])->first();
 
         if (! $usuario || ! Hash::check($data['contrasena_hash'], $usuario->contrasena_hash)) {
             throw ValidationException::withMessages([
