@@ -38,7 +38,7 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
 
       // Hook de finalizar
   const { finalizarTicket, loading: loadingFinalizar, error: errorFinalizar } =
-    useFinalizarTicket(usuario.id_usuario, (setTickets) => {
+    useFinalizarTicket(usuario.id_usuario, setTickets => {
       // Refrescar tickets localmente: marcar como finalizado
       const updated = tickets.map(t =>
         t.id_ticket === ticketId ? { ...t, estado: { id: 3, nombre_estado: "Finalizado" } } : t
