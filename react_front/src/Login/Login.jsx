@@ -57,6 +57,8 @@ const Login = ({ alIniciarSesion, alIrARegistro }) => {
 
       localStorage.setItem("token", data.token);
 
+      // Guardamos el objeto usuario para que esté disponible en todo el sistema
+      localStorage.setItem("usuario", JSON.stringify(data.usuario));
       // Evaluamos el rol recibido desde App.jsx
       const resultadoRol = alIniciarSesion(data.usuario);
 

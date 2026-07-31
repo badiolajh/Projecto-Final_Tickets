@@ -1,6 +1,6 @@
 import { FaEye } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 import Tick_Pendiente from "../Ver-ticket-pendiente/Ver-pendiente";
@@ -13,40 +13,43 @@ function Incidencias_Frame() {
     const [busqueda, setBusqueda] = useState("");
     const [filtroTipo, setFiltroTipo] = useState("Todos");
 
-    const [Verpendiente, ModaleVerPendiente] = useState(false);
+    // Estados para el modal y el ticket seleccionado
+    const [verPendiente, setVerPendiente] = useState(false);
+    const [ticketSeleccionado, setTicketSeleccionado] = useState(null);
 
     const [searchParams, setSearchParams] = useSearchParams();
     const paginaActual = parseInt(searchParams.get("page")) || 1;
 
-    useEffect(() => {
-        const obtenerTickets = async () => {
-            try {
-                const token = localStorage.getItem("token");
-                const apiUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+    const obtenerTickets = useCallback(async () => {
+        try {
+            setCargando(true);
+            const token = localStorage.getItem("token");
+            const apiUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
 
-                const response = await axios.get(`${apiUrl}/tickets`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    }
-                });
+            const response = await axios.get(`${apiUrl}/tickets`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
 
-                const data = response.data;
-                setTickets(data.data || data);
-            } catch (error) {
-                console.error("Hubo un error al cargar los tickets:", error.response?.data || error.message);
-            } finally {
-                setCargando(false);
-            }
-        };
-
-        obtenerTickets();
+            const data = response.data;
+            setTickets(data.data || data);
+        } catch (error) {
+            console.error("Hubo un error al cargar los tickets:", error.response?.data || error.message);
+        } finally {
+            setCargando(false);
+        }
     }, []);
+
+    useEffect(() => {
+        obtenerTickets();
+    }, [obtenerTickets]);
 
     const ticketsFiltrados = tickets.filter((t) => {
       const nombreEmpleado = t.empleado?.nombre_completo || "Desconocido";
-      const tipoTicket = t.categoria?.nombre_tipo || "General";
+      const tipoTicket = t.categoria?.nombre_tipo || t.tipo || "General";
 
       const coincideBusqueda =
         nombreEmpleado.toLowerCase().includes(busqueda.toLowerCase()) ||
@@ -131,10 +134,18 @@ function Incidencias_Frame() {
                       ticketsPagina.map((t) => (
                         <tr key={t.id_ticket || t.id}>
                           <td>{t.empleado?.nombre_completo || "Desconocido"}</td>
-                          <td>{t.categoria?.nombre_tipo || "General"}</td>
+                          <td>{t.categoria?.nombre_tipo || t.tipo || "General"}</td>
                           <td className="columna-admin">{formatearFecha(t.fecha_creacion || t.created_at)}</td>
                           <td className="acciones-boton">
-                            <button className="btn-ver-incid" onClick={() => ModaleVerPendiente(true)}><FaEye /> Ver</button>
+                            <button
+                              className="btn-ver-incid"
+                              onClick={() => {
+                                setTicketSeleccionado(t);
+                                setVerPendiente(true);
+                              }}
+                            >
+                              <FaEye /> Ver
+                            </button>
                           </td>
                         </tr>
                       ))
@@ -144,41 +155,45 @@ function Incidencias_Frame() {
 
                     <div className="pie-tabla">
                       <div className="tabla-paginas">
-                                <button
-                                  disabled={paginaActual === 1}
-                                  onClick={() => cambiarPagina(paginaActual - 1)}
-                                >&lt;</button>
+                            <button
+                              disabled={paginaActual === 1}
+                              onClick={() => cambiarPagina(paginaActual - 1)}
+                            >&lt;</button>
 
-                                <span> Pág {paginaActual} de {totalPaginas} </span>
+                            <span> Pág {paginaActual} de {totalPaginas} </span>
 
-                                <button
-                                  disabled={paginaActual === totalPaginas}
-                                  onClick={() => cambiarPagina(paginaActual + 1)}
-                                >&gt;</button>
-                              </div>
+                            <button
+                              disabled={paginaActual === totalPaginas}
+                              onClick={() => cambiarPagina(paginaActual + 1)}
+                            >&gt;</button>
+                          </div>
 
-                              <label>Mostrar:
-                                <select
-                                  value={registrosPorPagina}
-                                  onChange={(e) => {
-                                    setRegistrosPorPagina(Number(e.target.value));
-                                    cambiarPagina(1);
-                                  }}
-                                >
-                                  <option value={5}>5</option>
-                                  <option value={7}>7</option>
-                                  <option value={10}>10</option>
-                                </select> Registros
-                              </label>
-                            </div>
-                      </div>
+                          <label>Mostrar:
+                            <select
+                              value={registrosPorPagina}
+                              onChange={(e) => {
+                                setRegistrosPorPagina(Number(e.target.value));
+                                cambiarPagina(1);
+                              }}
+                            >
+                              <option value={5}>5</option>
+                              <option value={7}>7</option>
+                              <option value={10}>10</option>
+                            </select> Registros
+                          </label>
+                        </div>
+                    </div>
 
       <Tick_Pendiente
-      isOpen={Verpendiente}
-      onClose={() => ModaleVerPendiente(false)}
-      title="Ver Ticket Pendiente"
+        isOpen={verPendiente}
+        onClose={() => {
+          setVerPendiente(false);
+          setTicketSeleccionado(null);
+        }}
+        ticket={ticketSeleccionado}
+        onActualizado={obtenerTickets}
       />
-        </div>
+    </div>
   )
 }
 

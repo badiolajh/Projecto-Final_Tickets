@@ -7,8 +7,8 @@ const CrearTicketContent = ({ onValidChange }) => {
   const [error, setError] = useState("");
 
   const validate = (text) => {
-    if (!text || text.trim().length < 50) {
-      setError("La descripción debe tener al menos 50 caracteres.");
+    if (!text || text.trim() === "") {
+      setError("La descripción no puede estar vacía.");
       onValidChange(false, { tipo, descripcion: text });
     } else {
       setError("");
@@ -22,6 +22,13 @@ const CrearTicketContent = ({ onValidChange }) => {
     validate(text);
   };
 
+  const handleTipoChange = (e) => {
+    const nuevoTipo = e.target.value;
+    setTipo(nuevoTipo);
+    // Notificamos también el cambio de tipo manteniendo la descripción actual
+    onValidChange(descripcion.trim() !== "", { tipo: nuevoTipo, descripcion });
+  };
+
   return (
     <div className={styles.crearTicket}>
       {/* Título */}
@@ -31,7 +38,7 @@ const CrearTicketContent = ({ onValidChange }) => {
       <div className={styles.cuerpo}>
         <div className={styles.fieldRow}>
           <label className={styles.label}>Tipo:</label>
-          <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
+          <select value={tipo} onChange={handleTipoChange}>
             <option>Hardware</option>
             <option>Sistemas</option>
             <option>Redes</option>
