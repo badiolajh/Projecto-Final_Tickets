@@ -1,29 +1,41 @@
 import { IoClose } from "react-icons/io5";
 import "./Ver-pendiente.css";
 
-const Tick_Pendiente = ({ isOpen, onClose , user }) => {
+const Tick_Pendiente = ({ isOpen, onClose, user }) => {
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="section-title-superior">
-          Ticket de <span>{user ? user.username : "Invitad@"}</span>
+          Ticket de <span>{user?.empleado?.nombre_completo || "Invitad@"}</span>
         </div>
 
         <div className="section-title">Descripción</div>
         <div className="tarjeta-cuerpo-formulario">
           <div className="form-row">
-            <label>Area:</label> 
-            <input type="text" placeholder="Recursos Humanos" disabled />
+            <label>Área:</label>
+            <input
+              type="text"
+              value={user?.empleado?.area || "No especificada"}
+              disabled
+            />
           </div>
           <div className="form-row">
-            <label>Puesto:</label> 
-            <input type="text" placeholder="Jefe de departamento" disabled />
+            <label>Puesto:</label>
+            <input
+              type="text"
+              value={user?.empleado?.puesto || "No especificado"}
+              disabled
+            />
           </div>
           <div className="form-row">
-            <label>Num.ext:</label> 
-            <input type="text" placeholder="0325" disabled />
+            <label>Num.ext:</label>
+            <input
+              type="text"
+              value={user?.empleado?.extension || "N/A"}
+              disabled
+            />
           </div>
 
           <div className="form-row"><label>Detalle:</label></div>
@@ -31,7 +43,7 @@ const Tick_Pendiente = ({ isOpen, onClose , user }) => {
             <textarea
               disabled
               rows="4"
-              value="Cuento con fallas en mi computadora, es urgente!!!!!"
+              value={user?.descripcion_empleado || ""}
             />
           </div>
         </div>
