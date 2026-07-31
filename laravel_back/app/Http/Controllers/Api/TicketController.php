@@ -7,19 +7,33 @@ use App\Models\Ticket;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-//FormRequest
+// FormRequest
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 
 class TicketController extends Controller
 {
-    // Muestra todos los tickets
-    public function index()
+    // Muestra todos los tickets según el rol del usuario autenticado
+    public function index(Request $request)
     {
-        // Cargamos el ticket con su empleado, el área del empleado y la categoría/tipo
-            $tickets = Ticket::with(['empleado.area', 'categoria', 'tecnico', 'estado'])->get();
+        $usuario = $request->user(); // Usuario autenticado por Sanctum
 
-            return TicketResource::collection($tickets);
+        // Cargamos todas las relaciones necesarias incluyendo 'estado'
+        $query = Ticket::with(['empleado.area', 'categoria', 'tecnico', 'estado']);
+
+        // Si el usuario es empleado, solo ve sus propios tickets
+        if ($usuario->rol->nombre_rol === 'Empleado') {
+            $query->where('empleado_id', $usuario->id_usuario);
+        }
+        // Si es técnico, ve solo los asignados a él
+        elseif ($usuario->rol->nombre_rol === 'Técnico') {
+            $query->where('tecnico_id', $usuario->id_usuario);
+        }
+        // Si es Administrador, ve todos (sin filtro)
+
+        $tickets = $query->get();
+
+        return TicketResource::collection($tickets);
     }
 
     // Almacena un nuevo ticket
@@ -33,7 +47,7 @@ class TicketController extends Controller
         ], 201);
     }
 
-    // Ticket en especifico
+    // Ticket en específico
     public function show(Ticket $ticket)
     {
         return response()->json([
@@ -41,7 +55,7 @@ class TicketController extends Controller
         ], 200);
     }
 
-    // Actualizascion completa
+    // Actualización completa
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
         $ticket->update($request->validated());
@@ -52,10 +66,9 @@ class TicketController extends Controller
         ], 200);
     }
 
-    // Actualizacion parcial
+    // Actualización parcial
     public function updatePartial(UpdateTicketRequest $request, Ticket $ticket)
     {
-        // Al usar 'sometimes' en el FormRequest, podemos actualizar solo los campos enviados
         $ticket->update(array_filter($request->validated(), function ($value) {
             return !is_null($value);
         }));
@@ -76,18 +89,40 @@ class TicketController extends Controller
         ], 200);
     }
 
+    // Tickets por técnico específico
     public function ticketsPorTecnico($id)
     {
-        // Traemos los tickets asignados al técnico con todas sus relaciones
         $tickets = Ticket::with([
-            'empleado',     // datos del empleado que creó el ticket
-            'tecnico',      // datos del técnico asignado
-            'categoria',    // tipo/categoría del ticket
-            'estado'        // estado actual del ticket
+            'empleado.area',
+            'tecnico',
+            'categoria',
+            'estado'
         ])
-            ->where('tecnico_id', $id)
-            ->get();
+        ->where('tecnico_id', $id)
+        ->get();
 
         return TicketResource::collection($tickets);
+    }
+
+    // Asignar ticket a un técnico (solo administrador)
+    public function asignar(Request $request, Ticket $ticket)
+    {
+        $request->validate([
+            'tecnico_id' => 'required|exists:usuarios,id_usuario',
+        ]);
+
+        if ($request->user()->rol->nombre_rol !== 'Administrador') {
+            return response()->json(['message' => 'No autorizado'], 403);
+        }
+
+        $ticket->update([
+            'tecnico_id' => $request->tecnico_id,
+            'estado_id' => 2, // Cambia automáticamente a "En proceso" o el ID que corresponda
+        ]);
+
+        return response()->json([
+            'message' => 'Ticket asignado correctamente',
+            'ticket' => new TicketResource($ticket),
+        ]);
     }
 }

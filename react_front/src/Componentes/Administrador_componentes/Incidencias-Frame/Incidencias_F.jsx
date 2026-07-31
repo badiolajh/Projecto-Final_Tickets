@@ -17,6 +17,9 @@ function Incidencias_Frame() {
     const [verPendiente, setVerPendiente] = useState(false);
     const [ticketSeleccionado, setTicketSeleccionado] = useState(null);
 
+    // Lista de técnicos para asignar
+    const [tecnicos, setTecnicos] = useState([]);
+
     const [searchParams, setSearchParams] = useSearchParams();
     const paginaActual = parseInt(searchParams.get("page")) || 1;
 
@@ -43,28 +46,51 @@ function Incidencias_Frame() {
         }
     }, []);
 
+    const obtenerTecnicos = useCallback(async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const apiUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+
+            const res = await axios.get(`${apiUrl}/usuarios`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            const listaUsuarios = res.data.data || res.data.usuario || res.data;
+            const listaTecnicos = Array.isArray(listaUsuarios)
+                ? listaUsuarios.filter(u => u.rol?.nombre_rol === 'Técnico')
+                : [];
+
+            setTecnicos(listaTecnicos);
+        } catch (error) {
+            console.error("Error al cargar técnicos:", error);
+        }
+    }, []);
+
     useEffect(() => {
         obtenerTickets();
-    }, [obtenerTickets]);
+        obtenerTecnicos();
+    }, [obtenerTickets, obtenerTecnicos]);
 
     const ticketsFiltrados = tickets.filter((t) => {
-      const nombreEmpleado = t.empleado?.nombre_completo || "Desconocido";
-      const tipoTicket = t.categoria?.nombre_tipo || t.tipo || "General";
+        const nombreEmpleado = t.empleado?.nombre_completo || "Desconocido";
+        const tipoTicket = t.categoria?.nombre_tipo || t.tipo || "General";
 
-      const coincideBusqueda =
-        nombreEmpleado.toLowerCase().includes(busqueda.toLowerCase()) ||
-        String(tipoTicket).toLowerCase().includes(busqueda.toLowerCase());
+        const coincideBusqueda =
+            nombreEmpleado.toLowerCase().includes(busqueda.toLowerCase()) ||
+            String(tipoTicket).toLowerCase().includes(busqueda.toLowerCase());
 
-      const coincideTipo =
-        filtroTipo === "Todos" || String(tipoTicket).toLowerCase() === filtroTipo.toLowerCase();
+        const coincideTipo =
+            filtroTipo === "Todos" || String(tipoTicket).toLowerCase() === filtroTipo.toLowerCase();
 
-      return coincideBusqueda && coincideTipo;
+        return coincideBusqueda && coincideTipo;
     });
 
     const totalPaginas = Math.ceil(ticketsFiltrados.length / registrosPorPagina) || 1;
 
     const cambiarPagina = (nuevaPagina) => {
-      setSearchParams({ page: nuevaPagina });
+        setSearchParams({ page: nuevaPagina });
     };
 
     const indiceUltimo = paginaActual * registrosPorPagina;
@@ -72,129 +98,156 @@ function Incidencias_Frame() {
     const ticketsPagina = ticketsFiltrados.slice(indicePrimero, indiceUltimo);
 
     const formatearFecha = (fechaStr) => {
-      if (!fechaStr) return "N/A";
-      return fechaStr.split("T")[0].split(" ")[0];
+        if (!fechaStr) return "N/A";
+        return fechaStr.split("T")[0].split(" ")[0];
     };
 
-  return (
-    <div className="contenedor-Opciones">
-          <h1 className="tickets-pendientes">Estos son tus tickets pendientes!</h1>
+    const handleAsignarTecnico = async (ticket, nuevoTecnicoId) => {
+        if (!nuevoTecnicoId) return;
 
-          <div className="barra-controles-admin">
-            <label className="Buscar-admin">
-              Buscar
-              <input
-                type="text"
-                placeholder="Escribe aquí..."
-                value={busqueda}
-                onChange={(e) => {
-                  setBusqueda(e.target.value);
-                  cambiarPagina(1);
-                }}
-          />
+        const token = localStorage.getItem("token");
+        const apiUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
 
-          <select
-            className="select-estado"
-            value={filtroTipo}
-            onChange={(e) => {
-              setFiltroTipo(e.target.value);
-              cambiarPagina(1);
-            }}
-          >
-            <option value="Todos">Todos</option>
-            <option value="Hardware">Hardware</option>
-            <option value="Software">Software</option>
-            <option value="Redes">Redes</option>
-          </select>
-            </label>
-          </div>
+        try {
+            await axios.post(
+                `${apiUrl}/tickets/${ticket.id_ticket}/asignar`,
+                { tecnico_id: Number(nuevoTecnicoId) },
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                }
+            );
 
-          <div className="tarjeta-cabecera">
-            <table className="Tabla-Header">
-              <thead>
-                <tr>
-                  <th>Empleado</th><th>Tipo</th><th>Fecha</th><th className="acciones">Acciones</th>
-                </tr>
-              </thead>
-            </table>
-          </div>
+            // Recargar lista
+            obtenerTickets();
+        } catch (error) {
+            console.error("Error al asignar técnico:", error.response?.data || error.message);
+        }
+    };
 
-          <div className="tarjeta-cuerpo">
-            <table className="Tabla-Datos">
-                  <tbody>
-                    {cargando ? (
-                      <tr>
-                        <td colSpan="4" style={{ textAlign: "center" }}>Cargando tickets...</td>
-                      </tr>
-                    ) : ticketsPagina.length === 0 ? (
-                      <tr>
-                        <td colSpan="4" style={{ textAlign: "center" }}>No se encontraron tickets.</td>
-                      </tr>
-                    ) : (
-                      ticketsPagina.map((t) => (
-                        <tr key={t.id_ticket || t.id}>
-                          <td>{t.empleado?.nombre_completo || "Desconocido"}</td>
-                          <td>{t.categoria?.nombre_tipo || t.tipo || "General"}</td>
-                          <td className="columna-admin">{formatearFecha(t.fecha_creacion || t.created_at)}</td>
-                          <td className="acciones-boton">
-                            <button
-                              className="btn-ver-incid"
-                              onClick={() => {
-                                setTicketSeleccionado(t);
-                                setVerPendiente(true);
-                              }}
-                            >
-                              <FaEye /> Ver
-                            </button>
-                          </td>
+    return (
+        <div className="contenedor-Opciones">
+            <h1 className="tickets-pendientes">Estos son tus tickets pendientes!</h1>
+
+            <div className="barra-controles-admin">
+                <label className="Buscar-admin">
+                    Buscar
+                    <input
+                        type="text"
+                        placeholder="Escribe aquí..."
+                        value={busqueda}
+                        onChange={(e) => {
+                            setBusqueda(e.target.value);
+                            cambiarPagina(1);
+                        }}
+                    />
+
+                    <select
+                        className="select-estado"
+                        value={filtroTipo}
+                        onChange={(e) => {
+                            setFiltroTipo(e.target.value);
+                            cambiarPagina(1);
+                        }}
+                    >
+                        <option value="Todos">Todos</option>
+                        <option value="Hardware">Hardware</option>
+                        <option value="Software">Software</option>
+                        <option value="Redes">Redes</option>
+                    </select>
+                </label>
+            </div>
+
+            <div className="tarjeta-cabecera">
+                <table className="Tabla-Header">
+                    <thead>
+                        <tr>
+                            <th>Empleado</th>
+                            <th>Tipo</th>
+                            <th>Fecha</th>
+                            <th className="acciones">Acciones</th>
                         </tr>
-                      ))
-                    )}
-                  </tbody>
+                    </thead>
+                </table>
+            </div>
+
+            <div className="tarjeta-cuerpo">
+                <table className="Tabla-Datos">
+                    <tbody>
+                        {cargando ? (
+                            <tr>
+                                <td colSpan="4" style={{ textAlign: "center" }}>Cargando tickets...</td>
+                            </tr>
+                        ) : ticketsPagina.length === 0 ? (
+                            <tr>
+                                <td colSpan="4" style={{ textAlign: "center" }}>No se encontraron tickets.</td>
+                            </tr>
+                        ) : (
+                            ticketsPagina.map((t) => (
+                                <tr key={t.id_ticket || t.id}>
+                                    <td>{t.empleado?.nombre_completo || "Desconocido"}</td>
+                                    <td>{t.categoria?.nombre_tipo || t.tipo || "General"}</td>
+                                    <td className="columna-admin">{formatearFecha(t.fecha_creacion || t.created_at)}</td>
+                                    <td className="acciones-boton">
+                                        <button
+                                            className="btn-ver-incid"
+                                            onClick={() => {
+                                                setTicketSeleccionado(t);
+                                                setVerPendiente(true);
+                                            }}
+                                        >
+                                            <FaEye /> Ver
+                                        </button>
+
+
+                                    </td>
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
                 </table>
 
-                    <div className="pie-tabla">
-                      <div className="tabla-paginas">
-                            <button
-                              disabled={paginaActual === 1}
-                              onClick={() => cambiarPagina(paginaActual - 1)}
-                            >&lt;</button>
+                <div className="pie-tabla">
+                    <div className="tabla-paginas">
+                        <button
+                            disabled={paginaActual === 1}
+                            onClick={() => cambiarPagina(paginaActual - 1)}
+                        >&lt;</button>
 
-                            <span> Pág {paginaActual} de {totalPaginas} </span>
+                        <span> Pág {paginaActual} de {totalPaginas} </span>
 
-                            <button
-                              disabled={paginaActual === totalPaginas}
-                              onClick={() => cambiarPagina(paginaActual + 1)}
-                            >&gt;</button>
-                          </div>
-
-                          <label>Mostrar:
-                            <select
-                              value={registrosPorPagina}
-                              onChange={(e) => {
-                                setRegistrosPorPagina(Number(e.target.value));
-                                cambiarPagina(1);
-                              }}
-                            >
-                              <option value={5}>5</option>
-                              <option value={7}>7</option>
-                              <option value={10}>10</option>
-                            </select> Registros
-                          </label>
-                        </div>
+                        <button
+                            disabled={paginaActual === totalPaginas}
+                            onClick={() => cambiarPagina(paginaActual + 1)}
+                        >&gt;</button>
                     </div>
 
-      <Tick_Pendiente
-        isOpen={verPendiente}
-        onClose={() => {
-          setVerPendiente(false);
-          setTicketSeleccionado(null);
-        }}
-        ticket={ticketSeleccionado}
-        onActualizado={obtenerTickets}
-      />
-    </div>
-  )
+                    <label>Mostrar:
+                        <select
+                            value={registrosPorPagina}
+                            onChange={(e) => {
+                                setRegistrosPorPagina(Number(e.target.value));
+                                cambiarPagina(1);
+                            }}
+                        >
+                            <option value={5}>5</option>
+                            <option value={7}>7</option>
+                            <option value={10}>10</option>
+                        </select> Registros
+                    </label>
+                </div>
+            </div>
+
+            <Tick_Pendiente
+                isOpen={verPendiente}
+                onClose={() => {
+                    setVerPendiente(false);
+                    setTicketSeleccionado(null);
+                }}
+                ticket={ticketSeleccionado}
+                onActualizado={obtenerTickets}
+            />
+        </div>
+    );
 }
 
 export default Incidencias_Frame;

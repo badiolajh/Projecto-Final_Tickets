@@ -22,17 +22,12 @@ const IncidenciasContent = ({ acciones }) => {
     const [tiposTicketApi, setTiposTicketApi] = useState([]);
     const [guardando, setGuardando] = useState(false);
 
-    // Obtener el ID del usuario logueado de forma segura para la carga inicial de tickets
-    const usuarioLogueadoInicial = JSON.parse(localStorage.getItem('usuario'));
-    const empleadoIdInicial = usuarioLogueadoInicial?.id_usuario || usuarioLogueadoInicial?.id;
-
     const cargarDatos = useCallback(async () => {
         try {
             setLoading(true);
             const token = localStorage.getItem('token');
             const headers = { Authorization: `Bearer ${token}` };
 
-            // Cargamos tickets, estados y tipos de ticket en paralelo desde Laravel
             const [resTickets, resEstados, resTipos] = await Promise.all([
                 api.get('/tickets', { headers }),
                 api.get('/estados-ticket', { headers }),
@@ -43,12 +38,8 @@ const IncidenciasContent = ({ acciones }) => {
             const listaEstados = resEstados.data.data || resEstados.data;
             const listaTipos = resTipos.data.tipos_ticket || resTipos.data.data || resTipos.data;
 
-            // Filtramos únicamente los tickets creados por el empleado autenticado
-            const ticketsDelEmpleado = Array.isArray(todosLosTickets)
-                ? todosLosTickets.filter(t => Number(t.empleado_id) === Number(empleadoIdInicial))
-                : [];
-
-            setTickets(ticketsDelEmpleado);
+            // Ahora la API ya filtra por empleado, así que usamos todos directamente
+            setTickets(Array.isArray(todosLosTickets) ? todosLosTickets : []);
             setEstadosTicket(Array.isArray(listaEstados) ? listaEstados : []);
             setTiposTicketApi(Array.isArray(listaTipos) ? listaTipos : []);
         } catch (error) {
@@ -56,7 +47,7 @@ const IncidenciasContent = ({ acciones }) => {
         } finally {
             setLoading(false);
         }
-    }, [empleadoIdInicial]);
+    }, []);
 
     useEffect(() => {
         cargarDatos();
@@ -87,7 +78,8 @@ const IncidenciasContent = ({ acciones }) => {
             ? ticket.tecnico.nombre_completo
             : 'En espera..';
 
-        const tipoTicket = ticket.nombre_tipo || 'General';
+        // Aseguramos leer el tipo ya sea directo o desde la relación de Laravel
+        const tipoTicket = ticket.nombre_tipo || ticket.categoria?.nombre_tipo || 'General';
         const nombreEstado = mapaEstados[ticket.estado_id] || 'Desconocido';
 
         let fechaFormateada = 'N/A';

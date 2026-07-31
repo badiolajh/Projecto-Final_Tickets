@@ -83,3 +83,12 @@ Route::middleware('auth:sanctum')->group(function()
 
     Route::get('/tickets/tecnico/{id}', [TicketController::class, 'ticketsPorTecnico']);
 });
+
+// asignar ticket a un técnico (solo admin)
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('tickets', TicketController::class);
+    Route::patch('tickets/{ticket}/partial', [TicketController::class, 'updatePartial']);
+
+    // Nueva ruta para asignar técnico
+    Route::post('tickets/{ticket}/asignar', [TicketController::class, 'asignar']);
+});
