@@ -4,18 +4,18 @@ import SearchBar from '../common/SearchBar';
 import FilterEstado from '../common/FilterEstado';
 import styles from './IncidenciasContent.module.css';
 
-const IncidenciasContent = ({ acciones }) => {
+const IncidenciasContent = ({ acciones, tickets }) => {
     const [search, setSearch] = useState('');
     const [estado, setEstado] = useState('todos');
-
     const encabezados = ['Empleado', 'Tipo', 'Fecha', 'Acciones'];
-    const filas = [
-        ['Andres', 'Sistemas', '26/07/26'],
-        ['Adrian', 'Hardware', '25/07/26'],
-        ['Jorge', 'Redes', '18/07/26'],
-        ['Abril', 'Sistemas', '04/07/26'],
-        ['Maria', 'Hardware', '28/06/26'],
-    ];
+
+    const filas = tickets
+        .filter(t => t.estado?.nombre_estado !== 'Finalizado')
+        .map(t => [
+            t.empleado?.nombre_completo || 'Desconocido',
+            t.categoria?.nombre_tipo || 'General',
+            new Date(t.fecha_creacion).toLocaleDateString(),
+        ]);
 
     return (
         <div className={styles.incidencias}>

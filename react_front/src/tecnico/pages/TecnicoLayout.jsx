@@ -13,7 +13,7 @@ import Tick_Finalizado from '../modals/Ver-ticket-finalizado/Ver-finalizado';
 import Solicitud_Red from '../modals/Ver-solicitud-red/Ver_red';
 import FinalizarTicket from '../modals/Finalizar-ticket/finalizar';
 import Diagnostico from '../modals/Diagnostico-ticket/diagnostico';
-import api from '../../api/api';
+import { useTicketsTecnico } from "../../hooks/useTicketsTecnico";
 
 const TecnicoLayout = ({ usuario, onLogout }) => {
     const [opcion, setOpcion] = useState('Dashboard');
@@ -24,22 +24,18 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
     const [showPendienteModal, setShowPendienteModal] = useState(false);
     const [showFinalizadoModal, setShowFinalizadoModal] = useState(false);
     const [showRedModal, setShowRedModal] = useState(false);
-
-    // Estado para ticket/solicitud seleccionada
-    const [selectedTicket, setSelectedTicket] = useState(null);
-    const [redMode, setRedMode] = useState('nuevo'); // "nuevo" o "ver"
-    const [selectedSolicitud, setSelectedSolicitud] = useState(null);
     const [showFinalizarModal, setShowFinalizarModal] = useState(false);
     const [showDiagnosticoModal, setShowDiagnosticoModal] = useState(false);
 
+    // Estado para ticket/solicitud seleccionada
+    const [selectedTicket, setSelectedTicket] = useState(null);
+    const [redMode, setRedMode] = useState('nuevo');
+    const [selectedSolicitud, setSelectedSolicitud] = useState(null);
+
+    // Hook para consumir tickets del técnico
+    const { tickets, loading, error } = useTicketsTecnico(usuario.id_usuario);
+
     const [user, setUser] = useState({
-        // nombre: 'Jonathan',
-        // puesto: 'Técnico',
-        // area: 'Soporte',
-        // correo: 'jonathan@correo.com',
-        // contraseña: '********',
-        // extension: '123',
-        // avatar: null,
         nombre: usuario.nombre_completo,
         avatar: usuario.foto_url,
         puesto: usuario.puesto,
@@ -49,80 +45,33 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
         area: usuario.id_area,
     });
 
-    // const user = {
-    //     nombre: usuario.nombre_completo,
-    //     avatar: usuario.foto_url,
-    //     puesto: usuario.puesto,
-    //     correo: usuario.correo_electronico,
-    //     contraseña: '********',
-    //     extension: usuario.extension_telefono,
-    //     area: usuario.puesto,
-    // };
-
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const closeMenu = () => setMenuOpen(false);
 
     // Acciones para incidencias
     const accionesIncidencias = [
-        {
-            tipo: 'ver',
-            onClick: (fila) => {
-                setSelectedTicket({ username: fila[0], tipo: fila[1] });
-                setShowPendienteModal(true);
-            },
-        },
-        {
-            tipo: 'finalizar',
-            onClick: (fila) => {
-                setSelectedTicket({ username: fila[0], tipo: fila[1] });
-                setShowFinalizarModal(true);
-            },
-        },
+        { tipo: 'ver', onClick: (ticket) => { setSelectedTicket(ticket); setShowPendienteModal(true); } },
+        { tipo: 'finalizar', onClick: (ticket) => { setSelectedTicket(ticket); setShowFinalizarModal(true); } },
     ];
 
     // Acciones para historial
     const accionesHistorial = [
-        {
-            tipo: 'ver',
-            onClick: (fila) => {
-                setSelectedTicket({ username: fila[0], tipo: fila[1] });
-                setShowFinalizadoModal(true);
-            },
-        },
-        {
-            tipo: 'diagnostico',
-            onClick: (fila) => {
-                setSelectedTicket({ username: fila[0], tipo: fila[1] });
-                setShowDiagnosticoModal(true);
-            },
-        },
+        { tipo: 'ver', onClick: (ticket) => { setSelectedTicket(ticket); setShowFinalizadoModal(true); } },
+        { tipo: 'diagnostico', onClick: (ticket) => { setSelectedTicket(ticket); setShowDiagnosticoModal(true); } },
     ];
 
     // Acciones para redes
     const accionesRedes = [
-        {
-            tipo: 'ver',
-            onClick: (fila) => {
-                setSelectedSolicitud({
-                    nombre: fila[0],
-                    estado: fila[1],
-                    fecha: fila[2],
-                });
-                setRedMode('ver');
-                setShowRedModal(true);
-            },
-        },
+        { tipo: 'ver', onClick: (fila) => {
+            setSelectedSolicitud({ nombre: fila[0], estado: fila[1], fecha: fila[2] });
+            setRedMode('ver');
+            setShowRedModal(true);
+        }},
     ];
 
     // Acciones para dashboard
     const accionesDashboard = [
-        {
-            tipo: 'ver',
-            onClick: (fila) => {
-                setSelectedTicket({ username: fila.nombre, tipo: fila.tipo });
-                setShowPendienteModal(true);
-            },
-        },
+        { tipo: 'ver', onClick: (ticket) => { setSelectedTicket(ticket); setShowPendienteModal(true); } },
     ];
 
     return (
@@ -143,40 +92,24 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
                         onLogout={onLogout}
                     />
 
-                    {menuOpen && (
-                        <div
-                            className={styles.overlay}
-                            onClick={closeMenu}
-                        ></div>
-                    )}
+                    {menuOpen && <div className={styles.overlay} onClick={closeMenu}></div>}
 
                     <div className={styles.mainContent}>
                         <MainGeneral titulo={opcion}>
+                            {loading && <p>Cargando tickets...</p>}
+                            {error && <p style={{color:"red"}}>{error}</p>}
+
                             {opcion === 'Dashboard' && (
-                                <DashboardContent
-                                    user={user}
-                                    acciones={accionesDashboard}
-                                />
+                                <DashboardContent user={user} acciones={accionesDashboard} tickets={tickets} />
                             )}
                             {opcion === 'Incidencias' && (
-                                <IncidenciasContent
-                                    acciones={accionesIncidencias}
-                                />
+                                <IncidenciasContent acciones={accionesIncidencias} tickets={tickets.filter(t => t.estado?.id !== 3)} />
                             )}
                             {opcion === 'Historial' && (
-                                <HistorialContent
-                                    acciones={accionesHistorial}
-                                />
+                                <HistorialContent acciones={accionesHistorial} tickets={tickets.filter(t => t.estado?.id === 3)} />
                             )}
                             {opcion === 'Redes' && (
-                                <RedesContent
-                                    acciones={accionesRedes}
-                                    onNuevaSolicitud={() => {
-                                        setRedMode('nuevo');
-                                        setSelectedSolicitud(null);
-                                        setShowRedModal(true);
-                                    }}
-                                />
+                                <RedesContent acciones={accionesRedes} onNuevaSolicitud={() => { setRedMode('nuevo'); setSelectedSolicitud(null); setShowRedModal(true); }} />
                             )}
                         </MainGeneral>
                     </div>
@@ -187,36 +120,20 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
                     <ModalVerPerfil
                         info={user}
                         onClose={() => setShowPerfilModal(false)}
-                        onSave={(updatedUser) => {
-                            setUser(updatedUser);
-                            console.log('Perfil actualizado:', updatedUser);
-                        }}
+                        onSave={(updatedUser) => { setUser(updatedUser); }}
                     />
                 )}
 
-                {showPendienteModal && (
-                    <Tick_Pendiente
-                        isOpen={showPendienteModal}
-                        onClose={() => setShowPendienteModal(false)}
-                        user={selectedTicket}
-                    />
+                {showPendienteModal && selectedTicket && (
+                    <Tick_Pendiente isOpen={showPendienteModal} onClose={() => setShowPendienteModal(false)} user={selectedTicket} />
                 )}
 
-                {showFinalizadoModal && (
-                    <Tick_Finalizado
-                        isOpen={showFinalizadoModal}
-                        onClose={() => setShowFinalizadoModal(false)}
-                        user={selectedTicket}
-                    />
+                {showFinalizadoModal && selectedTicket && (
+                    <Tick_Finalizado isOpen={showFinalizadoModal} onClose={() => setShowFinalizadoModal(false)} user={selectedTicket} />
                 )}
 
                 {showRedModal && (
-                    <Solicitud_Red
-                        isOpen={showRedModal}
-                        onClose={() => setShowRedModal(false)}
-                        mode={redMode}
-                        info={selectedSolicitud}
-                    />
+                    <Solicitud_Red isOpen={showRedModal} onClose={() => setShowRedModal(false)} mode={redMode} info={selectedSolicitud} />
                 )}
 
                 {showFinalizarModal && (
@@ -225,21 +142,14 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
                         onClose={() => setShowFinalizarModal(false)}
                         user={selectedTicket}
                         onAccept={(data) => {
-                            console.log(
-                                'Ticket finalizado con diagnóstico:',
-                                data
-                            );
+                            console.log('Ticket finalizado con diagnóstico:', data);
                             setShowFinalizarModal(false);
                         }}
                     />
                 )}
 
                 {showDiagnosticoModal && (
-                    <Diagnostico
-                        isOpen={showDiagnosticoModal}
-                        onClose={() => setShowDiagnosticoModal(false)}
-                        user={selectedTicket}
-                    />
+                    <Diagnostico isOpen={showDiagnosticoModal} onClose={() => setShowDiagnosticoModal(false)} user={selectedTicket} />
                 )}
             </div>
         </div>
