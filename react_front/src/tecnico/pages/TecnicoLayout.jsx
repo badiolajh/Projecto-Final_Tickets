@@ -13,8 +13,9 @@ import Tick_Finalizado from '../modals/Ver-ticket-finalizado/Ver-finalizado';
 import Solicitud_Red from '../modals/Ver-solicitud-red/Ver_red';
 import FinalizarTicket from '../modals/Finalizar-ticket/finalizar';
 import Diagnostico from '../modals/Diagnostico-ticket/diagnostico';
+import api from '../../api/api';
 
-const TecnicoLayout = ({ onLogout }) => {
+const TecnicoLayout = ({ usuario, onLogout }) => {
     const [opcion, setOpcion] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -32,14 +33,31 @@ const TecnicoLayout = ({ onLogout }) => {
     const [showDiagnosticoModal, setShowDiagnosticoModal] = useState(false);
 
     const [user, setUser] = useState({
-        nombre: 'Jonathan',
-        puesto: 'Técnico',
-        area: 'Soporte',
-        correo: 'jonathan@correo.com',
+        // nombre: 'Jonathan',
+        // puesto: 'Técnico',
+        // area: 'Soporte',
+        // correo: 'jonathan@correo.com',
+        // contraseña: '********',
+        // extension: '123',
+        // avatar: null,
+        nombre: usuario.nombre_completo,
+        avatar: usuario.foto_url,
+        puesto: usuario.puesto,
+        correo: usuario.correo_electronico,
         contraseña: '********',
-        extension: '123',
-        avatar: null,
+        extension: usuario.extension_telefono,
+        area: usuario.id_area,
     });
+
+    // const user = {
+    //     nombre: usuario.nombre_completo,
+    //     avatar: usuario.foto_url,
+    //     puesto: usuario.puesto,
+    //     correo: usuario.correo_electronico,
+    //     contraseña: '********',
+    //     extension: usuario.extension_telefono,
+    //     area: usuario.puesto,
+    // };
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const closeMenu = () => setMenuOpen(false);
