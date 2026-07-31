@@ -9,7 +9,9 @@ const IncidenciasContent = ({ acciones, tickets = [] }) => {
     const [estado, setEstado] = useState('todos');
     const encabezados = ['Empleado', 'Tipo', 'Fecha', 'Acciones'];
 
-    const filas = tickets.filter(t => t.estado?.nombre_estado !== 'Finalizado');
+    const filas = tickets.filter(
+        (t) => t.estado?.nombre_estado !== 'Finalizado'
+    );
 
     return (
         <div className={styles.incidencias}>
@@ -19,16 +21,10 @@ const IncidenciasContent = ({ acciones, tickets = [] }) => {
                 <SearchBar onChange={setSearch} />
                 <FilterEstado value={estado} onChange={setEstado} />
             </div>
-
             <TablaGeneral
                 encabezados={encabezados}
                 filas={filas}
-                acciones={acciones.map(accion => ({
-                    ...accion,
-                    onClick: (_, index) => {
-                        accion.onClick(ticketsFiltrados[index]);
-                    }
-                }))}
+                acciones={acciones}
             />
         </div>
     );

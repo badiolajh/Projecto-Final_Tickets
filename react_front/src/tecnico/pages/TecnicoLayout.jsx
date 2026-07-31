@@ -38,19 +38,12 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
 
       // Hook de finalizar
   const { finalizarTicket, loading: loadingFinalizar, error: errorFinalizar } =
-    useFinalizarTicket(usuario.id_usuario, setTickets => {
-      // Refrescar tickets localmente: marcar como finalizado
-      const updated = tickets.map(t =>
-        t.id_ticket === ticketId ? { ...t, estado: { id: 3, nombre_estado: "Finalizado" } } : t
-      );
-      // Aquí puedes setear tickets en un estado local si lo manejas,
-      // o confiar en que useTicketsTecnico refresque automáticamente.
-    });
+  useFinalizarTicket(usuario.id_usuario, setTickets);
 
     const [user, setUser] = useState({
-        id_usuario: usuario.id_usuario,  // ✅ AGREGADO
-        id_rol: usuario.id_rol,  // ✅ AGREGADO
-        rol_id: usuario.rol_id,  // ✅ AGREGADO
+        id_usuario: usuario.id_usuario,  
+        id_rol: usuario.id_rol,  
+        rol_id: usuario.rol_id,  
         nombre: usuario.nombre_completo,
         avatar: usuario.foto_url,
         puesto: usuario.puesto,
@@ -157,8 +150,8 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
                         onClose={() => setShowFinalizarModal(false)}
                         user={selectedTicket}
                         onAccept={(data) => {
-                            finalizarTicket(selectedTicket.id_ticket, data.diagnostico);
-                            setShowFinalizarModal(false);
+                        finalizarTicket(selectedTicket.id_ticket, data.diagnostico);
+                        setShowFinalizarModal(false);
                         }}
                     />
                 )}
