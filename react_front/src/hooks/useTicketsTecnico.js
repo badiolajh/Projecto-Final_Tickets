@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import api from "../api/api";
+import { useState, useEffect } from 'react';
+import api from '../api/api';
 
 export const useTicketsTecnico = (idUsuario) => {
     const [tickets, setTickets] = useState([]);
@@ -9,21 +9,14 @@ export const useTicketsTecnico = (idUsuario) => {
     useEffect(() => {
         const obtenerTickets = async () => {
             try {
-                const token = localStorage.getItem('token');
+                const response = await api.get(`/tickets/tecnico/${idUsuario}`);
 
-                // Usamos 'api' en lugar de 'axios'
-                const response = await api.get('/tickets', {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+                // El backend devuelve un Resource::collection
+                const data = Array.isArray(response.data)
+                    ? response.data
+                    : response.data.data;
 
-                const todosLosTickets = response.data.data || response.data || [];
-
-                const ticketsFiltrados = todosLosTickets.filter(ticket =>
-                    Number(ticket.tecnico_id) === Number(idUsuario) ||
-                    Number(ticket.tecnico?.id_usuario) === Number(idUsuario)
-                );
-
-                setTickets(ticketsFiltrados);
+                setTickets(data || []);
             } catch (err) {
                 console.error('Error al obtener tickets:', err);
                 setError(err.message);
@@ -37,5 +30,5 @@ export const useTicketsTecnico = (idUsuario) => {
         }
     }, [idUsuario]);
 
-  return { tickets, setTickets, loading, error };
+    return { tickets, setTickets, loading, error };
 };

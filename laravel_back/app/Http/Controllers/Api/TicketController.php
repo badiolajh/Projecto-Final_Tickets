@@ -75,4 +75,20 @@ class TicketController extends Controller
             'message' => 'Ticket eliminado',
         ], 200);
     }
+
+        // Tickets por técnico específico
+    public function ticketsPorTecnico($id)
+    {
+        $tickets = Ticket::with([
+            'empleado.area',
+            'tecnico',
+            'categoria',
+            'estado'
+        ])
+        ->where('tecnico_id', $id)
+        ->get();
+
+        return TicketResource::collection($tickets);
+    }
+
 }
