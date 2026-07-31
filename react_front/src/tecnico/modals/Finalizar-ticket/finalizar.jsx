@@ -30,11 +30,19 @@ const FinalizarTicket = ({ isOpen, onClose, user, onAccept }) => {
         <div className={styles.body}>
           <div className={styles.field}>
             <label>Empleado:</label>
-            <input type="text" value={user?.username || "Invitad@"} disabled />
+            <input
+                type="text"
+                value={user?.empleado?.nombre_completo || "Invitad@"}
+                disabled
+            />
           </div>
           <div className={styles.field}>
             <label>Tipo:</label>
-            <input type="text" value={user?.tipo || ""} disabled />
+            <input
+                type="text"
+                value={user?.categoria?.nombre_tipo || ""}
+                disabled
+            />
           </div>
 
           {/* ✅ Envoltorio para Diagnóstico */}

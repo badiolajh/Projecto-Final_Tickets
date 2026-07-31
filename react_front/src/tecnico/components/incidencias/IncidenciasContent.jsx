@@ -9,30 +9,7 @@ const IncidenciasContent = ({ acciones, tickets = [] }) => {
     const [estado, setEstado] = useState('todos');
     const encabezados = ['Empleado', 'Tipo', 'Fecha', 'Acciones'];
 
-    const ticketsSeguro = Array.isArray(tickets) ? tickets : [];
-
-    // Filtrar por búsqueda si es necesario
-    const ticketsConBusqueda = ticketsSeguro.filter(t => {
-        const coincideBusqueda =
-            t.empleado?.nombre_completo?.toLowerCase().includes(search.toLowerCase()) ||
-            t.categoria?.nombre_tipo?.toLowerCase().includes(search.toLowerCase());
-
-        const coincideEstado = estado === 'todos' || t.estado?.nombre_estado === estado;
-
-        return coincideBusqueda && coincideEstado;
-    });
-
-    // 1. Filtramos los tickets activos (no finalizados)
-    const ticketsFiltrados = ticketsConBusqueda.filter(
-        t => t.estado?.nombre_estado !== 'Finalizado'
-    );
-
-    // 2. Preparamos las columnas de texto para la tabla
-    const filas = ticketsFiltrados.map(t => [
-        t.empleado?.nombre_completo || 'Desconocido',
-        t.categoria?.nombre_tipo || 'General',
-        t.fecha_creacion ? new Date(t.fecha_creacion).toLocaleDateString() : 'N/A',
-    ]);
+    const filas = tickets.filter(t => t.estado?.nombre_estado !== 'Finalizado');
 
     return (
         <div className={styles.incidencias}>

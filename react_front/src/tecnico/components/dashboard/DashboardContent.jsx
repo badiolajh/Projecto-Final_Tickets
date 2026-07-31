@@ -48,12 +48,7 @@ const DashboardContent = ({ user, acciones, tickets }) => {
         hardware: `${Math.round((ticketsFiltrados.filter(t => t.categoria?.nombre_tipo === 'Hardware').length / total) * 100)}%`,
     };
 
-    const ticketsPendientes = ticketsFiltrados
-        .filter(t => t.estado?.nombre_estado !== 'Finalizado')
-        .map(t => ({
-            nombre: t.empleado?.nombre_completo || 'Desconocido',
-            tipo: t.categoria?.nombre_tipo || 'General',
-        }));
+    const ticketsPendientes = tickets.filter(t => t.estado?.nombre_estado !== 'Finalizado');
 
     return (
         <div className={styles.dashboard}>

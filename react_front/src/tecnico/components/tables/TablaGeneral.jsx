@@ -22,18 +22,18 @@ const TablaGeneral = ({ encabezados, filas, acciones }) => {
       <div className={styles.bodyWrapper}>
         <table className={styles.table}>
           <tbody>
-            {filas.map((fila, idx) => (
+            {filas.map((ticket, idx) => (
               <tr key={idx}>
-                {fila.map((dato, i) => (
-                  <td key={i}>{dato}</td>
-                ))}
+                <td>{ticket.empleado?.nombre_completo || 'Desconocido'}</td>
+                <td>{ticket.categoria?.nombre_tipo || 'General'}</td>
+                <td>{new Date(ticket.fecha_creacion).toLocaleDateString()}</td>
                 <td>
                   <div className={styles.actions}>
                     {acciones.map((accion, i) => (
                       <ActionButton
                         key={i}
                         tipo={accion.tipo}
-                        onClick={() => accion.onClick(fila)}
+                        onClick={() => accion.onClick(ticket)} // ✅ ahora pasa el objeto completo
                       />
                     ))}
                   </div>

@@ -14,6 +14,7 @@ import Solicitud_Red from '../modals/Ver-solicitud-red/Ver_red';
 import FinalizarTicket from '../modals/Finalizar-ticket/finalizar';
 import Diagnostico from '../modals/Diagnostico-ticket/diagnostico';
 import { useTicketsTecnico } from "../../hooks/useTicketsTecnico";
+import { useFinalizarTicket } from "../../hooks/useFinalizarTicket";
 
 const TecnicoLayout = ({ usuario, onLogout }) => {
     const [opcion, setOpcion] = useState('Dashboard');
@@ -33,7 +34,18 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
     const [selectedSolicitud, setSelectedSolicitud] = useState(null);
 
     // Hook para consumir tickets del técnico
-    const { tickets, loading, error } = useTicketsTecnico(usuario.id_usuario);
+    const { tickets, setTickets, loading, error } = useTicketsTecnico(usuario.id_usuario);
+
+      // Hook de finalizar
+  const { finalizarTicket, loading: loadingFinalizar, error: errorFinalizar } =
+    useFinalizarTicket(usuario.id_usuario, (setTickets) => {
+      // Refrescar tickets localmente: marcar como finalizado
+      const updated = tickets.map(t =>
+        t.id_ticket === ticketId ? { ...t, estado: { id: 3, nombre_estado: "Finalizado" } } : t
+      );
+      // Aquí puedes setear tickets en un estado local si lo manejas,
+      // o confiar en que useTicketsTecnico refresque automáticamente.
+    });
 
     const [user, setUser] = useState({
         id_usuario: usuario.id_usuario,  // ✅ AGREGADO
@@ -139,13 +151,13 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
                     <Solicitud_Red isOpen={showRedModal} onClose={() => setShowRedModal(false)} mode={redMode} info={selectedSolicitud} />
                 )}
 
-                {showFinalizarModal && (
+                {showFinalizarModal && selectedTicket && (
                     <FinalizarTicket
                         isOpen={showFinalizarModal}
                         onClose={() => setShowFinalizarModal(false)}
                         user={selectedTicket}
                         onAccept={(data) => {
-                            console.log('Ticket finalizado con diagnóstico:', data);
+                            finalizarTicket(selectedTicket.id_ticket, data.diagnostico);
                             setShowFinalizarModal(false);
                         }}
                     />
@@ -154,6 +166,10 @@ const TecnicoLayout = ({ usuario, onLogout }) => {
                 {showDiagnosticoModal && (
                     <Diagnostico isOpen={showDiagnosticoModal} onClose={() => setShowDiagnosticoModal(false)} user={selectedTicket} />
                 )}
+
+                {loadingFinalizar && <p>Finalizando ticket...</p>}
+                {errorFinalizar && <p style={{color:"red"}}>{errorFinalizar}</p>}
+
             </div>
         </div>
     );

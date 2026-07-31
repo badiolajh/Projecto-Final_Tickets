@@ -37,5 +37,5 @@ export const useTicketsTecnico = (idUsuario) => {
         }
     }, [idUsuario]);
 
-    return { tickets, loading, error };
+  return { tickets, setTickets, loading, error };
 };

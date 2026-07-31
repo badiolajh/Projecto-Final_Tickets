@@ -9,13 +9,7 @@ const HistorialContent = ({ acciones, tickets =[] }) => {
   const [estado, setEstado] = useState("todos");
   const encabezados = ["Empleado", "Tipo", "Fecha", "Acciones"];
 
-    const filas = tickets
-        .filter(t => t.estado?.nombre_estado === 'Finalizado')
-        .map(t => [
-            t.empleado?.nombre_completo || 'Desconocido',
-            t.categoria?.nombre_tipo || 'General',
-            new Date(t.fecha_creacion).toLocaleDateString(),
-        ]);
+  const filas = tickets.filter(t => t.estado?.nombre_estado === 'Finalizado');
 
   return (
     <div className={styles.historial}>
