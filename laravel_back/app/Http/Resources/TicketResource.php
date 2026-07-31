@@ -51,6 +51,7 @@ class TicketResource extends JsonResource
 
             // Estado actual del ticket
             'estado' => [
+                'id' => $this->estado->id_estado ?? null,
                 'nombre_estado' => $this->estado->nombre_estado ?? 'Sin estado',
             ],
         ];
